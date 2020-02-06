@@ -11,7 +11,7 @@
 ## MODIFICATIONS
 - [X] Zoom more and start with real dimensions 
 - [X] Remove some paintings
-    ⋅⋅* starry night and left of it
+    * starry night and left of it
     ⋅⋅* Piles of book
 - [X] enlarge semicircles and smaller room
 - [X] Volume down shared videos
