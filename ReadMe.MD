@@ -11,14 +11,14 @@
 ## MODIFICATIONS
 - [X] Zoom more and start with real dimensions 
 - [X] Remove some paintings
-    * starry night and left of it
-    ⋅⋅* Piles of book
+    - starry night and left of it
+    - Piles of book
 - [X] enlarge semicircles and smaller room
 - [X] Volume down shared videos
 - [X] Sensitivity of mouse
 - [ ] highlight with light yellow 
-    ⋅⋅* V1 the painting that the others listen or zoom in
-    ⋅⋅* V2 painting others zoom in 
+    - V1 the painting that the others listen or zoom in
+    - V2 painting others zoom in 
 - [ ] Outline the painting the user listens / watching something
 - [ ] Volume down the audio from videos playing from other users
 - [ ] Semicircle all players enabled
@@ -36,9 +36,9 @@
 ## TRANSFORM TO HTC VIVE
 
 
-⋅⋅* Stories from real life visitors accompanying artworks 
-⋅⋅* The way it will be represented depends on the nature of each story 
-⋅⋅* Each story may have a counter of likes and dislikes
-⋅⋅* For each round, there will be a story which will be the round winner (depending on the likes) and an all time scoreboard
-⋅⋅* Treasure hunt might be a good idea for a game
+- Stories from real life visitors accompanying artworks 
+- The way it will be represented depends on the nature of each story 
+- Each story may have a counter of likes and dislikes
+- For each round, there will be a story which will be the round winner (depending on the likes) and an all time scoreboard
+- Treasure hunt might be a good idea for a game
 
