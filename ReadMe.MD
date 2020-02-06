@@ -28,7 +28,7 @@
 - [ ] bled 
 - [ ] Make a new project with removed videos 
 
-## BUGS
+## ~~BUGS~~
 - [X] Synchronization with other players
 - [X] Some paintings have wrong authorities (Blue face painting exrtas are not visible for host)
 - [X] Click on semicircle is clicking the painting
