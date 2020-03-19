@@ -16,22 +16,25 @@
 - [X] enlarge semicircles and smaller room
 - [X] Volume down shared videos
 - [X] Sensitivity of mouse
-- [ ] highlight with light yellow 
-     - V1 the painting that the others listen or zoom in
-     - V2 painting others zoom in 
-- [ ] Outline the painting the user listens / watching something
+- [ ] highlight
+     [X] V1 the painting that the others listen 
+     [ ] V1 zoom in
+     [ ] V2 painting others zoom in 
+- [X] Outline the painting the user listens / watching something
 - [ ] Volume down the audio from videos playing from other users
-- [ ] Semicircle all players enabled
+- [X] Semicircle all players enabled
 - [ ] Render a camera on room’s wall instead of an image
-- [ ] Camera and mouse should be synchronized 
-- [ ] Target shall follow camera (low pr) 
-- [ ] bled 
+- [X] Camera and mouse should be synchronized 
+- [X] Target shall follow camera (low pr) 
+- [ ] bled
 - [ ] Make a new project with removed videos 
 
-## ~~BUGS~~
+## BUGS
+- [ ] Do not click on walls and pass through
+- [ ] Right chair does not enlarge and not included in Outline
 - [X] Synchronization with other players
-- [X] Some paintings have wrong authorities (Blue face painting exrtas are not visible for host)
-- [X] Click on semicircle is clicking the painting
+- [X] Some paintings have wrong authorities (Blue face painting extras are not visible for host)
+- [ ] Click on semicircle shoould not click the painting
 
 ## TRANSFORM TO HTC VIVE
 

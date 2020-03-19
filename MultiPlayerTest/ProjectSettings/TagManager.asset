@@ -23,6 +23,7 @@ TagManager:
   - Potato
   - Sound
   - Video
+  - SIcon
   layers:
   - Default
   - TransparentFX

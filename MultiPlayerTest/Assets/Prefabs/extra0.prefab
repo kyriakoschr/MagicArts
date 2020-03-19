@@ -116,6 +116,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -227,6 +228,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -336,6 +338,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -387,13 +390,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Van Gogh depicts himself in his studio, wearing his overcoat and a hat.
-    Is it cold in the studio, or is this a sign of a lack of permanence?\r\n\nOn the
-    left, a blank canvas suggests that there is more work to come from this artist,
-    as indeed there was, and a Japanese print on the right relates to an area of great
-    artistic interest for him. \r\n\nThis is a manipulated copy of a real print by
-    Sato Torakiyo, owned by Van Gogh and pinned on the wall in his studio. In order
-    to fit his own face into the composition, Van Gogh has shifted the figures and
-    Mount Fuji across to the right.\r\nHis facial expression is still and melancholy,
+    Is it cold in the studio, or is this a sign of a lack of permanence?\r\n\nOn
+    the left, a blank canvas suggests that there is more work to come from this artist,
+    as indeed there was, and a Japanese print on the right relates to an area of
+    great artistic interest for him. \r\n\nThis is a manipulated copy of a real print
+    by Sato Torakiyo, owned by Van Gogh and pinned on the wall in his studio. In
+    order to fit his own face into the composition, Van Gogh has shifted the figures
+    and Mount Fuji across to the right.\r\nHis facial expression is still and melancholy,
     as though he is contemplating his position as an artist.\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -659,6 +662,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -753,6 +757,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -847,6 +852,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -976,6 +982,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -1080,6 +1087,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
