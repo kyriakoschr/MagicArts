@@ -24,6 +24,7 @@ TagManager:
   - Sound
   - Video
   - SIcon
+  - Wall
   layers:
   - Default
   - TransparentFX

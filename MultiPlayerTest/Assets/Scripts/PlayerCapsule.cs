@@ -1527,7 +1527,7 @@ public class PlayerCapsule : NetworkBehaviour
                     else if (Physics.Raycast(ray, out hit))
                     {
                         Debug.Log("clicked 111");
-                        if (hit.transform.tag == "Video" )
+                        if (hit.transform.tag == "Video")
                         {
                             Debug.Log(hit.collider.name + " is clickedededede");
                             AudioSource audio = hit.transform.parent.Find("AudioSource0").gameObject.GetComponent<AudioSource>();
@@ -1535,11 +1535,11 @@ public class PlayerCapsule : NetworkBehaviour
                             Debug.Log(audio.clip.name);
                             Debug.Log(video.clip.name);
                             Debug.Log(hit.transform.parent.transform.parent.name);
-                            if ( video.isPlaying)
+                            if (video.isPlaying)
                             {
-                               Debug.Log("MPIKen");
-                               CmdOutPaint2(hit.transform.parent.transform.parent.name,true);
-                               StartCoroutine(videoW(hit.transform.parent.transform.parent.name,video));
+                                Debug.Log("MPIKen");
+                                CmdOutPaint2(hit.transform.parent.transform.parent.name, true);
+                                StartCoroutine(videoW(hit.transform.parent.transform.parent.name, video));
                             }
                             else if (!video.isPlaying)
                             {
@@ -1547,7 +1547,7 @@ public class PlayerCapsule : NetworkBehaviour
                                 CmdOutPaint2(hit.transform.parent.transform.parent.name, false);
                             }
                         }
-                        else if(hit.transform.tag == "SIcon")
+                        else if (hit.transform.tag == "SIcon")
                         {
                             Debug.Log(hit.collider.name + " is clickedededede");
                             AudioSource audio = hit.transform.parent.Find("AudioSource0").gameObject.GetComponent<AudioSource>();
@@ -1555,16 +1555,16 @@ public class PlayerCapsule : NetworkBehaviour
                             Debug.Log(audio.clip.name);
                             Debug.Log(video.clip.name);
                             Debug.Log(hit.transform.parent.transform.parent.name);
-                            if (audio.isPlaying )
+                            if (audio.isPlaying)
                             {
                                 Debug.Log("MPIKen");
                                 CmdOutPaint2(hit.transform.parent.transform.parent.name, true);
                                 StartCoroutine(videoA(hit.transform.parent.transform.parent.name, audio));
                             }
-                            else if (!audio.isPlaying )
+                            else if (!audio.isPlaying)
                             {
                                 Debug.Log("MPIKen");
-                                CmdOutPaint2(hit.transform.parent.transform.parent.name,false);
+                                CmdOutPaint2(hit.transform.parent.transform.parent.name, false);
                             }
                         }
                         else if (hit.transform.name == "paint2")
@@ -1572,12 +1572,14 @@ public class PlayerCapsule : NetworkBehaviour
                             if (GameObject.Find("extra2").active)
                             {
                                 Debug.Log("OPOPOP");
-                                CmdOutPaint2(hit.transform.name,true);
+                                CmdOutPaint2(hit.transform.name, true);
                             }
                         }
-                        if (terrain.Raycast(ray, out hit, Mathf.Infinity))
-                        {
-                            transform.position = new Vector3(hit.point.x, transform.position.y, hit.point.z);
+                        else if (hit.transform.tag != "Wall") { 
+                            if (terrain.Raycast(ray, out hit, Mathf.Infinity))
+                            {
+                                transform.position = new Vector3(hit.point.x, transform.position.y, hit.point.z);
+                            }
                         }
                     }
                     

@@ -30,7 +30,7 @@
 - [ ] Make a new project with removed videos 
 
 ## BUGS
-- [ ] Do not click on walls and pass through
+- [X] Do not click on walls and pass through
 - [ ] Right chair does not enlarge and not included in Outline
 - [X] Synchronization with other players
 - [X] Some paintings have wrong authorities (Blue face painting extras are not visible for host)
