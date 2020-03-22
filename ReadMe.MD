@@ -9,7 +9,7 @@
 - [ ] Sit on chair
 
 ## MODIFICATIONS
-- [X] Zoom more and start with real dimensions 
+- [ ] Zoom more and start with real dimensions 
 - [X] Remove some paintings
      - starry night and left of it
      - Piles of book
@@ -31,10 +31,10 @@
 
 ## BUGS
 - [X] Do not click on walls and pass through
-- [ ] Right chair does not enlarge and not included in Outline
+- [ ] Right chair and blue face does not enlarge and chair not included in Outline
 - [X] Synchronization with other players
 - [X] Some paintings have wrong authorities (Blue face painting extras are not visible for host)
-- [ ] Click on semicircle should not click the painting
+- [ ] Click on painting is messing with semicircle
 
 ## TRANSFORM TO HTC VIVE
 
