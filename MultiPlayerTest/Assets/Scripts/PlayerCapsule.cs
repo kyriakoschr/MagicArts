@@ -944,6 +944,12 @@ public class PlayerCapsule : NetworkBehaviour
 
     float latencySmoothingFactor = 10;
 
+    public bool checkme()
+    {
+        return hasAuthority;
+
+    }
+
     void Update()
     {
         //Scene scene = myGO.scene;
@@ -1561,6 +1567,14 @@ public class PlayerCapsule : NetworkBehaviour
                                 CmdOutPaint2(hit.transform.parent.transform.parent.name,false);
                             }
                         }
+                        else if (hit.transform.name == "paint2")
+                        {
+                            if (GameObject.Find("extra2").active)
+                            {
+                                Debug.Log("OPOPOP");
+                                CmdOutPaint2(hit.transform.name,true);
+                            }
+                        }
                         if (terrain.Raycast(ray, out hit, Mathf.Infinity))
                         {
                             transform.position = new Vector3(hit.point.x, transform.position.y, hit.point.z);
@@ -2076,6 +2090,11 @@ public class PlayerCapsule : NetworkBehaviour
         RpcCome();
     }
 
+    public void outP(string name, bool nval)
+    {
+        CmdOutPaint2(name, nval);
+    }
+
     [Command]
     void CmdOutPaint2(string name,bool nval)
     {
@@ -2197,7 +2216,7 @@ public class PlayerCapsule : NetworkBehaviour
                 }
                 else if (index == 2)
                 {
-                    b_wall3 = true;
+                    b_wall2 = true;
                     if (this.name == "remy(Clone)")
                         GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall2 = true;
                     else if (this.name == "claire(Clone)" && GameObject.Find("remy(Clone)") != null)

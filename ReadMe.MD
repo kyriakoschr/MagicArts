@@ -18,7 +18,7 @@
 - [X] Sensitivity of mouse
 - [ ] highlight
      [X] V1 the painting that the others listen 
-     [ ] V1 zoom in
+     [X] V1 zoom in
      [ ] V2 painting others zoom in 
 - [X] Outline the painting the user listens / watching something
 - [ ] Volume down the audio from videos playing from other users
@@ -34,7 +34,7 @@
 - [ ] Right chair does not enlarge and not included in Outline
 - [X] Synchronization with other players
 - [X] Some paintings have wrong authorities (Blue face painting extras are not visible for host)
-- [ ] Click on semicircle shoould not click the painting
+- [ ] Click on semicircle should not click the painting
 
 ## TRANSFORM TO HTC VIVE
 

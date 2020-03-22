@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using UnityEngine.Networking;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
+using cakeslice;
 
-public class SpriteOnClick : MonoBehaviour {
+public class SpriteOnClick : NetworkBehaviour {
 
 //	[SyncVar]
 //	bool MSet;
@@ -11,17 +13,68 @@ public class SpriteOnClick : MonoBehaviour {
 	public GameObject Wall;
 	public GameObject Menu;
 	public GameObject Audio;
+    public GameObject user;
     RaycastHit hit;
     Ray ray;
     Camera cam;
     public GameObject FPC;
     public GameObject TPC;
-    // Use this for initialization
-    void Start () {
-		//MSet = false;
-	}
+    public GameObject luser = null;
+    bool found = false;
 
-	void OnMouseDown(){
+    void find() {
+        //MSet = false;
+        Debug.Log("ONSTARTERERERE");
+        GameObject[] users = GameObject.FindGameObjectsWithTag("Player");
+        for(int i = 0; i < users.Length; i++)
+        {
+            Debug.Log("lplayer " + users[i].gameObject.transform.name);
+            if (users[i].gameObject.GetComponent<PlayerCapsule>().checkme())
+            {
+                luser = users[i].gameObject;
+                break;
+            }
+
+        }
+        Debug.Log(luser.transform.name + " is local player");
+        found = true;
+        //users..gameObject.GetComponent<PlayerCapsule>().outP(this.transform.name, true);
+        //user.GetComponent<PlayerCapsule>().outP(this.transform.name, true);
+    }
+
+    public void closeout(GameObject name)
+    {
+        luser.GetComponent<PlayerCapsule>().outP(name.name, false);
+    }
+
+    [Command]
+    void CmdOutPaint2(string name, bool nval)
+    {
+        RpcOutPaint2(name, nval);
+    }
+
+    [ClientRpc]
+    void RpcOutPaint2(string name, bool nval)
+    {
+        cakeslice.Outline outl = GameObject.Find(name).GetComponent<cakeslice.Outline>();
+        MouseOver2 mouseOver2 = GameObject.Find(name).GetComponent<MouseOver2>();
+        if (nval)
+            mouseOver2.b = mouseOver2.b + 1;
+        else
+            mouseOver2.b = mouseOver2.b - 1;
+        if (mouseOver2.b > 0)
+        {
+            outl.color = 1;
+            outl.enabled = true;
+        }
+        else
+        {
+            outl.color = 0;
+            outl.enabled = nval;
+        }
+    }
+
+    void OnMouseDown(){
         
 	
         //RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up);
@@ -46,8 +99,26 @@ public class SpriteOnClick : MonoBehaviour {
 			Debug.Log (Wall.name + "sprite on click");
             if (Wall.activeInHierarchy)
             {
-                Debug.Log("Wall active in sprite");
+                Debug.Log(this.transform.name +" Wall active in sprite");
                 Menu.SetActive(true);
+                //GameObject[] users = GameObject.FindGameObjectsWithTag("Player");
+                //GameObject user = users[0];
+                /*for(int i = 0; i < users.Length; i++)
+                {
+                    Debug.Log("lplayer " + users[i].gameObject.transform.name);
+                    if (users[i].gameObject.GetComponent<NetworkIdentity>().isLocalPlayer)
+                    {
+                        user = users[i].gameObject;
+                        break;
+                    }
+
+                }*/
+                if (!found)
+                    find();
+                Debug.Log(luser.transform.name);
+                //users..gameObject.GetComponent<PlayerCapsule>().outP(this.transform.name, true);
+                luser.GetComponent<PlayerCapsule>().outP(this.transform.name, true);
+                //CmdOutPaint2(this.transform.name, true);
             }
 		} else {
 			VideoPlayer vp = GetComponent<VideoPlayer> ();
