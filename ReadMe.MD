@@ -23,10 +23,9 @@
 - [X] Outline the painting the user listens / watching something
 - [ ] Volume down the audio from videos playing from other users
 - [X] Semicircle all players enabled
-- [ ] Render a camera on room’s wall instead of an image
+- [X] Render a camera on room’s wall instead of an image
 - [X] Camera and mouse should be synchronized 
 - [X] Target shall follow camera (low pr) 
-- [ ] bled
 - [ ] Make a new project with removed videos 
 
 ## BUGS
