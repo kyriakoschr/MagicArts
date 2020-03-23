@@ -9,7 +9,7 @@
 - [ ] Sit on chair
 
 ## MODIFICATIONS
-- [ ] Zoom more and start with real dimensions 
+- [X] Zoom more and start with real dimensions 
 - [X] Remove some paintings
      - starry night and left of it
      - Piles of book
