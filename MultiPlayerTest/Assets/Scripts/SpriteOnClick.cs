@@ -45,6 +45,8 @@ public class SpriteOnClick : NetworkBehaviour {
     public void closeout(GameObject name)
     {
         luser.GetComponent<PlayerCapsule>().outP(name.name, false);
+        //if (name.name == "paint8")
+        //    luser.GetComponent<PlayerCapsule>().outP("paint8(1)", false);
     }
 
     [Command]
@@ -118,6 +120,8 @@ public class SpriteOnClick : NetworkBehaviour {
                 Debug.Log(luser.transform.name);
                 //users..gameObject.GetComponent<PlayerCapsule>().outP(this.transform.name, true);
                 luser.GetComponent<PlayerCapsule>().outP(this.transform.name, true);
+                //if (this.transform.name == "paint8")
+                //    luser.GetComponent<PlayerCapsule>().outP("paint8(1)", true);
                 //CmdOutPaint2(this.transform.name, true);
             }
 		} else {

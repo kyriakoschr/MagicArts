@@ -1560,21 +1560,30 @@ public class PlayerCapsule : NetworkBehaviour
                                 Debug.Log("MPIKen");
                                 CmdOutPaint2(hit.transform.parent.transform.parent.name, true);
                                 StartCoroutine(videoA(hit.transform.parent.transform.parent.name, audio));
+                                if (hit.transform.parent.transform.parent.name == "paint8")
+                                {
+                                    CmdOutPaint2("paint8(1)", true);
+                                    StartCoroutine(videoA("paint8(1)", audio));
+                                }
                             }
                             else if (!audio.isPlaying)
                             {
                                 Debug.Log("MPIKen");
                                 CmdOutPaint2(hit.transform.parent.transform.parent.name, false);
+                                if (hit.transform.parent.transform.parent.name == "paint8")
+                                {
+                                    CmdOutPaint2("paint8(1)", false);
+                                }
                             }
                         }
-                        else if (hit.transform.name == "paint2")
+                        /*else if (hit.transform.name == "paint2")
                         {
                             if (GameObject.Find("extra2").active)
                             {
                                 Debug.Log("OPOPOP");
                                 CmdOutPaint2(hit.transform.name, true);
                             }
-                        }
+                        }*/
                         else if (hit.transform.tag != "Wall") { 
                             if (terrain.Raycast(ray, out hit, Mathf.Infinity))
                             {
