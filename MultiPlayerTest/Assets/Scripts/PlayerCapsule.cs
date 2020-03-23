@@ -1957,7 +1957,7 @@ public class PlayerCapsule : NetworkBehaviour
                 //ButtonNight.SetActive(false);
                 //ButtonDay.SetActive(false);
                 Debug.Log("Teleport to " + other.gameObject);
-                transform.position = new Vector3(-50.34f, 0.5f, 167.34f);
+                transform.position = new Vector3(-37.56f, 0.5f, 167.34f);
                 CmdSSound();
                 CmdHeadVR(temphs, tempvr);
                 //transform.position = new Vector3 (3.5f, 0.5f, 23.4f);//GameObject.FindGameObjectWithTag ("Respawn").transform.position;
