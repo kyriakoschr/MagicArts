@@ -21,7 +21,7 @@
      [X] V1 zoom in
      [ ] V2 painting others zoom in 
 - [X] Outline the painting the user listens / watching something
-- [ ] Volume down the audio from videos playing from other users
+- [ ] V2 Volume down the audio from videos playing from other users
 - [X] Semicircle all players enabled
 - [X] Render a camera on room’s wall instead of an image
 - [X] Camera and mouse should be synchronized 
