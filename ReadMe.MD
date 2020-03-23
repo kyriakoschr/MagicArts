@@ -34,7 +34,7 @@
 - [X] Right chair and blue face does not enlarge and chair not included in Outline
 - [X] Synchronization with other players
 - [X] Some paintings have wrong authorities (Blue face painting extras are not visible for host)
-- [ ] Click on painting is messing with semicircle
+- [X] Click on painting is messing with semicircle
 
 ## TRANSFORM TO HTC VIVE
 
