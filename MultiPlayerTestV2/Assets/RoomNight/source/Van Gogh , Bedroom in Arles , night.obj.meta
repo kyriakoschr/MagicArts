@@ -1,0 +1,202 @@
+fileFormatVersion: 2
+guid: e0db89675a6b01d4195be74822e8d154
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: back
+    100002: bad
+    100004: bad_for
+    100006: bordur
+    100008: ceiling
+    100010: chair
+    100012: Doors
+    100014: FLOOR
+    100016: glass
+    100018: glass2
+    100020: molbert
+    100022: painting_left
+    100024: painting_right
+    100026: table
+    100028: //RootNode
+    100030: veshalka
+    100032: wall_staff
+    100034: walls
+    100036: win_anim
+    100038: win_still
+    400000: back
+    400002: bad
+    400004: bad_for
+    400006: bordur
+    400008: ceiling
+    400010: chair
+    400012: Doors
+    400014: FLOOR
+    400016: glass
+    400018: glass2
+    400020: molbert
+    400022: painting_left
+    400024: painting_right
+    400026: table
+    400028: //RootNode
+    400030: veshalka
+    400032: wall_staff
+    400034: walls
+    400036: win_anim
+    400038: win_still
+    2100000: backMat
+    2100002: badMat
+    2100004: bad_forMat
+    2100006: bordurMat
+    2100008: ceilingMat
+    2100010: chairMat
+    2100012: DoorsMat
+    2100014: FLOORMat
+    2100016: glassMat
+    2100018: glass2Mat
+    2100020: molbertMat
+    2100022: painting_leftMat
+    2100024: painting_rightMat
+    2100026: tableMat
+    2100028: veshalkaMat
+    2100030: wall_staffMat
+    2100032: wallsMat
+    2100034: win_animMat
+    2100036: win_stillMat
+    2300000: back
+    2300002: bad
+    2300004: bad_for
+    2300006: bordur
+    2300008: ceiling
+    2300010: chair
+    2300012: Doors
+    2300014: FLOOR
+    2300016: glass
+    2300018: glass2
+    2300020: molbert
+    2300022: painting_left
+    2300024: painting_right
+    2300026: table
+    2300028: veshalka
+    2300030: wall_staff
+    2300032: walls
+    2300034: win_anim
+    2300036: win_still
+    3300000: back
+    3300002: bad
+    3300004: bad_for
+    3300006: bordur
+    3300008: ceiling
+    3300010: chair
+    3300012: Doors
+    3300014: FLOOR
+    3300016: glass
+    3300018: glass2
+    3300020: molbert
+    3300022: painting_left
+    3300024: painting_right
+    3300026: table
+    3300028: veshalka
+    3300030: wall_staff
+    3300032: walls
+    3300034: win_anim
+    3300036: win_still
+    4300000: back
+    4300002: bad
+    4300004: bad_for
+    4300006: bordur
+    4300008: ceiling
+    4300010: chair
+    4300012: Doors
+    4300014: FLOOR
+    4300016: glass
+    4300018: glass2
+    4300020: molbert
+    4300022: painting_left
+    4300024: painting_right
+    4300026: table
+    4300028: veshalka
+    4300030: wall_staff
+    4300032: walls
+    4300034: win_anim
+    4300036: win_still
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

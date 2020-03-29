@@ -16,17 +16,17 @@
 - [X] enlarge semicircles and smaller room
 - [X] Volume down shared videos
 - [X] Sensitivity of mouse
-- [ ] highlight
+- [X] highlight
      [X] V1 the painting that the others listen 
      [X] V1 zoom in
-     [ ] V2 painting others zoom in 
+     [X] V2 painting others zoom in 
 - [X] Outline the painting the user listens / watching something
-- [ ] V2 Volume down the audio from videos playing from other users
+- [X] V2 Volume down the audio from videos and audio playing from other users
 - [X] Semicircle all players enabled
 - [X] Render a camera on room’s wall instead of an image
 - [X] Camera and mouse should be synchronized 
 - [X] Target shall follow camera (low pr) 
-- [ ] Make a new project with removed videos 
+- [ ] Make a new project with removed videos (V3)
 
 ## BUGS
 - [X] Do not click on walls and pass through
