@@ -2137,7 +2137,6 @@ public class PlayerCapsule : NetworkBehaviour
         MouseOver2 mouseOver2 = GameObject.Find(name).GetComponent<MouseOver2>();
         VideoPlayer video = null;
         AudioSource audio = null;
-        Debug.Log("id of user: " + hasAuthority);
         if (va == 1)
         {
             video = GameObject.Find(name).GetComponentInChildren<VideoPlayer>();
@@ -2145,9 +2144,26 @@ public class PlayerCapsule : NetworkBehaviour
         }
         else if (va == 2)
         {
-            audio = GameObject.Find(name).GetComponentInChildren<AudioSource>();
+            if(name=="paint5")
+            {
+                GameObject obj = GameObject.Find(name);
+                audio = obj.gameObject.transform.Find("extra5/AudioSource0").GetComponent<AudioSource>();
+            }
+            else if(name=="paint10")
+            {
+                GameObject obj = GameObject.Find(name);
+                audio = obj.gameObject.transform.Find("extra10/AudioSource0").GetComponent<AudioSource>();
+            }
+            else if(name=="paint11")
+            {
+                GameObject obj = GameObject.Find(name);
+                audio = obj.gameObject.transform.Find("extra11/AudioSource0").GetComponent<AudioSource>();
+            }
+            else
+                audio = GameObject.Find(name).GetComponentInChildren<AudioSource>();
             //audio.volume = 0.5F;
         }
+        Debug.Log("id of user: "  + nval + va+audio.clip.name);
         if (nval)
             mouseOver2.b = mouseOver2.b + 1;
         else
