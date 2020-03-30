@@ -26,7 +26,7 @@
 - [X] Render a camera on room’s wall instead of an image
 - [X] Camera and mouse should be synchronized 
 - [X] Target shall follow camera (low pr) 
-- [ ] Make a new project with removed videos (V3)
+- [X] Make a new project with removed videos (V3)
 
 ## BUGS
 - [X] Do not click on walls and pass through
