@@ -17,9 +17,9 @@
 - [X] Volume down shared videos
 - [X] Sensitivity of mouse
 - [X] highlight
-     [X] V1 the painting that the others listen 
-     [X] V1 zoom in
-     [X] V2 painting others zoom in 
+     - V1 the painting that the others listen 
+     - V1 zoom in
+     - V2 painting others zoom in 
 - [X] Outline the painting the user listens / watching something
 - [X] V2 Volume down the audio from videos and audio playing from other users
 - [X] Semicircle all players enabled
