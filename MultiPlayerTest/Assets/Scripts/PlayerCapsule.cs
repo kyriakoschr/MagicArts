@@ -501,6 +501,8 @@ public class PlayerCapsule : NetworkBehaviour
         }
     }
 
+    float maxDistance = 0f;
+
     void Start()
     {
         //Debug.Log (btn1.name);
@@ -724,6 +726,7 @@ public class PlayerCapsule : NetworkBehaviour
         DontDestroyOnLoad(this);
         activeScene = "Museum";
         nactiveScene = "Museum";
+        maxDistance = Vector3.Distance(wall[1].transform.position, wall[6].transform.position);
         //FPC = Instantiate (FPCP);
         //TPC=Instantiate (TPCP);
         //FPC = GameObject.FindWithTag ("MainCamera");
@@ -1729,6 +1732,24 @@ public class PlayerCapsule : NetworkBehaviour
             CmdHeadVR(temphs, tempvr);
         }
         //Debug.DrawRay (transform.position, tar.transform.position, Color.red);
+        GameObject vid = GameObject.Find("VideoPotato");
+        GameObject vid1 = GameObject.Find("VideoBaby");
+        GameObject vid2 = GameObject.Find("VideoCafe");
+        if (vid != null && vid.active)
+        {
+            float dist = Vector3.Distance(vid.transform.position, this.transform.position);
+            vid.GetComponent<VideoPlayer>().GetTargetAudioSource(0).volume = (maxDistance - dist) / maxDistance;
+        }
+        if (vid1 != null && vid1.active)
+        {
+            float dist = Vector3.Distance(vid1.transform.position, this.transform.position);
+            vid1.GetComponent<VideoPlayer>().GetTargetAudioSource(0).volume = (maxDistance - dist) / maxDistance;
+        }
+        if (vid2 != null && vid2.active)
+        {
+            float dist = Vector3.Distance(vid2.transform.position, this.transform.position);
+            vid2.GetComponent<VideoPlayer>().GetTargetAudioSource(0).volume = (maxDistance - dist) / maxDistance;
+        }
         CmdUpdateVelocity(this.transform.position, this.transform.rotation);
 
         //anim.SetTrigger ("isWaving");
