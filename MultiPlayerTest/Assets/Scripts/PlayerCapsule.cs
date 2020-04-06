@@ -502,6 +502,8 @@ public class PlayerCapsule : NetworkBehaviour
     }
 
     float maxDistance = 0f;
+    GameObject currentlyPlaying;
+    int audioVideo = 0;
 
     void Start()
     {
@@ -1541,12 +1543,28 @@ public class PlayerCapsule : NetworkBehaviour
                             if (video.isPlaying)
                             {
                                 Debug.Log("MPIKen");
+                                if (audioVideo == 1)
+                                {
+                                    AudioSource goo = currentlyPlaying.transform.Find("AudioSource0").GetComponent<AudioSource>();
+                                    goo.Pause();
+                                    CmdOutPaint2(currentlyPlaying.transform.parent.name, false);
+                                }
+                                else if (audioVideo == 2)
+                                {
+                                    VideoPlayer goo = currentlyPlaying.transform.Find("Video").GetComponent<VideoPlayer>();
+                                    goo.Pause();
+                                    CmdOutPaint2(currentlyPlaying.transform.parent.name, false);
+                                }
+                                audioVideo = 2;
+                                currentlyPlaying = hit.transform.parent.gameObject;
                                 CmdOutPaint2(hit.transform.parent.transform.parent.name, true);
                                 StartCoroutine(videoW(hit.transform.parent.transform.parent.name, video));
                             }
                             else if (!video.isPlaying)
                             {
                                 Debug.Log("MPIKen");
+                                audioVideo = 0;
+                                currentlyPlaying = null;
                                 CmdOutPaint2(hit.transform.parent.transform.parent.name, false);
                             }
                         }
@@ -1561,6 +1579,20 @@ public class PlayerCapsule : NetworkBehaviour
                             if (audio.isPlaying)
                             {
                                 Debug.Log("MPIKen");
+                                if (audioVideo == 1)
+                                {
+                                    AudioSource goo = currentlyPlaying.transform.Find("AudioSource0").GetComponent<AudioSource>();
+                                    goo.Pause();
+                                    CmdOutPaint2(currentlyPlaying.transform.parent.name, false);
+                                }
+                                else if (audioVideo == 2)
+                                {
+                                    VideoPlayer goo = currentlyPlaying.transform.Find("Video").GetComponent<VideoPlayer>();
+                                    goo.Pause();
+                                    CmdOutPaint2(currentlyPlaying.transform.parent.name, false);
+                                }
+                                audioVideo = 1;
+                                currentlyPlaying = hit.transform.parent.gameObject;
                                 CmdOutPaint2(hit.transform.parent.transform.parent.name, true);
                                 StartCoroutine(videoA(hit.transform.parent.transform.parent.name, audio));
                                 if (hit.transform.parent.transform.parent.name == "paint8")
@@ -1572,6 +1604,8 @@ public class PlayerCapsule : NetworkBehaviour
                             else if (!audio.isPlaying)
                             {
                                 Debug.Log("MPIKen");
+                                audioVideo = 0;
+                                currentlyPlaying = null;
                                 CmdOutPaint2(hit.transform.parent.transform.parent.name, false);
                                 if (hit.transform.parent.transform.parent.name == "paint8")
                                 {

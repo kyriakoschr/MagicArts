@@ -35,8 +35,8 @@
 - [X] Click on painting is messing with semicircle
 
 ## MEETING POINTS
-- [ ] V1 Volume down the shared video (installations) audio according to the distance from it
-- [ ] V1 Audio icon on wall to be headphones icon
+- [X] V1 Volume down the shared video (installations) audio according to the distance from it
+- [X] V1 Audio icon on wall to be headphones icon
 - [ ] V1 Only one audio/video exhibit at a time per user
 - [ ] V2 Remove HMD / headphones
 - [ ] V2 Volume down the installations / video / audio according to the distance from it
