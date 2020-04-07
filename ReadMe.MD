@@ -36,7 +36,7 @@
 
 ## MEETING POINTS
 - [ ] V2 bug doesnt play on every user
-- [ ] V3 icon to headset
+- [X] V3 icon to headset
 - [X] V1 Volume down the shared video (installations) audio according to the distance from it
 - [X] V1 Audio icon on wall to be headphones icon
 - [X] V1 Only one audio/video exhibit at a time per user
