@@ -35,12 +35,14 @@
 - [X] Click on painting is messing with semicircle
 
 ## MEETING POINTS
+- [ ] V2 bug doesnt play on every user
+- [ ] V3 icon to headset
 - [X] V1 Volume down the shared video (installations) audio according to the distance from it
 - [X] V1 Audio icon on wall to be headphones icon
 - [X] V1 Only one audio/video exhibit at a time per user
 - [X] V2 Remove HMD / headphones
 - [X] V2 Volume down the installations / video / audio according to the distance from it
-- [ ] Add a label with username above avatar
+- [X] Add a label with username above avatar
 - [ ] Add an extra mode (?) on V1 dixit-like (choose a storyteller, storyteller picks an artwork and describe it to the rest, each user choose his answer, keep score)
 - [ ] Choose between avatars (?)
 

@@ -7,9 +7,12 @@ using UnityEngine.Networking;
 using UnityEngine.Video;
 using UnityEngine.SceneManagement;
 using cakeslice;
+using TMPro;
 
 public class PlayerCapsule : NetworkBehaviour
 {
+    [SyncVar(hook ="setUname")]
+    public string uname;
     [SyncVar(hook = "gw_on0")]
     public bool gwall0;
     [SyncVar(hook = "gw_on1")]
@@ -152,6 +155,11 @@ public class PlayerCapsule : NetworkBehaviour
     public GameObject wow;
     public GameObject sad;
     public GameObject neutral;
+
+    public void setUname(string un)
+    {
+        uname = un;
+    }
 
     public void gw_on0(bool nval)
     {
@@ -504,6 +512,20 @@ public class PlayerCapsule : NetworkBehaviour
     float maxDistance = 0f;
     GameObject currentlyPlaying;
     int audioVideo = 0;
+    GameObject myCanvas;
+    GameObject myName;
+
+    public override void OnStartAuthority()
+    {
+        myCanvas = GameObject.Find("ConnectCanvas");
+        //myName = myCanvas.transform.Find("Username").transform.Find("UsernameText").gameObject;
+        myName = myCanvas.transform.Find("Username").gameObject.transform.Find("UsernameText").gameObject;
+        Debug.Log("KOKOKOOK "+myName.name);
+        this.transform.Find("Name").GetComponent<TMP_Text>().SetText(myName.GetComponent<Text>().text);
+        myCanvas.active = false;
+        uname = myName.GetComponent<Text>().text;
+        CmdChangeName(myCanvas, myName.GetComponent<Text>().text);   
+    }
 
     void Start()
     {
@@ -519,6 +541,7 @@ public class PlayerCapsule : NetworkBehaviour
         //		sad= transform.Find("sadcloud").gameObject;
         //		neutral= transform.Find ("neutralcloud").gameObject;
         //		angry= transform.Find("angrycloud").gameObject;
+        this.transform.Find("Name").GetComponent<TMP_Text>().SetText(uname);
         smile.SetActive(false);
         angry.SetActive(false);
         neutral.SetActive(false);
@@ -755,6 +778,10 @@ public class PlayerCapsule : NetworkBehaviour
         //	Debug.Log (wall [i].name);
         if (hasAuthority == false)
             return;
+        Debug.Log("KOKOKOOK");
+        /*myCanvas = GameObject.Find("ConnectCanvas");
+        myName = GameObject.Find("UsernameText");
+        CmdChangeName(myCanvas, myName);*/
         Debug.Log("Entered by" + this.name);
         if (isServer)
             return;
@@ -2519,6 +2546,23 @@ public class PlayerCapsule : NetworkBehaviour
         //anim.SetTrigger ("isWaving");
         //waving=true;
         RpcWalk();
+    }
+
+    [Command]
+    void CmdChangeName(GameObject canv, string nam)
+    {
+        this.transform.Find("Name").GetComponent<TMP_Text>().SetText(nam);
+        //myCanvas.active = false;
+        uname = nam;
+        RpcChangeName(canv, nam);
+    }
+
+    [ClientRpc]
+    void RpcChangeName(GameObject canv, string nam)
+    {
+        Debug.Log(" rpc change name " + myCanvas.name);
+        this.transform.Find("Name").GetComponent<TMP_Text>().SetText(nam);
+        myCanvas.active = false;
     }
 
     [Command]
