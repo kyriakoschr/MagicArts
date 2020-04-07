@@ -501,6 +501,8 @@ public class PlayerCapsule : NetworkBehaviour
         }
     }
 
+    float maxDistance;
+
     void Start()
     {
         //Debug.Log (btn1.name);
@@ -522,7 +524,7 @@ public class PlayerCapsule : NetworkBehaviour
         sad.SetActive(false);
         vr.SetActive(false);
         headphones.SetActive(false);
-        CmdHeadVR(false, false);
+        //CmdHeadVR(false, false);
         CmdSSound();
         GameObject[] Buttons = Resources.FindObjectsOfTypeAll<GameObject>();
         for (int i = 0; i < Buttons.Length; i++)
@@ -731,6 +733,7 @@ public class PlayerCapsule : NetworkBehaviour
         //DontDestroyOnLoad (TPC);
         //DontDestroyOnLoad (FPC);
         anim = GetComponent<Animator>();
+        maxDistance = Vector3.Distance(GameObject.Find("paint1").transform.position, GameObject.Find("paint6").transform.position);
         bestGuessPosition = transform.position;
         bestGuessRotation = transform.rotation;
         //Uncomment for FPC
@@ -1696,6 +1699,7 @@ public class PlayerCapsule : NetworkBehaviour
                 if (sound.GetComponent<AudioSource>().isPlaying)
                 {
                     temphs = true;
+                    sound.GetComponent<AudioSource>().volume = (maxDistance - Vector3.Distance(this.transform.position, sound.transform.parent.transform.parent.transform.position)) / maxDistance;
                 }
             }
             GameObject[] videos = GameObject.FindGameObjectsWithTag("Video");
@@ -1705,6 +1709,7 @@ public class PlayerCapsule : NetworkBehaviour
                 {
                     tempvr = true;
                     temphs = true;
+                    video.GetComponent<VideoPlayer>().GetTargetAudioSource(0).volume= (maxDistance - Vector3.Distance(this.transform.position, video.transform.parent.transform.parent.transform.position)) / maxDistance;
                 }
             }
             //				GameObject[] videos = GameObject.FindGameObjectsWithTag("Video");
@@ -1726,9 +1731,27 @@ public class PlayerCapsule : NetworkBehaviour
                     tempvr = true;
                 }
             */
-            CmdHeadVR(temphs, tempvr);
+            //CmdHeadVR(temphs, tempvr);
         }
         //Debug.DrawRay (transform.position, tar.transform.position, Color.red);
+        GameObject vid = GameObject.Find("VideoPotato");
+        GameObject vid1 = GameObject.Find("VideoBaby");
+        GameObject vid2 = GameObject.Find("VideoCafe");
+        if (vid != null && vid.active)
+        {
+            float dist = Vector3.Distance(vid.transform.position, this.transform.position);
+            vid.GetComponent<VideoPlayer>().GetTargetAudioSource(0).volume = (maxDistance - dist) / maxDistance;
+        }
+        if (vid1 != null && vid1.active)
+        {
+            float dist = Vector3.Distance(vid1.transform.position, this.transform.position);
+            vid1.GetComponent<VideoPlayer>().GetTargetAudioSource(0).volume = (maxDistance - dist) / maxDistance;
+        }
+        if (vid2 != null && vid2.active)
+        {
+            float dist = Vector3.Distance(vid2.transform.position, this.transform.position);
+            vid2.GetComponent<VideoPlayer>().GetTargetAudioSource(0).volume = (maxDistance - dist) / maxDistance;
+        }
         CmdUpdateVelocity(this.transform.position, this.transform.rotation);
 
         //anim.SetTrigger ("isWaving");
@@ -1863,7 +1886,7 @@ public class PlayerCapsule : NetworkBehaviour
                     //headphones.SetActive (false);
                     //vr.SetActive (false);
                 }
-                CmdHeadVR(temphs, tempvr);
+                //CmdHeadVR(temphs, tempvr);
                 //ButtonNight.SetActive(true);
                 CanvasDay.SetActive(false);
                 Debug.Log("Teleport to " + other.gameObject);
@@ -1959,7 +1982,7 @@ public class PlayerCapsule : NetworkBehaviour
                 Debug.Log("Teleport to " + other.gameObject);
                 transform.position = new Vector3(-37.56f, 0.5f, 167.34f);
                 CmdSSound();
-                CmdHeadVR(temphs, tempvr);
+                //CmdHeadVR(temphs, tempvr);
                 //transform.position = new Vector3 (3.5f, 0.5f, 23.4f);//GameObject.FindGameObjectWithTag ("Respawn").transform.position;
             }
             else if (other.CompareTag("Baby"))
@@ -2163,28 +2186,22 @@ public class PlayerCapsule : NetworkBehaviour
                 audio = GameObject.Find(name).GetComponentInChildren<AudioSource>();
             //audio.volume = 0.5F;
         }
-        Debug.Log("id of user: "  + nval + va+audio.clip.name);
+        Debug.Log("nval: "  + nval);
+        Debug.Log("va: " + va);
+        //Debug.Log("clip: "  + audio.clip.name);
         if (nval)
             mouseOver2.b = mouseOver2.b + 1;
         else
             mouseOver2.b = mouseOver2.b - 1;
         if (va == 1 && nval)
         {
-            video.Play();
-            if (!hasAuthority)
-                video.GetTargetAudioSource(0).volume = 0.2F;
-            else
-                video.GetTargetAudioSource(0).volume = 1F;
+            Debug.Log(maxDistance+" "+ Vector3.Distance(this.transform.position, video.transform.parent.transform.parent.transform.position));
         }
         else if (va == 1 && !nval)
             video.Pause();
         else if (va == 2 && nval)
         {
             audio.Play();
-            if (!hasAuthority)
-                audio.volume = 0.2F;
-            else
-                audio.volume = 1F;
         }
         else if (va == 2 && !nval)
             audio.Pause();
@@ -2861,7 +2878,7 @@ public class PlayerCapsule : NetworkBehaviour
     {
         yield return new WaitForSeconds((float)go.GetComponent<VideoPlayer>().clip.length);
         Debug.Log("Serverwait");
-        CmdHeadVR(false, false);
+        //CmdHeadVR(false, false);
     }
 
     [ClientRpc]

@@ -728,7 +728,7 @@ public class PlayerCapsule : NetworkBehaviour
         DontDestroyOnLoad(this);
         activeScene = "Museum";
         nactiveScene = "Museum";
-        maxDistance = Vector3.Distance(wall[1].transform.position, wall[6].transform.position);
+        maxDistance = Vector3.Distance(GameObject.Find("paint1").transform.position, GameObject.Find("paint6").transform.position);
         //FPC = Instantiate (FPCP);
         //TPC=Instantiate (TPCP);
         //FPC = GameObject.FindWithTag ("MainCamera");
