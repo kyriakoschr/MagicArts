@@ -9,6 +9,7 @@ public class PlayerObject : NetworkBehaviour {
 	//public GameObject ButtonNight = null; // assign in the editor
 	//public GameObject FPC;
 	public GameObject gObject;
+    public string chosenPrefab;
 
 	public void myChangeScene (string scene){
 		//if (isLocalPlayer) {
@@ -23,10 +24,15 @@ public class PlayerObject : NetworkBehaviour {
 		//rb = GetComponent<Rigidbody>();
 		//FPC = GameObject.FindWithTag ("MainCamera");
 		Debug.Log("Spawn my own personal unit.");
-		//Instantiate(PlayerUnitPrefab);
-		CmdSpawnMyUnit(this.transform.position,this.transform.rotation);
-		//this.GetComponent<NetworkIdentity>().AssignClientAuthority(this.GetComponent<NetworkIdentity>().connectionToClient);
-		DontDestroyOnLoad (this);
+        //Instantiate(PlayerUnitPrefab);
+        chosenPrefab = GameObject.Find("Option").GetComponent<Text>().text;
+        Debug.Log("My chosen Prefab is " + chosenPrefab);
+        if(chosenPrefab=="Man")
+	        CmdSpawnMyUnit(this.transform.position,this.transform.rotation,2);
+        else
+            CmdSpawnMyUnit(this.transform.position, this.transform.rotation, 1);
+        //this.GetComponent<NetworkIdentity>().AssignClientAuthority(this.GetComponent<NetworkIdentity>().connectionToClient);
+        DontDestroyOnLoad (this);
 		//ButtonDay.GetComponent<Button>().onClick.AddListener(delegate{CmdChangeScene("day"); });
 		//ButtonNight.GetComponent<Button>().onClick.AddListener(delegate{CmdChangeScene("night"); });
 
@@ -82,7 +88,7 @@ public class PlayerObject : NetworkBehaviour {
 	}
 
 	[Command]
-	void CmdSpawnMyUnit(Vector3 p,Quaternion r)
+	void CmdSpawnMyUnit(Vector3 p,Quaternion r,int chosen)
 	{
 		//create the new object on server
 		//rb = GetComponent<Rigidbody>();
@@ -93,13 +99,18 @@ public class PlayerObject : NetworkBehaviour {
 		Debug.Log("Connection : " + m_Identity.connectionToClient.connectionId);
         //Debug.Log ("TR is " + tr.position);
         Quaternion q = new Quaternion();
+        GameObject chosenPre = null;
+        if (chosen == 1)
+            chosenPre = PlayerUnitPrefab1;
+        else
+            chosenPre = PlayerUnitPrefab2;
         if (m_Identity.connectionToClient.connectionId % 2 == 0) {
             q.SetLookRotation(new Vector3(-60, 0, 0));
-            gObject = Instantiate(PlayerUnitPrefab1, p,q);
+            gObject = Instantiate(chosenPre, p,q);
         }
         else {
             q.SetLookRotation(new Vector3(15,0,25));
-            gObject = Instantiate(PlayerUnitPrefab2, p, q);
+            gObject = Instantiate(chosenPre, p, q);
             }
 		//GameObject go1 = Instantiate(Line);
 		//GameObject go2 = Instantiate(Spot);
