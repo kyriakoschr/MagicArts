@@ -35,7 +35,6 @@
 - [X] Click on painting is messing with semicircle
 
 ## MEETING POINTS
-- [ ] V2 bug doesnt play on every user
 - [X] V3 icon to headset
 - [X] V1 Volume down the shared video (installations) audio according to the distance from it
 - [X] V1 Audio icon on wall to be headphones icon

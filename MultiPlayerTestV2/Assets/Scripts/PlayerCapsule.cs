@@ -2205,6 +2205,7 @@ public class PlayerCapsule : NetworkBehaviour
         if (va == 1)
         {
             video = GameObject.Find(name).GetComponentInChildren<VideoPlayer>();
+            Debug.Log(video.clip.name+" is the video");
             //video.SetDirectAudioVolume(0, 0.5F);
         }
         else if (va == 2)
@@ -2237,6 +2238,7 @@ public class PlayerCapsule : NetworkBehaviour
             mouseOver2.b = mouseOver2.b - 1;
         if (va == 1 && nval)
         {
+            video.Play();
             Debug.Log(maxDistance+" "+ Vector3.Distance(this.transform.position, video.transform.parent.transform.parent.transform.position));
         }
         else if (va == 1 && !nval)
