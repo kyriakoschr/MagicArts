@@ -8,6 +8,7 @@ using UnityEngine.Video;
 using UnityEngine.SceneManagement;
 using cakeslice;
 using TMPro;
+using System;
 
 public class PlayerCapsule : NetworkBehaviour
 {
@@ -143,10 +144,13 @@ public class PlayerCapsule : NetworkBehaviour
     private GameObject ButtonDay;
     private GameObject CanvasNight;
     private GameObject CanvasDay;
+    public GameObject GameCanvas;
     Vector3 offset;
+    public Button startGame;
     public string activeScene;
     public string nactiveScene;
     public GameObject myGO;
+    public GameObject setGame;
     private Button btn1;
     private Button btn2;
     public GameObject[] wall;
@@ -527,6 +531,14 @@ public class PlayerCapsule : NetworkBehaviour
         CmdChangeName(myCanvas, myName.GetComponent<Text>().text);   
     }
 
+    public GameObject myMessage;
+
+    void startMyGame()
+    {
+        Debug.Log("Start My Game");
+        CmdStartGame();
+    }
+
     void Start()
     {
         //Debug.Log (btn1.name);
@@ -551,6 +563,7 @@ public class PlayerCapsule : NetworkBehaviour
         headphones.SetActive(false);
         CmdHeadVR(false, false);
         CmdSSound();
+        GameCanvas = GameObject.Find("GalleryCanvas");
         GameObject[] Buttons = Resources.FindObjectsOfTypeAll<GameObject>();
         for (int i = 0; i < Buttons.Length; i++)
         {
@@ -736,6 +749,14 @@ public class PlayerCapsule : NetworkBehaviour
                 //Debug.Log ("Len of array:" + wall1.Length);
                 Debug.Log("TMCamera detected");
                 TPC = Buttons[i].gameObject;
+            }
+            else if (Buttons[i].name=="GalleryCanvas")
+            {
+                startGame = Buttons[i].transform.Find("StorytellerBoard").transform.Find("Start").GetComponent<Button>();
+                startGame.onClick.AddListener(startMyGame);
+                setGame = Buttons[i].transform.Find("StorytellerBoard").gameObject;
+                myMessage = Buttons[i].transform.Find("Message").gameObject;
+                Debug.Log("Message found "+myMessage.name);
             }
         }
         /*ButtonNight=GameObject.Find ("ButtonNight");
@@ -1039,7 +1060,7 @@ public class PlayerCapsule : NetworkBehaviour
         float rotation = (Input.GetAxis("Horizontal") + Input.GetAxis("Mouse X")) * rspeed;
         rotation *= Time.deltaTime;
         bool changed = false;
-        if (GameObject.Find("Canvas") == null)
+        if (setGame.active==false&&CanvasDay.active==false&& CanvasNight.active == false)
         {
             transform.Rotate(0, rotation, 0);
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
@@ -1092,7 +1113,7 @@ public class PlayerCapsule : NetworkBehaviour
         //mouseY=mouseY * Time.deltaTime;
         rotY += mouseY * mouseSensitivity * Time.deltaTime;
         //rotX += mouseX *mouseSensitivity* Time.deltaTime;
-        if (GameObject.Find("Canvas") == null)
+        if (setGame.active == false && CanvasDay.active == false && CanvasNight.active == false)
             TPC.transform.Rotate(rotY, 0, 0);
         //TPC.transform.rotation=new Quaternion(rotY,TPC.transform.rotation.y,TPC.transform.rotation.z,TPC.transform.rotation.w);
         //TPC.transform.Rotate (90,0,0);
@@ -1110,7 +1131,7 @@ public class PlayerCapsule : NetworkBehaviour
         Vector3 temp = new Vector3(this.transform.position.x, FPC.transform.position.y, this.transform.position.z + 0.2f);
         FPC.transform.position = temp + this.transform.forward * 4f;
         FPC.transform.rotation = this.transform.rotation;
-        if (GameObject.Find("Canvas") == null)
+        if (setGame.active == false && CanvasDay.active == false && CanvasNight.active == false)
             FPC.transform.Rotate(rotY, 0, 0);
         //Vector3 p1= new Vector3(transform.position.x,4,transform.position.z+1);
         //Debug.Log ("bef transf pos "+p1);
@@ -1123,100 +1144,103 @@ public class PlayerCapsule : NetworkBehaviour
         //float angl;
         //transform.rotation.ToAngleAxis(angl,rotat);
         //Vector3 p = transform.position;
-        if (Input.GetKeyDown(KeyCode.H))
+        if (setGame.active == false && CanvasDay.active == false && CanvasNight.active == false)
         {
-            anim.SetTrigger("isWaving");
-            //Debug.Log ("Have to wave mine");
-            CmdWave();
+            if (Input.GetKeyDown(KeyCode.H))
+            {
+                anim.SetTrigger("isWaving");
+                //Debug.Log ("Have to wave mine");
+                CmdWave();
+            }
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                anim.SetTrigger("isPointing");
+                //Debug.Log ("Have to wave mine");
+                CmdPoint();
+            }
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                //anim.SetTrigger ("isPointing");
+                //Debug.Log ("Have to wave mine");
+                CmdDance();
+            }
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                //anim.SetTrigger ("isroll");
+                //Debug.Log ("Have to wave mine");
+                CmdRoll();
+            }
+            if (Input.GetKeyDown(KeyCode.F1))
+                if (activeScene == "Museum")
+                    if (TPC.activeInHierarchy)
+                    {
+                        FPC.gameObject.GetComponent<OutlineEffect>().enabled = true;
+                        TPC.gameObject.GetComponent<OutlineEffect>().enabled = false;
+                        FPC.SetActive(true);
+                        TPC.SetActive(false);
+                        GameObject.Find("paint0").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint1").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint2").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint3").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint4").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint5").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint6").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint7").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint8").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint8(1)").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint9").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint10").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint11").GetComponent<cakeslice.Outline>().enabled = false;
+                        //GameObject.Find ("paint12").GetComponent<cakeslice.Outline> ().enabled=false;
+                        GameObject.Find("paint13").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint14").GetComponent<cakeslice.Outline>().enabled = false;
+                        //GameObject.Find ("paint15").GetComponent<cakeslice.Outline> ().enabled=false;
+                        //GameObject.Find ("paint16").GetComponent<cakeslice.Outline> ().enabled=false;
+                        GameObject.Find("paint17").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint18").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint19").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint20").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint21").GetComponent<cakeslice.Outline>().enabled = false;
+                    }
+                    else
+                    {
+                        FPC.gameObject.GetComponent<OutlineEffect>().enabled = false;
+                        TPC.gameObject.GetComponent<OutlineEffect>().enabled = true;
+                        FPC.SetActive(false);
+                        TPC.SetActive(true);
+                        GameObject.Find("paint0").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint1").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint2").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint3").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint4").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint5").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint6").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint7").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint8").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint8(1)").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint9").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint10").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint11").GetComponent<cakeslice.Outline>().enabled = false;
+                        //GameObject.Find ("paint12").GetComponent<cakeslice.Outline> ().enabled=false;
+                        GameObject.Find("paint13").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint14").GetComponent<cakeslice.Outline>().enabled = false;
+                        //GameObject.Find ("paint15").GetComponent<cakeslice.Outline> ().enabled=false;
+                        //GameObject.Find ("paint16").GetComponent<cakeslice.Outline> ().enabled=false;
+                        GameObject.Find("paint17").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint18").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint19").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint20").GetComponent<cakeslice.Outline>().enabled = false;
+                        GameObject.Find("paint21").GetComponent<cakeslice.Outline>().enabled = false;
+                    }
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                anim.SetTrigger("isCome");
+                CmdCome();
+            }
         }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            anim.SetTrigger("isPointing");
-            //Debug.Log ("Have to wave mine");
-            CmdPoint();
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            //anim.SetTrigger ("isPointing");
-            //Debug.Log ("Have to wave mine");
-            CmdDance();
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            //anim.SetTrigger ("isroll");
-            //Debug.Log ("Have to wave mine");
-            CmdRoll();
-        }
-        if (Input.GetKeyDown(KeyCode.F1))
-            if (activeScene == "Museum")
-                if (TPC.activeInHierarchy)
-                {
-                    FPC.gameObject.GetComponent<OutlineEffect>().enabled = true;
-                    TPC.gameObject.GetComponent<OutlineEffect>().enabled = false;
-                    FPC.SetActive(true);
-                    TPC.SetActive(false);
-                    GameObject.Find("paint0").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint1").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint2").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint3").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint4").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint5").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint6").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint7").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint8").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint8(1)").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint9").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint10").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint11").GetComponent<cakeslice.Outline>().enabled = false;
-                    //GameObject.Find ("paint12").GetComponent<cakeslice.Outline> ().enabled=false;
-                    GameObject.Find("paint13").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint14").GetComponent<cakeslice.Outline>().enabled = false;
-                    //GameObject.Find ("paint15").GetComponent<cakeslice.Outline> ().enabled=false;
-                    //GameObject.Find ("paint16").GetComponent<cakeslice.Outline> ().enabled=false;
-                    GameObject.Find("paint17").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint18").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint19").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint20").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint21").GetComponent<cakeslice.Outline>().enabled = false;
-                }
-                else
-                {
-                    FPC.gameObject.GetComponent<OutlineEffect>().enabled = false;
-                    TPC.gameObject.GetComponent<OutlineEffect>().enabled = true;
-                    FPC.SetActive(false);
-                    TPC.SetActive(true);
-                    GameObject.Find("paint0").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint1").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint2").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint3").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint4").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint5").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint6").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint7").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint8").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint8(1)").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint9").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint10").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint11").GetComponent<cakeslice.Outline>().enabled = false;
-                    //GameObject.Find ("paint12").GetComponent<cakeslice.Outline> ().enabled=false;
-                    GameObject.Find("paint13").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint14").GetComponent<cakeslice.Outline>().enabled = false;
-                    //GameObject.Find ("paint15").GetComponent<cakeslice.Outline> ().enabled=false;
-                    //GameObject.Find ("paint16").GetComponent<cakeslice.Outline> ().enabled=false;
-                    GameObject.Find("paint17").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint18").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint19").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint20").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint21").GetComponent<cakeslice.Outline>().enabled = false;
-                }
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            anim.SetTrigger("isCome");
-            CmdCome();
-        }
-
         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.T))
-            if (activeScene == "Museum" && GameObject.Find("Canvas") == null)
+        {
+            if (activeScene == "Museum" && setGame.active == false && CanvasDay.active == false && CanvasNight.active == false)
             {
                 Debug.Log("Have to teleport");
                 RaycastHit hit;
@@ -1648,14 +1672,15 @@ public class PlayerCapsule : NetworkBehaviour
                                 CmdOutPaint2(hit.transform.name, true);
                             }
                         }*/
-                        else if (hit.transform.tag != "Wall") { 
+                        else if (hit.transform.tag != "Wall")
+                        {
                             if (terrain.Raycast(ray, out hit, Mathf.Infinity))
                             {
                                 transform.position = new Vector3(hit.point.x, transform.position.y, hit.point.z);
                             }
                         }
                     }
-                    
+
 
                     if (openedPainting)
                     {
@@ -1741,7 +1766,8 @@ public class PlayerCapsule : NetworkBehaviour
 						}*/
                     }
                 }               //this.transform.position = Input.mousePosition;
-            }
+            }        
+        }
         if (activeScene == "Museum")
         {
             GameObject tar = GameObject.FindWithTag("Cylinder");
@@ -2058,7 +2084,7 @@ public class PlayerCapsule : NetworkBehaviour
             }
         }
     }
-
+ 
     public Sprite sprite;
     public IEnumerator checkVid(GameObject go)
     {
@@ -2072,6 +2098,21 @@ public class PlayerCapsule : NetworkBehaviour
         Debug.Log("finished");
         //yield return null;
 
+    }
+
+    [Command]
+    void CmdStartGame()
+    {
+        RpcStartGame();
+    }
+    
+    
+    [ClientRpc]
+    void RpcStartGame()
+    {
+        Debug.Log("RPC STAER");
+        myMessage.SetActive(true);
+        StartCoroutine(waiterMsg(myMessage));
     }
 
     [Command]
@@ -2524,6 +2565,14 @@ public class PlayerCapsule : NetworkBehaviour
     {
         go.SetActive(true);
         yield return new WaitForSeconds(30);
+        go.SetActive(false);
+
+    }
+
+    IEnumerator waiterMsg(GameObject go)
+    {
+        go.SetActive(true);
+        yield return new WaitForSeconds(15);
         go.SetActive(false);
 
     }

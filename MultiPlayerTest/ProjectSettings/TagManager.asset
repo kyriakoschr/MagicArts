@@ -25,6 +25,7 @@ TagManager:
   - Video
   - SIcon
   - Wall
+  - Game
   layers:
   - Default
   - TransparentFX

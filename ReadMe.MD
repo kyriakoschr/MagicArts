@@ -42,7 +42,7 @@
 - [X] V2 Remove HMD / headphones
 - [X] V2 Volume down the installations / video / audio according to the distance from it
 - [X] Add a label with username above avatar
-- [ ] Add an extra mode (?) on V1 dixit-like (choose a storyteller, storyteller picks an artwork and describe it to the rest, each user choose his answer, keep score)
+- [X] Add an extra mode (?) on V1 dixit-like (choose a storyteller, storyteller picks an artwork and describe it to the rest, each user choose his answer, keep score)
 - [X] Choose between avatars (?)
 
 ## TRANSFORM TO HTC VIVE
