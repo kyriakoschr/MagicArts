@@ -769,6 +769,7 @@ public class PlayerCapsule : NetworkBehaviour
         rotY = rot.x;
         rotX = rot.z;
         TPC.transform.LookAt(this.transform);
+        TPC.SetActive(false);
         //FPC.SetActive(false);
         //Debug.Log ("Entered by" + this.name);
         //for (int i = 0; i < 13; i++)
