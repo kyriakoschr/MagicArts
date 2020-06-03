@@ -170,6 +170,7 @@ MonoBehaviour:
   user: {fileID: 0}
   FPC: {fileID: 0}
   TPC: {fileID: 0}
+  luser: {fileID: 0}
 --- !u!65 &65415396056475078
 BoxCollider:
   m_ObjectHideFlags: 0

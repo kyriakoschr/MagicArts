@@ -44,7 +44,7 @@ public class SpriteOnClick : NetworkBehaviour {
 
     public void closeout(GameObject name)
     {
-        luser.GetComponent<PlayerCapsule>().outP(name.name, false);
+        luser.GetComponent<PlayerCapsule>().outP(name.name, -1);
         //if (name.name == "paint8")
         //    luser.GetComponent<PlayerCapsule>().outP("paint8(1)", false);
     }
@@ -119,7 +119,7 @@ public class SpriteOnClick : NetworkBehaviour {
                     find();
                 Debug.Log(luser.transform.name);
                 //users..gameObject.GetComponent<PlayerCapsule>().outP(this.transform.name, true);
-                luser.GetComponent<PlayerCapsule>().outP(this.transform.name, true);
+                luser.GetComponent<PlayerCapsule>().outP(this.transform.name, 1);
                 //if (this.transform.name == "paint8")
                 //    luser.GetComponent<PlayerCapsule>().outP("paint8(1)", true);
                 //CmdOutPaint2(this.transform.name, true);
@@ -127,10 +127,17 @@ public class SpriteOnClick : NetworkBehaviour {
 		} else {
 			VideoPlayer vp = GetComponent<VideoPlayer> ();
 			if (vp != null) {
-				if (vp.isPlaying)
-					vp.Pause ();
-				else
-					vp.Play ();
+                if (vp.isPlaying)
+                {
+                    //Debug.Log("PLAYing");
+                    vp.Pause();
+                    //vp.Prepare();
+                }
+                else
+                {
+                    Debug.Log("notPlaying");
+                    vp.Play();
+                }
 			} else {
 				AudioSource AS=Audio.GetComponent<AudioSource> ();
 				if( AS.isPlaying == false)

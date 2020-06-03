@@ -27,7 +27,7 @@ public class PlayerObject : NetworkBehaviour {
         //Instantiate(PlayerUnitPrefab);
         chosenPrefab = GameObject.Find("Option").GetComponent<Text>().text;
         Debug.Log("My chosen Prefab is " + chosenPrefab);
-        if(chosenPrefab=="Man")
+        if(chosenPrefab=="Boy")
 	        CmdSpawnMyUnit(this.transform.position,this.transform.rotation,2);
         else
             CmdSpawnMyUnit(this.transform.position, this.transform.rotation, 1);

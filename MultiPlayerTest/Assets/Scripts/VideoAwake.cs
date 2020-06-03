@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.Video;
 
 public class VideoAwake : MonoBehaviour {
+    bool started = true;
 
-	VideoPlayer vp;
+    VideoPlayer vp;
 	// Use this for initialization
 	void Start () {
 		
@@ -13,12 +14,24 @@ public class VideoAwake : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        //Debug.Log((ulong)vp.frame + " " + vp.frameCount);
+        if (vp.frame == 4 && started)
+        {
+            started = false;
+            vp.Pause();
+        }
+    }
 
-	void OnEnable(){
-		vp = GetComponent<VideoPlayer> ();
-		vp.Play ();
-		vp.Pause ();
+    private void OnBecameVisible()
+    {
+        vp = GetComponent<VideoPlayer>();
+        /*vp.Play();*/
+        //vp.Pause ();
+    }
+    void Awake(){
+        Debug.Log("awaken");
+        vp = GetComponent<VideoPlayer> ();
+        /*vp.Play();
+        vp.Pause ();*/
 	}
 }

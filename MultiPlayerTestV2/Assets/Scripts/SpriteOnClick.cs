@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 using cakeslice;
+using UnityEngine.Assertions.Must;
 
 public class SpriteOnClick : NetworkBehaviour {
 
@@ -44,7 +45,8 @@ public class SpriteOnClick : NetworkBehaviour {
 
     public void closeout(GameObject name)
     {
-        luser.GetComponent<PlayerCapsule>().outP(name.name, false,3, luser.GetComponent<NetworkIdentity>().netId);
+        //luser.GetComponent<PlayerCapsule>().outP(name.name, false,3, luser.GetComponent<NetworkIdentity>().netId);
+        luser.GetComponent<PlayerCapsule>().outP(name.name,0,-1);
         //if (name.name == "paint8")
         //    luser.GetComponent<PlayerCapsule>().outP("paint8(1)", false);
     }
@@ -75,7 +77,16 @@ public class SpriteOnClick : NetworkBehaviour {
             outl.enabled = nval;
         }
     }*/
-
+    IEnumerator playVideo()
+    {
+        VideoPlayer vp = GetComponent<VideoPlayer>();
+        while (!vp.isPrepared)
+        {
+            Debug.Log("Preparing Video");
+            yield return null;
+        }
+        vp.Play();
+    }
     void OnMouseDown(){
         
 	
@@ -119,7 +130,8 @@ public class SpriteOnClick : NetworkBehaviour {
                     find();
                 Debug.Log(luser.transform.name);
                 //users..gameObject.GetComponent<PlayerCapsule>().outP(this.transform.name, true);
-                luser.GetComponent<PlayerCapsule>().outP(this.transform.name, true,3,luser.GetComponent<NetworkIdentity>().netId);
+                //luser.GetComponent<PlayerCapsule>().outP(this.transform.name, true,3,luser.GetComponent<NetworkIdentity>().netId);
+                luser.GetComponent<PlayerCapsule>().outP(this.transform.name, 0,1);
                 //if (this.transform.name == "paint8")
                 //    luser.GetComponent<PlayerCapsule>().outP("paint8(1)", true);
                 //CmdOutPaint2(this.transform.name, true);
@@ -127,10 +139,26 @@ public class SpriteOnClick : NetworkBehaviour {
 		} else {
 			VideoPlayer vp = GetComponent<VideoPlayer> ();
 			if (vp != null) {
-				if (vp.isPlaying)
-					vp.Pause ();
-				else
-					vp.Play ();
+                if (vp.isPlaying)
+                {
+                    /*vp.Stop();
+                    vp.Prepare();
+                    Debug.Log("Preparing Video");
+                    while (!vp.isPrepared)
+                    {
+                        Debug.Log("Preparing Video");
+                        yield return null;
+                    }
+                    vp.time = 0.1;*/
+                    vp.Pause();
+                }
+                else
+                {
+                    /*vp.time = 0.1;
+                    vp.Prepare();
+                    StartCoroutine(playVideo());*/
+                    vp.Play();
+                }
 			} else {
 				AudioSource AS=Audio.GetComponent<AudioSource> ();
 				if( AS.isPlaying == false)

@@ -45,6 +45,38 @@
 - [X] Add an extra mode (?) on V1 dixit-like (choose a storyteller, storyteller picks an artwork and describe it to the rest, each user choose his answer, keep score)
 - [X] Choose between avatars (?)
 
+### 21/4
+- [X] αλλαγη woman / man 
+- [X] αποκρυψη γραμμη
+- [X] teleport line doesn't move
+- [X] το bug με το ζοομ ιν
+- [Χ] να μικρανει λιγο το label me to onoma
+- [X] bug when enters room V1
+- [X] na allaxei i entasi kai na afxithi i diafora ixou
+
+- [X] να γινεται outline green to video
+- [X] να ελεγξω τι παιζει οταν μπαινουν 2 boys/girls
+- [X] na mikranei to outline
+- [X] αν μπορσει να παει το outline πισω layers
+- [X] bug when enters room με τα outlines
+- [X] na koitajv na ta kanv nonUI
+- [X] enable green outline when zoom in
+- [X] use b to outline
+- [X] server headset
+- [X] check enabling on zoom
+- [X] not working on >2 users
+- [X] check painting 8 on both versions
+- [X] play multimedia on other users V2
+- [X] check videos looping
+- [X] enhance game to old
+
+for the game:
+- [X] move lower, add background, start->select, cancel->hide
+- [X] move freely around the museum 
+- [X] using the same setup to choose answer
+- [X] keep results and show at the end of each round
+- [X] think about when/how to choose the next storyteller
+
 ## TRANSFORM TO HTC VIVE
 - First 2 versions
 - Avatars might need to be replaced with simplier (ghosts or handless robots)

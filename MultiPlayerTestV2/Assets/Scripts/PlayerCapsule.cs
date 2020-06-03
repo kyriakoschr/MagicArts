@@ -8,7 +8,8 @@ using UnityEngine.Video;
 using UnityEngine.SceneManagement;
 using cakeslice;
 using TMPro;
-
+using System;
+using UnityEngine.UIElements;
 
 public class PlayerCapsule : NetworkBehaviour
 {
@@ -148,8 +149,8 @@ public class PlayerCapsule : NetworkBehaviour
     public string activeScene;
     public string nactiveScene;
     public GameObject myGO;
-    private Button btn1;
-    private Button btn2;
+    private UnityEngine.UI.Button btn1;
+    private UnityEngine.UI.Button btn2;
     public GameObject[] wall;
     public GameObject smile;
     public GameObject angry;
@@ -515,6 +516,29 @@ public class PlayerCapsule : NetworkBehaviour
     GameObject myCanvas;
     GameObject myName;
 
+    /*public class Artifact
+    {
+        public GameObject painting;
+        public int audioVideo;
+        public Coroutine cour;
+
+        public Artifact (GameObject p, int av, Coroutine c)
+        {
+            painting = p;
+            audioVideo = av;
+            cour = c;
+        }
+        
+        public Artifact (Artifact aa)
+        {
+            painting = aa.painting;
+            audioVideo = aa.audioVideo;
+            cour = aa.cour;
+        }
+    }*/
+
+    public List<KeepOpenedArtifacts.Artifact> artifacts = null;
+
     public override void OnStartAuthority()
     {
         myCanvas = GameObject.Find("ConnectCanvas");
@@ -524,7 +548,7 @@ public class PlayerCapsule : NetworkBehaviour
         this.transform.Find("Name").GetComponent<TMP_Text>().SetText(myName.GetComponent<Text>().text);
         myCanvas.active = false;
         uname = myName.GetComponent<Text>().text;
-        CmdChangeName(myCanvas, myName.GetComponent<Text>().text);
+        CmdChangeName( myName.GetComponent<Text>().text);
     }
 
     void Start()
@@ -550,6 +574,7 @@ public class PlayerCapsule : NetworkBehaviour
         vr.SetActive(false);
         headphones.SetActive(false);
         //CmdHeadVR(false, false);
+        artifacts = GameObject.Find("paint0").GetComponent<KeepOpenedArtifacts>().artifacts;
         CmdSSound();
         GameObject[] Buttons = Resources.FindObjectsOfTypeAll<GameObject>();
         for (int i = 0; i < Buttons.Length; i++)
@@ -557,13 +582,13 @@ public class PlayerCapsule : NetworkBehaviour
             if (Buttons[i].name == "ButtonNight")
             {
                 ButtonNight = Buttons[i].gameObject;
-                btn2 = ButtonNight.GetComponent<Button>();
+                btn2 = ButtonNight.GetComponent<UnityEngine.UI.Button>();
                 btn2.onClick.AddListener(delegate { LoadMyScene("night"); });
             }
             else if (Buttons[i].name == "ButtonDay")
             {
                 ButtonDay = Buttons[i].gameObject;
-                btn1 = ButtonDay.GetComponent<Button>();
+                btn1 = ButtonDay.GetComponent<UnityEngine.UI.Button>();
                 btn1.onClick.AddListener(delegate { LoadMyScene("day"); });
             }
             else if (Buttons[i].name == "CanvasDay")
@@ -737,6 +762,10 @@ public class PlayerCapsule : NetworkBehaviour
                 Debug.Log("TMCamera detected");
                 TPC = Buttons[i].gameObject;
             }
+            else if (Buttons[i].name == "Cylinder" || Buttons[i].name == "CurvedLine")
+            {
+                Buttons[i].SetActive(true);
+            }
         }
         /*ButtonNight=GameObject.Find ("ButtonNight");
 		ButtonDay=GameObject.Find ("ButtonDay");
@@ -772,68 +801,43 @@ public class PlayerCapsule : NetworkBehaviour
         rotY = rot.x;
         rotX = rot.z;
         TPC.transform.LookAt(this.transform);
-        TPC.SetActive(false);
         //FPC.SetActive(false);
         //Debug.Log ("Entered by" + this.name);
         //for (int i = 0; i < 13; i++)
         //	Debug.Log (wall [i].name);
         if (hasAuthority == false)
             return;
+        TPC.SetActive(false);
         Debug.Log("Entered by" + this.name);
         if (isServer)
             return;
         //CmdRequest();
         //Debug.Log (lb_wall0 + " on client " + this.name);
-        if (this.name == "remy(Clone)")
-        {
-            lb_wall0 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall0;
-            lb_wall1 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall1;
-            lb_wall2 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall2;
-            lb_wall3 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall3;
-            lb_wall4 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall4;
-            lb_wall5 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall5;
-            lb_wall6 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall6;
-            lb_wall7 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall7;
-            lb_wall8 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall8;
-            lb_wall9 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall9;
-            lb_wall10 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall10;
-            lb_wall11 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall11;
-            //lb_wall12 = GameObject.Find ("claire(Clone)").GetComponent<PlayerCapsule> ().b_wall12;
-            lb_wall13 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall13;
-            lb_wall14 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall14;
-            //lb_wall15 = GameObject.Find ("claire(Clone)").GetComponent<PlayerCapsule> ().b_wall15;
-            //lb_wall16 = GameObject.Find ("claire(Clone)").GetComponent<PlayerCapsule> ().b_wall16;
-            lb_wall17 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall17;
-            lb_wall18 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall18;
-            lb_wall19 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall19;
-            lb_wall20 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall20;
-            lb_wall21 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall21;
-        }
-        else if (this.name == "claire(Clone)")
-        {
-            lb_wall0 = GameObject.Find("remy(Clone)").GetComponent<PlayerCapsule>().b_wall0;
-            lb_wall1 = GameObject.Find("remy(Clone)").GetComponent<PlayerCapsule>().b_wall1;
-            lb_wall2 = GameObject.Find("remy(Clone)").GetComponent<PlayerCapsule>().b_wall2;
-            lb_wall3 = GameObject.Find("remy(Clone)").GetComponent<PlayerCapsule>().b_wall3;
-            lb_wall4 = GameObject.Find("remy(Clone)").GetComponent<PlayerCapsule>().b_wall4;
-            lb_wall5 = GameObject.Find("remy(Clone)").GetComponent<PlayerCapsule>().b_wall5;
-            lb_wall6 = GameObject.Find("remy(Clone)").GetComponent<PlayerCapsule>().b_wall6;
-            lb_wall7 = GameObject.Find("remy(Clone)").GetComponent<PlayerCapsule>().b_wall7;
-            lb_wall8 = GameObject.Find("remy(Clone)").GetComponent<PlayerCapsule>().b_wall8;
-            lb_wall9 = GameObject.Find("remy(Clone)").GetComponent<PlayerCapsule>().b_wall9;
-            lb_wall10 = GameObject.Find("remy(Clone)").GetComponent<PlayerCapsule>().b_wall10;
-            lb_wall11 = GameObject.Find("remy(Clone)").GetComponent<PlayerCapsule>().b_wall11;
-            //lb_wall12 = GameObject.Find ("remy(Clone)").GetComponent<PlayerCapsule> ().b_wall12;
-            lb_wall13 = GameObject.Find("remy(Clone)").GetComponent<PlayerCapsule>().b_wall13;
-            lb_wall14 = GameObject.Find("remy(Clone)").GetComponent<PlayerCapsule>().b_wall14;
-            //lb_wall15 = GameObject.Find ("remy(Clone)").GetComponent<PlayerCapsule> ().b_wall15;
-            //lb_wall16 = GameObject.Find ("remy(Clone)").GetComponent<PlayerCapsule> ().b_wall16;
-            lb_wall17 = GameObject.Find("remy(Clone)").GetComponent<PlayerCapsule>().b_wall17;
-            lb_wall18 = GameObject.Find("remy(Clone)").GetComponent<PlayerCapsule>().b_wall18;
-            lb_wall19 = GameObject.Find("remy(Clone)").GetComponent<PlayerCapsule>().b_wall19;
-            lb_wall20 = GameObject.Find("remy(Clone)").GetComponent<PlayerCapsule>().b_wall20;
-            lb_wall21 = GameObject.Find("remy(Clone)").GetComponent<PlayerCapsule>().b_wall21;
-        }
+        GameObject tempGO = GameObject.Find("claire(Clone)");
+        if (tempGO == null)
+            tempGO = GameObject.Find("remy(Clone)");
+        lb_wall0 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall0;
+        lb_wall1 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall1;
+        lb_wall2 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall2;
+        lb_wall3 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall3;
+        lb_wall4 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall4;
+        lb_wall5 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall5;
+        lb_wall6 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall6;
+        lb_wall7 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall7;
+        lb_wall8 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall8;
+        lb_wall9 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall9;
+        lb_wall10 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall10;
+        lb_wall11 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall11;
+        //lb_wall12 = GameObject.Find ("claire(Clone)").GetComponent<PlayerCapsule> ().b_wall12;
+        lb_wall13 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall13;
+        lb_wall14 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall14;
+        //lb_wall15 = GameObject.Find ("claire(Clone)").GetComponent<PlayerCapsule> ().b_wall15;
+        //lb_wall16 = GameObject.Find ("claire(Clone)").GetComponent<PlayerCapsule> ().b_wall16;
+        lb_wall17 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall17;
+        lb_wall18 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall18;
+        lb_wall19 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall19;
+        lb_wall20 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall20;
+        lb_wall21 = GameObject.Find("claire(Clone)").GetComponent<PlayerCapsule>().b_wall21;
         Debug.Log(lb_wall0 + " on client " + this.name);
         if (lb_wall0)
         {
@@ -1032,10 +1036,20 @@ public class PlayerCapsule : NetworkBehaviour
 			anim.SetBool ("isWalking", false);
 			CmdNotWalk ();
 		}*/
-
+        GameObject[] menus = GameObject.FindGameObjectsWithTag("Menu");
         float rotation = (Input.GetAxis("Horizontal") + Input.GetAxis("Mouse X")) * rspeed;
         rotation *= Time.deltaTime;
         bool changed = false;
+        /*if (newArt.painting != null)
+        {
+            Debug.Log(newArt.painting.name+ " new art name");
+            KeepOpenedArtifacts.Artifact aa = new KeepOpenedArtifacts.Artifact(newArt);
+            artifacts.Add(aa);
+            newArt.painting = null;
+            newArt.cour = null;
+            newArt.audioVideo = 0;
+        }*/
+        Debug.Log(artifacts.Count + " on update arti");
         if (GameObject.Find("Canvas") == null)
         {
             transform.Rotate(0, rotation, 0);
@@ -1148,11 +1162,11 @@ public class PlayerCapsule : NetworkBehaviour
             if (activeScene == "Museum")
                 if (TPC.activeInHierarchy)
                 {
-                    FPC.gameObject.GetComponent<OutlineEffect>().enabled = true;
-                    TPC.gameObject.GetComponent<OutlineEffect>().enabled = false;
+                    //FPC.gameObject.GetComponent<OutlineEffect>().enabled = true;
+                    //TPC.gameObject.GetComponent<OutlineEffect>().enabled = false;
                     FPC.SetActive(true);
                     TPC.SetActive(false);
-                    GameObject.Find("paint0").GetComponent<cakeslice.Outline>().enabled = false;
+                    /*GameObject.Find("paint0").GetComponent<cakeslice.Outline>().enabled = false;
                     GameObject.Find("paint1").GetComponent<cakeslice.Outline>().enabled = false;
                     GameObject.Find("paint2").GetComponent<cakeslice.Outline>().enabled = false;
                     GameObject.Find("paint3").GetComponent<cakeslice.Outline>().enabled = false;
@@ -1174,15 +1188,15 @@ public class PlayerCapsule : NetworkBehaviour
                     GameObject.Find("paint18").GetComponent<cakeslice.Outline>().enabled = false;
                     GameObject.Find("paint19").GetComponent<cakeslice.Outline>().enabled = false;
                     GameObject.Find("paint20").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint21").GetComponent<cakeslice.Outline>().enabled = false;
+                    GameObject.Find("paint21").GetComponent<cakeslice.Outline>().enabled = false;*/
                 }
                 else
                 {
-                    FPC.gameObject.GetComponent<OutlineEffect>().enabled = false;
-                    TPC.gameObject.GetComponent<OutlineEffect>().enabled = true;
+                    //FPC.gameObject.GetComponent<OutlineEffect>().enabled = false;
+                    //TPC.gameObject.GetComponent<OutlineEffect>().enabled = true;
                     FPC.SetActive(false);
                     TPC.SetActive(true);
-                    GameObject.Find("paint0").GetComponent<cakeslice.Outline>().enabled = false;
+                    /*GameObject.Find("paint0").GetComponent<cakeslice.Outline>().enabled = false;
                     GameObject.Find("paint1").GetComponent<cakeslice.Outline>().enabled = false;
                     GameObject.Find("paint2").GetComponent<cakeslice.Outline>().enabled = false;
                     GameObject.Find("paint3").GetComponent<cakeslice.Outline>().enabled = false;
@@ -1204,7 +1218,7 @@ public class PlayerCapsule : NetworkBehaviour
                     GameObject.Find("paint18").GetComponent<cakeslice.Outline>().enabled = false;
                     GameObject.Find("paint19").GetComponent<cakeslice.Outline>().enabled = false;
                     GameObject.Find("paint20").GetComponent<cakeslice.Outline>().enabled = false;
-                    GameObject.Find("paint21").GetComponent<cakeslice.Outline>().enabled = false;
+                    GameObject.Find("paint21").GetComponent<cakeslice.Outline>().enabled = false;*/
                 }
         if (Input.GetKeyDown(KeyCode.C))
         {
@@ -1566,14 +1580,16 @@ public class PlayerCapsule : NetworkBehaviour
                             Debug.Log(hit.transform.parent.transform.parent.name);
                             if (video.isPlaying)
                             {
-                                Debug.Log("MPIKen");
-                                CmdOutPaint2(hit.transform.parent.transform.parent.name, true,1,this.gameObject.GetComponent<NetworkIdentity>().netId);
-                                StartCoroutine(videoW(hit.transform.parent.transform.parent.name, video));
+                                Debug.Log("MPIKen starting v "+artifacts.Count);
+                                //CmdOutPaint3(hit.transform.parent.transform.parent.name, true,1,this.gameObject.GetComponent<NetworkIdentity>().netId);
+                                CmdOutPaint4(hit.transform.parent.transform.parent.name,2,0);
+                                //StartCoroutine(videoW(hit.transform.parent.transform.parent.name, video));
                             }
                             else if (!video.isPlaying)
                             {
-                                Debug.Log("MPIKen");
-                                CmdOutPaint2(hit.transform.parent.transform.parent.name, false,1, this.gameObject.GetComponent<NetworkIdentity>().netId);
+                                Debug.Log("MPIKen stoping v " + artifacts.Count);
+                                //CmdOutPaint3(hit.transform.parent.transform.parent.name, false,1, this.gameObject.GetComponent<NetworkIdentity>().netId);
+                                CmdOutPaint4(hit.transform.parent.transform.parent.name, -2, 0);
                             }
                         }
                         else if (hit.transform.tag == "SIcon")
@@ -1586,23 +1602,29 @@ public class PlayerCapsule : NetworkBehaviour
                             Debug.Log(hit.transform.parent.transform.parent.name);
                             if (audio.isPlaying)
                             {
-                                Debug.Log("MPIKen");
-                                CmdOutPaint2(hit.transform.parent.transform.parent.name, true,2, this.gameObject.GetComponent<NetworkIdentity>().netId);
-                                StartCoroutine(videoA(hit.transform.parent.transform.parent.name, audio));
-                                if (hit.transform.parent.transform.parent.name == "paint8")
+                                Debug.Log("MPIKen starting a");
+                                //CmdOutPaint3(hit.transform.parent.transform.parent.name, true,2, this.gameObject.GetComponent<NetworkIdentity>().netId);
+                                //StartCoroutine(videoA(hit.transform.parent.transform.parent.name, audio));
+                                if (hit.transform.parent.transform.parent.name.Contains("paint8"))
                                 {
-                                    CmdOutPaint2("paint8(1)", true,2, this.gameObject.GetComponent<NetworkIdentity>().netId);
-                                    StartCoroutine(videoA("paint8(1)", audio));
+                                    //CmdOutPaint3("paint8(1)", true,2, this.gameObject.GetComponent<NetworkIdentity>().netId);
+                                    CmdOutPaint4("paint8", 1,0);
+                                    //StartCoroutine(videoA("paint8(1)", audio));
                                 }
+                                else
+                                    CmdOutPaint4(hit.transform.parent.transform.parent.name, 1, 0);
                             }
                             else if (!audio.isPlaying)
                             {
-                                Debug.Log("MPIKen");
-                                CmdOutPaint2(hit.transform.parent.transform.parent.name, false,2, this.gameObject.GetComponent<NetworkIdentity>().netId);
-                                if (hit.transform.parent.transform.parent.name == "paint8")
+                                Debug.Log("MPIKen stopping a");
+                                //CmdOutPaint3(hit.transform.parent.transform.parent.name, false,2, this.gameObject.GetComponent<NetworkIdentity>().netId);
+                                if (hit.transform.parent.transform.parent.name.Contains("paint8"))
                                 {
-                                    CmdOutPaint2("paint8(1)", false,2, this.gameObject.GetComponent<NetworkIdentity>().netId);
+                                    //CmdOutPaint3("paint8(1)", false,2, this.gameObject.GetComponent<NetworkIdentity>().netId);
+                                    CmdOutPaint4("paint8", -1,0);
                                 }
+                                else
+                                    CmdOutPaint4(hit.transform.parent.transform.parent.name, -1, 0);
                             }
                         }
                         /*else if (hit.transform.name == "paint2")
@@ -1766,17 +1788,47 @@ public class PlayerCapsule : NetworkBehaviour
         if (vid != null && vid.active)
         {
             float dist = Vector3.Distance(vid.transform.position, this.transform.position);
-            vid.GetComponent<VideoPlayer>().GetTargetAudioSource(0).volume = (maxDistance - dist) / maxDistance;
+            float vlm;
+            if (dist < 50)
+                vlm = 1f;
+            else if (dist < 100)
+                vlm = 0.7f;
+            else if (dist < 150)
+                vlm = 0.3f;
+            else if (dist < 200)
+                vlm = 0.05f;
+            else vlm = 0.0f;
+            vid.GetComponent<VideoPlayer>().GetTargetAudioSource(0).volume = vlm;
         }
         if (vid1 != null && vid1.active)
         {
             float dist = Vector3.Distance(vid1.transform.position, this.transform.position);
-            vid1.GetComponent<VideoPlayer>().GetTargetAudioSource(0).volume = (maxDistance - dist) / maxDistance;
+            float vlm;
+            if (dist < 50)
+                vlm = 1f;
+            else if (dist < 100)
+                vlm = 0.7f;
+            else if (dist < 150)
+                vlm = 0.3f;
+            else if (dist < 200)
+                vlm = 0.05f;
+            else vlm = 0.0f;
+            vid1.GetComponent<VideoPlayer>().GetTargetAudioSource(0).volume = vlm;
         }
         if (vid2 != null && vid2.active)
         {
             float dist = Vector3.Distance(vid2.transform.position, this.transform.position);
-            vid2.GetComponent<VideoPlayer>().GetTargetAudioSource(0).volume = (maxDistance - dist) / maxDistance;
+            float vlm;
+            if (dist < 50)
+                vlm = 1f;
+            else if (dist < 100)
+                vlm = 0.7f;
+            else if (dist < 150)
+                vlm = 0.3f;
+            else if (dist < 200)
+                vlm = 0.05f;
+            else vlm = 0.0f;
+            vid2.GetComponent<VideoPlayer>().GetTargetAudioSource(0).volume = vlm;
         }
         CmdUpdateVelocity(this.transform.position, this.transform.rotation);
 
@@ -1917,11 +1969,11 @@ public class PlayerCapsule : NetworkBehaviour
                 CanvasDay.SetActive(false);
                 Debug.Log("Teleport to " + other.gameObject);
                 CmdSSound();
-                FPC.gameObject.GetComponent<OutlineEffect>().enabled = true;
-                TPC.gameObject.GetComponent<OutlineEffect>().enabled = false;
+                //FPC.gameObject.GetComponent<OutlineEffect>().enabled = true;
+                //TPC.gameObject.GetComponent<OutlineEffect>().enabled = false;
                 FPC.SetActive(true);
                 TPC.SetActive(false);
-                GameObject.Find("paint0").GetComponent<cakeslice.Outline>().enabled = false;
+                /*GameObject.Find("paint0").GetComponent<cakeslice.Outline>().enabled = false;
                 GameObject.Find("paint1").GetComponent<cakeslice.Outline>().enabled = false;
                 GameObject.Find("paint2").GetComponent<cakeslice.Outline>().enabled = false;
                 GameObject.Find("paint3").GetComponent<cakeslice.Outline>().enabled = false;
@@ -1943,7 +1995,7 @@ public class PlayerCapsule : NetworkBehaviour
                 GameObject.Find("paint18").GetComponent<cakeslice.Outline>().enabled = false;
                 GameObject.Find("paint19").GetComponent<cakeslice.Outline>().enabled = false;
                 GameObject.Find("paint20").GetComponent<cakeslice.Outline>().enabled = false;
-                GameObject.Find("paint21").GetComponent<cakeslice.Outline>().enabled = false;
+                GameObject.Find("paint21").GetComponent<cakeslice.Outline>().enabled = false;*/
                 transform.position = new Vector3(365f, 0.5f, 23.4f);
                 //SceneManager.MoveGameObjectToScene(GameObject.Find("PlayerObject"),SceneManager.GetSceneByName("roomDay"));
                 //SceneManager.MoveGameObjectToScene(this.gameObject,SceneManager.GetSceneByName("roomDay"));
@@ -2027,6 +2079,7 @@ public class PlayerCapsule : NetworkBehaviour
     }
 
     public Sprite sprite;
+    
     public IEnumerator checkVid(GameObject go)
     {
         Debug.Log("Started");
@@ -2042,22 +2095,22 @@ public class PlayerCapsule : NetworkBehaviour
     }
 
     [Command]
-    void CmdChangeName(GameObject canv, string nam)
+    void CmdChangeName( string nam)
     {
         this.transform.Find("Name").GetComponent<TMP_Text>().SetText(nam);
         //myCanvas.active = false;
         uname = nam;
-        RpcChangeName(canv, nam);
+        RpcChangeName( nam);
     }
 
     [ClientRpc]
-    void RpcChangeName(GameObject canv, string nam)
+    void RpcChangeName(string nam)
     {
         //Debug.Log(" rpc change name " + myCanvas.name);
         this.transform.Find("Name").GetComponent<TMP_Text>().SetText(nam);
     }
 
-
+    /*
     [Command]
     void CmdVideoAnime(GameObject go, bool val)
     {
@@ -2075,7 +2128,7 @@ public class PlayerCapsule : NetworkBehaviour
         else
             go.GetComponent<EnableAnimation>().OnTriggerExit(c);
     }
-
+    */
     [Command]
     void CmdHeadVR(bool head, bool vrb)
     {
@@ -2185,15 +2238,124 @@ public class PlayerCapsule : NetworkBehaviour
         RpcCome();
     }
 
-    public void outP(string name, bool nval,int va,NetworkInstanceId id)
+    /*public void outP(string name, bool nval, int va, NetworkInstanceId id)
     {
-        CmdOutPaint2(name, nval,va,id);
+        CmdOutPaint3(name, nval, va, id);
+    }*/
+
+    public void outP(string name, int av, int zoom)
+    {
+        CmdOutPaint4(name, av,zoom);
     }
 
     [Command]
     void CmdOutPaint2(string name,bool nval,int va, NetworkInstanceId id)
     {
         RpcOutPaint2(name,nval,va,id);
+    }
+
+    [Command]
+    void CmdOutPaint3(string name,bool nval,int va, NetworkInstanceId id)
+    {
+        RpcOutPaint3(name,nval,va,id);
+    }
+
+    [Command]
+    void CmdOutPaint4(string name,int av,int zoom)
+    {
+        /*Debug.Log("cmd out " + name + " " + av);
+        MouseOver2 mouseOver2 = null;
+        if (zoom == 1)
+        {
+            mouseOver2 = GameObject.Find(name).GetComponent<MouseOver2>();
+            mouseOver2.b = mouseOver2.b + 1;
+        }
+        else if (zoom == -1)
+        {
+            mouseOver2 = GameObject.Find(name).GetComponent<MouseOver2>();
+            mouseOver2.b = mouseOver2.b - 1;
+        }
+        else if (zoom == 0)
+        {
+            //MouseOver2 oldMO = null;
+            GameObject ch = findRecChild(name, av);
+            //Debug.Log(av + " " + name + " " + currentlyPlaying + " " + audioVideo);
+            Artifact temp = artifacts.Find(e => e.audioVideo == av && e.painting.Equals(ch));
+            if (av > 0)
+            {*/
+                /*if (temp != null)
+                {
+                    if (av== 1)
+                    {
+                        oldMO = temp.painting.transform.parent.GetComponent<MouseOver2>();
+                    }
+                    else if (av == 2)
+                    {
+                        oldMO = temp.painting.GetComponent<MouseOver2>();
+                    }
+                    StopCoroutine(temp.cour);
+                    oldMO.b = oldMO.b - 1;
+                    if (oldMO.b > 0)
+                    {
+                        oldMO.outlineMaterial.SetColor("_SolidOutline", Color.green);
+                        oldMO.outlineMaterial.SetFloat("_OutlineEnabled", 1.0f);
+                    }
+                    else
+                    {
+                        oldMO.outlineMaterial.SetColor("_SolidOutline", Color.red);
+                        oldMO.outlineMaterial.SetFloat("_OutlineEnabled", 0.0f);
+                        oldMO.b = 0;
+                    }
+                }*/
+                /*Artifact newA = new Artifact();
+                newA.painting = ch;
+                newA.audioVideo = av;
+                if (av == 1)
+                {
+                    mouseOver2 = ch.transform.parent.GetComponent<MouseOver2>();
+                    newA.cour = StartCoroutine(videoA(name, ch.transform.Find("AudioSource0").GetComponent<AudioSource>()));
+                }
+                else if (av == 2)
+                {
+                    mouseOver2 = ch.GetComponent<MouseOver2>();
+                    newA.cour = StartCoroutine(videoW(name, ch.GetComponent<VideoPlayer>()));
+                }
+                mouseOver2.b = mouseOver2.b + 1;
+                artifacts.Add(newA);
+            }
+            else
+            {
+                Artifact toDeleteA = artifacts.Find(t => t.audioVideo == Math.Abs(av) && t.painting.Equals(ch));
+                if (av == -1)
+                {
+                    mouseOver2 = ch.transform.parent.GetComponent<MouseOver2>();
+                }
+                else if (av == -2)
+                {
+                    mouseOver2 = ch.GetComponent<MouseOver2>();
+                }
+                if (toDeleteA.audioVideo == 1)
+                    ch.transform.Find("AudioSource0").GetComponent<AudioSource>().Stop();
+                else
+                    ch.GetComponent<VideoPlayer>().Stop();
+                StopCoroutine(toDeleteA.cour);
+                mouseOver2.b = mouseOver2.b - 1;
+                artifacts.Remove(toDeleteA);
+            }
+        }
+        if (mouseOver2.b > 0)
+        {
+            mouseOver2.outlineMaterial.SetColor("_SolidOutline", Color.green);
+            mouseOver2.outlineMaterial.SetFloat("_OutlineEnabled", 1.0f);
+            Debug.Log(mouseOver2.name + " " + mouseOver2.b);
+        }
+        else
+        {
+            mouseOver2.outlineMaterial.SetColor("_SolidOutline", Color.red);
+            mouseOver2.outlineMaterial.SetFloat("_OutlineEnabled", 0.0f);
+            mouseOver2.b = 0;
+        }*/
+        RpcOutPaint4(name,av,zoom);
     }
 
     [ClientRpc]
@@ -2259,6 +2421,218 @@ public class PlayerCapsule : NetworkBehaviour
         {
             outl.color = 0;
             outl.enabled = nval;
+        }
+    }
+
+    GameObject findRecChild(string pare, int av)
+    {
+        List<Transform> children = new List<Transform>();
+        children.AddRange(GameObject.Find(pare).transform.GetComponentsInChildren<Transform>());
+        foreach (Transform child in children)
+        {
+            if ((av == 1 || av == -1) && child.name.Contains("extra"))
+                return child.gameObject;
+            else if ((av == 2 || av == -2) && child.name.Equals("Video"))
+                return child.gameObject;
+        }
+        return null;
+    }
+
+    /*void addArt( GameObject go,int av,Coroutine cour)
+    {
+        Debug.Log("add art from rpc");
+        newArt.painting = go;
+        newArt.cour = cour;
+        newArt.audioVideo = av;
+    }*/
+
+    [ClientRpc]
+    void RpcOutPaint4(string name, int av, int zoom)
+    { 
+        Debug.Log("rpc out " + name+" "+av);
+        MouseOver2 mouseOver2 = null;
+        MouseOver2 mouseOver22 = null;
+        if (zoom == 1)
+        {
+            mouseOver2 = GameObject.Find(name).GetComponent<MouseOver2>();
+            mouseOver2.b = mouseOver2.b + 1;
+        }
+        else if (zoom == -1)
+        {
+            mouseOver2 = GameObject.Find(name).GetComponent<MouseOver2>();
+            mouseOver2.b = mouseOver2.b - 1;
+        }
+        else if (zoom == 0)
+        {
+            //MouseOver2 oldMO = null;
+            GameObject ch = findRecChild(name, av);
+            //Debug.Log(av + " " + name + " " + currentlyPlaying + " " + audioVideo);
+            //KeepOpenedArtifacts.Artifact temp = artifacts.Find(e => e.audioVideo == av && e.painting.Equals(ch));
+            if (av > 0)
+            {
+                /*if (temp != null)
+                {
+                    if (av== 1)
+                    {
+                        oldMO = temp.painting.transform.parent.GetComponent<MouseOver2>();
+                    }
+                    else if (av == 2)
+                    {
+                        oldMO = temp.painting.GetComponent<MouseOver2>();
+                    }
+                    StopCoroutine(temp.cour);
+                    oldMO.b = oldMO.b - 1;
+                    if (oldMO.b > 0)
+                    {
+                        oldMO.outlineMaterial.SetColor("_SolidOutline", Color.green);
+                        oldMO.outlineMaterial.SetFloat("_OutlineEnabled", 1.0f);
+                    }
+                    else
+                    {
+                        oldMO.outlineMaterial.SetColor("_SolidOutline", Color.red);
+                        oldMO.outlineMaterial.SetFloat("_OutlineEnabled", 0.0f);
+                        oldMO.b = 0;
+                    }
+                }*/
+                if (av == 1)
+                {
+                    mouseOver2 = ch.transform.parent.GetComponent<MouseOver2>();
+                    mouseOver22 = GameObject.Find("paint8(1)").GetComponent<MouseOver2>();
+                    //addArt(ch, av, StartCoroutine(videoA(name, ch.transform.Find("AudioSource0").GetComponent<AudioSource>())));
+                    artifacts.Add(new KeepOpenedArtifacts.Artifact(ch, av, StartCoroutine(videoA(name, ch.transform.Find("AudioSource0").GetComponent<AudioSource>()))));
+                }
+                else if (av == 2)
+                {
+                    mouseOver2 = ch.GetComponent<MouseOver2>();
+                    //addArt(ch, av, StartCoroutine(videoW(name, ch.GetComponent<VideoPlayer>())));
+                    artifacts.Add(new KeepOpenedArtifacts.Artifact(ch, av, StartCoroutine(videoW(name, ch.GetComponent<VideoPlayer>()))));
+                }
+                if (mouseOver22!=null)
+                    mouseOver22.b = mouseOver22.b + 1;
+                mouseOver2.b = mouseOver2.b + 1;
+                Debug.Log("rpc arts add" + artifacts.Count);
+            }
+            else
+            {
+                Debug.Log("rpc arts "+artifacts.Count);
+                KeepOpenedArtifacts.Artifact toDeleteA = artifacts.Find(t => t.audioVideo == Math.Abs(av) && t.painting.Equals(ch));
+                if (av == -1)
+                {
+                    mouseOver22 = GameObject.Find("paint8(1)").GetComponent<MouseOver2>();
+                    mouseOver2 = ch.transform.parent.GetComponent<MouseOver2>();
+                }
+                else if (av == -2)
+                {
+                    mouseOver2 = ch.GetComponent<MouseOver2>();
+                }
+                if (toDeleteA.audioVideo == 1)
+                    ch.transform.Find("AudioSource0").GetComponent<AudioSource>().Stop();
+                else
+                {
+                    ch.GetComponent<VideoPlayer>().Pause();
+                }
+                StopCoroutine(toDeleteA.cour);
+                if (mouseOver22 != null)
+                    mouseOver22.b = mouseOver22.b - 1;
+                mouseOver2.b = mouseOver2.b - 1;
+                Debug.Log(artifacts.Count + "before");
+                artifacts.Remove(toDeleteA);
+                Debug.Log(artifacts.Count + "after");
+            }
+        }
+        if (mouseOver22 != null)
+        {
+            if (mouseOver22.b > 0)
+            {
+                mouseOver22.outlineMaterial.SetColor("_SolidOutline", Color.green);
+                mouseOver22.outlineMaterial.SetFloat("_OutlineEnabled", 1.0f);
+            }
+            else
+            {
+                mouseOver22.outlineMaterial.SetColor("_SolidOutline", Color.red);
+                mouseOver22.outlineMaterial.SetFloat("_OutlineEnabled", 0.0f);
+                mouseOver22.b = 0;
+            }
+        }
+        if (mouseOver2.b > 0)
+        {
+            mouseOver2.outlineMaterial.SetColor("_SolidOutline", Color.green);
+            mouseOver2.outlineMaterial.SetFloat("_OutlineEnabled", 1.0f);
+            Debug.Log(mouseOver2.name + " " + mouseOver2.b);
+        }
+        else
+        {
+            mouseOver2.outlineMaterial.SetColor("_SolidOutline", Color.red);
+            mouseOver2.outlineMaterial.SetFloat("_OutlineEnabled", 0.0f);
+            mouseOver2.b = 0;
+        }
+        Debug.Log(artifacts.Count + " after rpc");
+        /*outl.color = 1;
+        outl.enabled = true;*/
+    }
+
+    [ClientRpc]
+    void RpcOutPaint3(string name,bool nval,int va, NetworkInstanceId id)
+    {
+        MouseOver2 mouseOver2 = GameObject.Find(name).GetComponent<MouseOver2>();
+        VideoPlayer video = null;
+        AudioSource audio = null;
+        if (va == 1)
+        {
+            video = GameObject.Find(name).GetComponentInChildren<VideoPlayer>();
+            Debug.Log(video.clip.name+" is the video");
+            //video.SetDirectAudioVolume(0, 0.5F);
+        }
+        else if (va == 2)
+        {
+            if(name=="paint5")
+            {
+                GameObject obj = GameObject.Find(name);
+                audio = obj.gameObject.transform.Find("extra5/AudioSource0").GetComponent<AudioSource>();
+            }
+            else if(name=="paint10")
+            {
+                GameObject obj = GameObject.Find(name);
+                audio = obj.gameObject.transform.Find("extra10/AudioSource0").GetComponent<AudioSource>();
+            }
+            else if(name=="paint11")
+            {
+                GameObject obj = GameObject.Find(name);
+                audio = obj.gameObject.transform.Find("extra11/AudioSource0").GetComponent<AudioSource>();
+            }
+            else
+                audio = GameObject.Find(name).GetComponentInChildren<AudioSource>();
+            //audio.volume = 0.5F;
+        }
+        Debug.Log("nval: "  + nval);
+        Debug.Log("va: " + va);
+        //Debug.Log("clip: "  + audio.clip.name);
+        if (nval)
+            mouseOver2.b = mouseOver2.b + 1;
+        else
+            mouseOver2.b = mouseOver2.b - 1;
+        if (va == 1 && nval)
+        {
+            video.Play();
+            Debug.Log(maxDistance+" "+ Vector3.Distance(this.transform.position, video.transform.parent.transform.parent.transform.position));
+        }
+        else if (va == 1 && !nval)
+            video.Pause();
+        else if (va == 2 && nval)
+        {
+            audio.Play();
+        }
+        else if (va == 2 && !nval)
+            audio.Pause();
+        if (mouseOver2.b > 0)
+        {
+            mouseOver2.outlineMaterial.SetColor("_SolidOutline", Color.green);
+            mouseOver2.outlineMaterial.SetFloat("_OutlineEnabled", 1.0f);
+        }
+        else
+        {
+            mouseOver2.outlineMaterial.SetColor("_SolidOutline", Color.red);
+            mouseOver2.outlineMaterial.SetFloat("_OutlineEnabled", 0.0f);
         }
     }
 
@@ -2549,21 +2923,59 @@ public class PlayerCapsule : NetworkBehaviour
 
     IEnumerator videoW(string name, VideoPlayer go)
     {
-        double len = go.length - 0.01;
+        Debug.Log("Video waits "+ artifacts.Count +" "+ go.time);
+        go.Play();
+        double len = go.length - go.time - 0.1;
         yield return new WaitForSeconds((float)len);
-        if (go.isPlaying)
+        /*go.time = 0.1;
+        go.Pause();
+        go.Prepare();*/
+        GameObject ch = findRecChild(name, 2);
+        if (artifacts.Exists(a => a.painting.Equals(ch) && a.audioVideo == 2))
         {
-            CmdOutPaint2(name, false,1,this.gameObject.GetComponent<NetworkIdentity>().netId);
+            //CmdOutPaint3(name, false,1,this.gameObject.GetComponent<NetworkIdentity>().netId);
+            go.Stop();
+            go.Prepare();
+            Debug.Log("Preparing Video");
+            while (!go.isPrepared)
+            {
+                Debug.Log("Preparing Video");
+                yield return null;
+            }
+            go.Play();
+            go.frame = 4;
+            go.Pause();
+            Debug.Log("Video prepared " + go.length + " " + go.time);
+            KeepOpenedArtifacts.Artifact toDeleteA = artifacts.Find(t => t.audioVideo == 2 && t.painting.Equals(go));
+            go.gameObject.GetComponent<MouseOver2>().b = go.gameObject.GetComponent<MouseOver2>().b - 1;
+            if (go.gameObject.GetComponent<MouseOver2>().b > 0)
+            {
+                go.gameObject.GetComponent<MouseOver2>().outlineMaterial.SetColor("_SolidOutline", Color.green);
+                go.gameObject.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 1.0f);
+            }
+            else
+            {
+                go.gameObject.GetComponent<MouseOver2>().outlineMaterial.SetColor("_SolidOutline", Color.red);
+                go.gameObject.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 0.0f);
+                go.gameObject.GetComponent<MouseOver2>().b = 0;
+            }
+            artifacts.Remove(toDeleteA);
+            //CmdOutPaint4(name, -2, 0);
+
         }
     }
 
     IEnumerator videoA(string name, AudioSource go)
     {
-        double len = go.clip.length - 0.01;
+        double len = go.clip.length - go.time - 0.01;
+        go.Play();
         yield return new WaitForSeconds((float)len);
-        if (go.isPlaying)
+        GameObject ch = findRecChild(name, 1);
+        if (artifacts.Exists(a =>a.painting.Equals(ch)&&a.audioVideo==1))
         {
-            CmdOutPaint2(name, false,2, this.gameObject.GetComponent<NetworkIdentity>().netId);
+            //CmdOutPaint3(name, false,2, this.gameObject.GetComponent<NetworkIdentity>().netId);
+            //go.Stop();
+            CmdOutPaint4(name, -1, 0);
         }
     }
 
@@ -2840,19 +3252,22 @@ public class PlayerCapsule : NetworkBehaviour
         if (other.name == "paint11")
         {
             VideoToAnimate.GetComponent<VideoPlayer>().Pause();
-            VideoToAnimate.GetComponent<cakeslice.Outline>().enabled = false;
+            VideoToAnimate.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 0.0f);
+            //VideoToAnimate.GetComponent<cakeslice.Outline>().enabled = false;
             VideoToAnimate.SetActive(false);
         }
         else if (other.name == "paint5")
         {
             VideoToAnimate2.GetComponent<VideoPlayer>().Pause();
-            VideoToAnimate2.GetComponent<cakeslice.Outline>().enabled = false;
+            VideoToAnimate2.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 0.0f);
+            //VideoToAnimate2.GetComponent<cakeslice.Outline>().enabled = false;            
             VideoToAnimate2.SetActive(false);
         }
         else if (other.name == "paint10")
         {
             VideoToAnimate3.GetComponent<VideoPlayer>().Pause();
-            VideoToAnimate3.GetComponent<cakeslice.Outline>().enabled = false;
+            VideoToAnimate3.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 0.0f);
+            //VideoToAnimate3.GetComponent<cakeslice.Outline>().enabled = false;
             VideoToAnimate3.SetActive(false);
         }
 
@@ -2864,19 +3279,22 @@ public class PlayerCapsule : NetworkBehaviour
         if (other.name == "paint11")
         {
             VideoToAnimate.GetComponent<VideoPlayer>().Pause();
-            VideoToAnimate.GetComponent<cakeslice.Outline>().enabled = false;
+            VideoToAnimate.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 0.0f);
+            //VideoToAnimate.GetComponent<cakeslice.Outline>().enabled = false;
             VideoToAnimate.SetActive(false);
         }
         else if (other.name == "paint5")
         {
             VideoToAnimate2.GetComponent<VideoPlayer>().Pause();
-            VideoToAnimate2.GetComponent<cakeslice.Outline>().enabled = false;
+            VideoToAnimate2.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 0.0f);
+            //VideoToAnimate2.GetComponent<cakeslice.Outline>().enabled = false;
             VideoToAnimate2.SetActive(false);
         }
         else if (other.name == "paint10")
         {
             VideoToAnimate3.GetComponent<VideoPlayer>().Pause();
-            VideoToAnimate3.GetComponent<cakeslice.Outline>().enabled = false;
+            VideoToAnimate3.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 0.0f);
+            //VideoToAnimate3.GetComponent<cakeslice.Outline>().enabled = false;
             VideoToAnimate3.SetActive(false);
         }
     }
@@ -2888,21 +3306,24 @@ public class PlayerCapsule : NetworkBehaviour
         {
             VideoToAnimate.SetActive(true);
             VideoToAnimate.GetComponent<VideoPlayer>().Play();
-            VideoToAnimate.GetComponent<cakeslice.Outline>().enabled = true;
+            VideoToAnimate.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 1.0f);
+            //VideoToAnimate.GetComponent<cakeslice.Outline>().enabled = true;
             StartCoroutine(videowait(VideoToAnimate));
         }
         else if (other.name == "paint5")
         {
             VideoToAnimate2.SetActive(true);
             VideoToAnimate2.GetComponent<VideoPlayer>().Play();
-            VideoToAnimate2.GetComponent<cakeslice.Outline>().enabled = true;
+            VideoToAnimate2.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 1.0f);
+            //VideoToAnimate2.GetComponent<cakeslice.Outline>().enabled = true;
             StartCoroutine(videowait(VideoToAnimate2));
         }
         else if (other.name == "paint10")
         {
             VideoToAnimate3.SetActive(true);
             VideoToAnimate3.GetComponent<VideoPlayer>().Play();
-            VideoToAnimate3.GetComponent<cakeslice.Outline>().enabled = true;
+            VideoToAnimate3.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 1.0f);
+            //VideoToAnimate3.GetComponent<cakeslice.Outline>().enabled = true;
             StartCoroutine(videowait(VideoToAnimate3));
         }
         //		VideoPlayer vp = other.GetComponent<VideoPlayer>();
@@ -2914,7 +3335,8 @@ public class PlayerCapsule : NetworkBehaviour
     IEnumerator videowait(GameObject go)
     {
         yield return new WaitForSeconds((float)go.GetComponent<VideoPlayer>().clip.length);
-        go.GetComponent<cakeslice.Outline>().enabled = false;
+        go.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 0.0f);
+        //go.GetComponent<cakeslice.Outline>().enabled = false;
         Debug.Log("Videowait");
         go.SetActive(false);
     }
@@ -2943,7 +3365,8 @@ public class PlayerCapsule : NetworkBehaviour
             {
                 VideoToAnimate.SetActive(true);
                 VideoToAnimate.GetComponent<VideoPlayer>().Play();
-                VideoToAnimate.GetComponent<cakeslice.Outline>().enabled = true;
+                VideoToAnimate.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 1.0f);
+                //VideoToAnimate.GetComponent<cakeslice.Outline>().enabled = true;
                 StartCoroutine(videowait(VideoToAnimate));
             }
         }
@@ -2953,7 +3376,8 @@ public class PlayerCapsule : NetworkBehaviour
             {
                 VideoToAnimate2.SetActive(true);
                 VideoToAnimate2.GetComponent<VideoPlayer>().Play();
-                VideoToAnimate2.GetComponent<cakeslice.Outline>().enabled = true;
+                VideoToAnimate2.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 1.0f);
+                //VideoToAnimate2.GetComponent<cakeslice.Outline>().enabled = true;
                 StartCoroutine(videowait(VideoToAnimate2));
             }
         }
@@ -2963,7 +3387,8 @@ public class PlayerCapsule : NetworkBehaviour
             {
                 VideoToAnimate3.SetActive(true);
                 VideoToAnimate3.GetComponent<VideoPlayer>().Play();
-                VideoToAnimate3.GetComponent<cakeslice.Outline>().enabled = true;
+                VideoToAnimate3.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 1.0f);
+                //VideoToAnimate3.GetComponent<cakeslice.Outline>().enabled = true;
                 StartCoroutine(videowait(VideoToAnimate3));
             }
         }

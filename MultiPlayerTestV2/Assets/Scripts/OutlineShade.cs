@@ -14,11 +14,16 @@ public class OutlineShade : NetworkBehaviour {
 			Debug.Log ("AAAAAAAAAAAAAA!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			body = this.transform.Find ("Girl_Body_Geo").gameObject;
 		}
-		else {
-			Debug.Log ("Q!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        else if (this.name == "remy(Clone)")
+        {
+            Debug.Log ("Q!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			body = this.transform.Find ("Body").gameObject;
 		}
-		BothOutlines=body.GetComponent<SkinnedMeshRenderer> ().materials ;
+        else
+        {
+            body = this.transform.gameObject;
+        }
+        BothOutlines =body.GetComponent<SkinnedMeshRenderer> ().materials ;
 		BothOutlines [1] = none;
 		body.GetComponent<SkinnedMeshRenderer> ().materials = BothOutlines;
 		Debug.Log (body.GetComponent<SkinnedMeshRenderer> ().materials[0]);

@@ -10,8 +10,8 @@ public class Target : MonoBehaviour {
 	void Start () {
 		transform.position = new Vector3(1,0.5f,20);
 
-		FPC = GameObject.FindWithTag ("MainCamera");
-		TPC = GameObject.FindWithTag ("TMainCamera");
+		//FPC = GameObject.FindWithTag ("MainCamera");
+		//TPC = GameObject.FindWithTag ("TMainCamera");
 	}
 
 	// Update is called once per frame

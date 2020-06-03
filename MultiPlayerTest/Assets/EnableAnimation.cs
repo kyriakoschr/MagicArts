@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using cakeslice;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
@@ -21,7 +22,8 @@ public class EnableAnimation : MonoBehaviour
     IEnumerator videowait(GameObject go)
     {
         yield return new WaitForSeconds((float)go.GetComponent<VideoPlayer>().clip.length);
-        go.GetComponent<cakeslice.Outline>().enabled = false;
+        go.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 0.0f);
+        //go.GetComponent<cakeslice.Outline>().enabled = false;
         go.SetActive(false);
     }
 
@@ -41,7 +43,8 @@ public class EnableAnimation : MonoBehaviour
             {
                 VideoToAnimate.SetActive(true);
                 VideoToAnimate.GetComponent<VideoPlayer>().Play();
-                VideoToAnimate.GetComponent<cakeslice.Outline>().enabled = true;
+                VideoToAnimate.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 1.0f);
+                //VideoToAnimate.GetComponent<cakeslice.Outline>().enabled = true;
                 StartCoroutine(videowait(VideoToAnimate));
             }
         }
@@ -60,7 +63,8 @@ public class EnableAnimation : MonoBehaviour
             else if (this.transform.parent.name == "paint5")
                 VideoToAnimate = this.transform.parent.transform.Find("VideoPotato").gameObject;
             VideoToAnimate.GetComponent<VideoPlayer>().Pause();
-            VideoToAnimate.GetComponent<cakeslice.Outline>().enabled = false;
+            VideoToAnimate.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 0.0f);
+            //VideoToAnimate.GetComponent<cakeslice.Outline>().enabled = false;
             VideoToAnimate.SetActive(false);
         }
     }
