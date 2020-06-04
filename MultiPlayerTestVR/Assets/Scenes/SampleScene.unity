@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2235,7 +2235,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.4429e-41, y: 1.04e-43, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 1.4574e-41, y: 1.01e-43, z: 7.36e-43, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -3134,12 +3134,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4801978950974090, guid: 2e6281ef80ffed54ea1792dee5a4f088,
     type: 3}
   m_PrefabInstance: {fileID: 2025243200}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &226292765 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 924669743321741622, guid: cf693b836735f354cbe5d54b566e5ba6,
-    type: 3}
-  m_PrefabInstance: {fileID: 310726833}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &234342029
 GameObject:
@@ -4584,6 +4578,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 924669743321358580, guid: cf693b836735f354cbe5d54b566e5ba6,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.75
+      objectReference: {fileID: 0}
     - target: {fileID: 924669745072754288, guid: cf693b836735f354cbe5d54b566e5ba6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4649,6 +4648,16 @@ PrefabInstance:
       propertyPath: viewIdField
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7290324869191420265, guid: cf693b836735f354cbe5d54b566e5ba6,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 7290324869191420265, guid: cf693b836735f354cbe5d54b566e5ba6,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.34
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5677062274478022858, guid: cf693b836735f354cbe5d54b566e5ba6, type: 3}
     - {fileID: 1812623705559328637, guid: cf693b836735f354cbe5d54b566e5ba6, type: 3}
@@ -4671,7 +4680,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 604ef31adb728814b8094e40ab1453ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avatar: {fileID: 226292765}
+  avatar: {fileID: 310726836}
+--- !u!1 &310726836 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7290324869604671023, guid: cf693b836735f354cbe5d54b566e5ba6,
+    type: 3}
+  m_PrefabInstance: {fileID: 310726833}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &316282641
 GameObject:
   m_ObjectHideFlags: 0
