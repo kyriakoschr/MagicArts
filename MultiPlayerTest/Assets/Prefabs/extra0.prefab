@@ -32,7 +32,7 @@ Transform:
   - {fileID: 4924231144990342}
   - {fileID: 4344212815290666}
   - {fileID: 4695174812518184}
-  - {fileID: 4526539125421522}
+  - {fileID: 8308892643738279602}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -467,7 +467,7 @@ MonoBehaviour:
   m_pageToDisplay: 1
   m_margin: {x: 6.769063, y: 0, z: 2.489657, w: -14.838682}
   m_textInfo:
-    textComponent: {fileID: 0}
+    textComponent: {fileID: 114366148644002910}
     characterCount: 686
     spriteCount: 0
     spaceCount: 134
@@ -1041,7 +1041,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4526539125421522}
+  - component: {fileID: 8308892643738279602}
   - component: {fileID: 33215426273262054}
   - component: {fileID: 23950346817333666}
   - component: {fileID: 64960543459304802}
@@ -1052,8 +1052,8 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &4526539125421522
+  m_IsActive: 1
+--- !u!4 &8308892643738279602
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

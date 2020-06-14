@@ -1,4 +1,4 @@
-# To Do:
+﻿# To Do:
 
 ## FUNCTIONALITIES
 - [ ] Join view of other 
@@ -69,6 +69,24 @@
 - [X] play multimedia on other users V2
 - [X] check videos looping
 - [X] enhance game to old
+
+## 11/6
+- [X] na paizei i perigrafi kai patontas to kimeno (na megalwsw to collider) kai to video me tin cameroula
+- [ ] diskolia stin ploigisi me to pontiki
+- [X] na koitaxw to prwto frame sta video 
+- [X] den koitazoun to scoreboard meta to move
+- [X] me to drag na metaferete ligo pio mprosta
+- [X] na min emfanizete to teleport oso emfanizetai kapoio canvas. kapoio lathos me to teleport 3rd person
+- [X] to scoreboard na einai sto kentro tou xwrou se kapoio trapezi se mavro pinaka kai na iparxei arithmisi twn thesewn
+- [X] me to end round na paizei ixos simansis telous girou kai metafora girw apo ton pinaka
+- [X] drag to choose painting. 
+- [X] hide -> X panw dexia sto panel
+- [X] to select na paei katw apo to epilegmeno kai dipla tou to onoma tou pinaka
+- [X] Your turn panw apo to minima
+- [X] start playing now kai end round katw aristera
+- [X] end round -> go to scoreboard mazi me to start/end
+- [X] me kapoio minima na enimerwnetai o storyteller oti o user psifise me kapoio tick voted panw apo to avatar
+- [X] start playing -> become storyteller
 
 for the game:
 - [X] move lower, add background, start->select, cancel->hide

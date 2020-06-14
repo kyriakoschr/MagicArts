@@ -15,10 +15,12 @@ public class VideoAwake : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //Debug.Log((ulong)vp.frame + " " + vp.frameCount);
-        if (vp.frame == 4 && started)
+        if (started && vp.isPlaying && vp.isPrepared)
         {
             started = false;
+            vp.frame = 2;
             vp.Pause();
+            vp.frame = 2;
         }
     }
 

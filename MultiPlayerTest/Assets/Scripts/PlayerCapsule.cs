@@ -548,7 +548,13 @@ public class PlayerCapsule : NetworkBehaviour
         Debug.Log("Start My Game");
         CmdStartGame();
     }
-
+    public GameObject voted;
+    public Transform t1;
+    public Transform t2;
+    public Transform t3;
+    public Transform t4;
+    public Transform t5;
+    public Transform t6;
     private GameManager gManager;
     [SyncVar(hook = "setNarr")]
     public String narrator;
@@ -614,6 +620,7 @@ public class PlayerCapsule : NetworkBehaviour
             gManager.answers[uname] = text;
         else
             gManager.answers.Add(uname, text);
+        voted.SetActive(true);
         RpcGiveAnswer(text);
     }
 
@@ -624,6 +631,7 @@ public class PlayerCapsule : NetworkBehaviour
             gManager.answers[uname] = text;
         else
             gManager.answers.Add(uname, text);
+        voted.SetActive(true);
     }
 
     [Command]
@@ -752,6 +760,30 @@ public class PlayerCapsule : NetworkBehaviour
                 ButtonNight = Buttons[i].gameObject;
                 btn2 = ButtonNight.GetComponent<Button>();
                 btn2.onClick.AddListener(delegate { LoadMyScene("night"); });
+            }
+            else if (Buttons[i].name.Equals("transform1"))
+            {
+                t1 = Buttons[i].transform;
+            }
+            else if (Buttons[i].name.Equals("transform2"))
+            {
+                t2 = Buttons[i].transform;
+            }
+            else if (Buttons[i].name.Equals("transform3"))
+            {
+                t3 = Buttons[i].transform;
+            }
+            else if (Buttons[i].name.Equals("transform4"))
+            {
+                t4 = Buttons[i].transform;
+            }
+            else if (Buttons[i].name.Equals("transform5"))
+            {
+                t5 = Buttons[i].transform;
+            }
+            else if (Buttons[i].name.Equals("transform6"))
+            {
+                t6 = Buttons[i].transform;
             }
             else if (Buttons[i].name == "ButtonDay")
             {
@@ -1289,19 +1321,56 @@ public class PlayerCapsule : NetworkBehaviour
             Debug.Log(k + ": " + scores[k]);
         CmdGRows();
     }
-
+ 
+    Vector3 randV3()
+    {
+        var rand = new System.Random();
+        float x = (float)(rand.NextDouble() * (20 + 20) - 20); //random.NextDouble() * (maximum - minimum) + minimum;
+        float z = (float)(rand.NextDouble() * (40 - 20) + 20);
+        Debug.Log("rand floats "+x+" "+z);
+        return new Vector3(x, 0, z);
+    }
+    
     [Command]
     void CmdGRows()
     {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject player in players)
+            player.GetComponent<PlayerCapsule>().voted.SetActive(false);
         gManager.generateRows();
         RpcGRows();
+        GameObject board = GameObject.Find("MenuBoard_double");
+        Transform[] ts = new Transform[] { t1,t2,t3,t4,t5,t6};
+        int i = 0;
+        foreach(GameObject player in players)
+        {
+            /*Vector3 pos = new Vector3(board.transform.position.x,player.transform.position.y, board.transform.position.z)+ randV3();
+            player.transform.position = pos;
+            //player.transform.rotation.SetLookRotation(board.transform.position); 
+            
+            // Determine which direction to rotate towards
+            Vector3 targetDirection = board.transform.position - pos;
+            Quaternion lrotation = Quaternion.LookRotation(targetDirection);
+            lrotation.Set(0, lrotation.y, 0, player.transform.rotation.w);
+            player.transform.rotation = lrotation;
+            CmdMoveHim(pos, lrotation, player);*/
+
+            CmdMoveHim(ts[i].position, ts[i].rotation, player);
+            i++;
+            //CmdGather(pos, player);
+        }
     }
 
     [ClientRpc]
     void RpcGRows()
     {
         if (!isServer)
+        {
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+            foreach (GameObject player in players)
+                player.GetComponent<PlayerCapsule>().voted.SetActive(false);
             gManager.generateRows();
+        }
     }
 
     private Dictionary<string, int> scores;
@@ -1590,7 +1659,7 @@ public class PlayerCapsule : NetworkBehaviour
                             {
                                 clicked2 = true;
                                 Debug.Log(hit.collider.gameObject.name);
-                                CmdMoveHim(this.transform.position + transform.forward * 4, this.transform.rotation, hit.collider.gameObject);
+                                CmdMoveHim(this.transform.position + transform.forward * 10, this.transform.rotation, hit.collider.gameObject);
                                 CmdDrag();
                                 //this.transform.LookAt (hit.collider.gameObject.transform.position);
                                 target = this.transform.position + transform.forward * 4;
@@ -2494,6 +2563,17 @@ public class PlayerCapsule : NetworkBehaviour
         Debug.Log("Move him exit on " + go.name);
     }
 
+    [Command]
+    void CmdGather(Vector3 p,GameObject go)
+    {
+        GameObject board = GameObject.Find("MenuBoard_double");
+        go.transform.position = p;
+        go.transform.rotation.SetLookRotation(board.transform.position);
+        Quaternion q = go.transform.rotation;
+        go.GetComponent<PlayerCapsule>().bestGuessPosition = p;
+        go.GetComponent<PlayerCapsule>().bestGuessRotation = q;
+        RpcGather(p,q,go);
+    }
 
     [Command]
     void CmdPlay(GameObject other)
@@ -3449,6 +3529,15 @@ public class PlayerCapsule : NetworkBehaviour
         //			Debug.Log ("RPCMOVE p "+p);
         //			this.transform.LookAt(p);
         //		}
+    }
+    
+    [ClientRpc]
+    void RpcGather(Vector3 p,Quaternion q,GameObject go){
+        go.transform.position = p;
+        go.transform.rotation = q;
+        go.GetComponent<PlayerCapsule>().bestGuessPosition = p;
+        go.GetComponent<PlayerCapsule>().bestGuessRotation = q;
+
     }
 
     [ClientRpc]
