@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; 
@@ -12,12 +13,12 @@ public class TurnTable : MonoBehaviour
 
     public void SetPPanel(Transform go)
     {
-        picturePanel = go;
+        //picturePanel = go;
         Sprite[] pictures = Resources.LoadAll<Sprite>("Art/");
         Debug.Log(pictures.Length + " is lent ");
         for (int i = 0; i < pictures.Length; i++)
         {
-            GameObject clone = (GameObject)Instantiate(smallPicture);
+            GameObject clone = (GameObject)Instantiate(smallPicture,picturePanel);
             clone.GetComponentInChildren<Image>().sprite = pictures[i];
             clone.transform.SetParent(picturePanel);
             clone.GetComponentInChildren<Text>().text = pictures[i].name;
@@ -33,6 +34,7 @@ public class TurnTable : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SetPPanel(null);
         /*Sprite[] pictures = Resources.LoadAll<Sprite>("Art/");
         Debug.Log(pictures.Length + " is lent ");
         for (int i = 0; i < pictures.Length; i++)
