@@ -9,6 +9,8 @@ namespace cakeslice
     public class MouseOver2 : MonoBehaviour {
         public GameObject vvideo = null;
         public GameObject aaudio = null;
+        public GameObject Menu = null;
+        public GameObject Canvas = null;
         private Outline go;
         public Material outlineMaterial;
         private bool over = false;
@@ -50,7 +52,8 @@ namespace cakeslice
         Debug.Log("TRIGGEREd");
         }
 
-        void OnMouseOver() {
+        public void KokosIn() {
+            Debug.Log("KOKOKOOKKOOKKOS");
             if (GameObject.FindGameObjectWithTag("Menu"))
                 return;
             if (this.name.Equals("Video")||GetComponent<VideoPlayer>() != null)
@@ -65,6 +68,70 @@ namespace cakeslice
             {
                 outlineMaterial.SetColor("_SolidOutline",Color.red);
                 outlineMaterial.SetFloat("_OutlineEnabled", 1.0f);
+            }
+
+            /*if(vvideo!= null||aaudio!=null)
+            {
+                if(!aaudio.GetComponent<AudioSource>().isPlaying)
+                {
+                    //Debug.Log("LAMPIKE" + vvideo.GetComponent<VideoPlayer>().isPlaying);
+                    //CmdOutline(false, 0);
+                    if (go.enabled == false)
+                    {
+                        go.color = 0;
+                        go.enabled = true;
+                    }
+                }
+                else if (!vvideo.GetComponent<VideoPlayer>().isPlaying)
+                {
+                    //Debug.Log("LAMPIKE" + vvideo.GetComponent<VideoPlayer>().isPlaying);
+                    //CmdOutline(true, 0);
+                    if (go.enabled == false)
+                    {
+                        go.color = 0;
+                        go.enabled = true;
+                    }
+                }
+            }*/
+            /*else
+            {
+                //Debug.Log("LAMPIKE" + vvideo.GetComponent<VideoPlayer>().isPlaying);
+                CmdOutline(true, 0);
+                go.color = 0;
+                go.enabled = true;
+            }
+            if (!(vvideo != null && vvideo.GetComponent<VideoPlayer>().isPlaying) && !(aaudio != null && aaudio.GetComponent<AudioSource>().isPlaying))
+            {
+                Debug.Log("LAMPIKE" + vvideo.GetComponent<VideoPlayer>().isPlaying);
+                go.color = 0;
+                go.enabled = true;
+            }*/
+        }
+        
+        public void OpenMenu()
+        {
+            if (Menu.activeInHierarchy)
+                Canvas.SetActive(true);
+            else
+                Menu.SetActive(true);
+        }
+
+        public void KokosOut() {
+            Debug.Log("KOKOKOOKKOOKKOS");
+            if (GameObject.FindGameObjectWithTag("Menu"))
+                return;
+            if (this.name.Equals("Video")||GetComponent<VideoPlayer>() != null)
+                return;
+            over = true;
+            /*if (!go.enabled)
+            {
+                go.color = 0;
+                go.enabled = true;
+            }*/
+            if (outlineMaterial.GetFloat("_OutlineEnabled").Equals(1.0f))
+            {
+                outlineMaterial.SetColor("_SolidOutline",Color.red);
+                outlineMaterial.SetFloat("_OutlineEnabled", 0.0f);
             }
 
             /*if(vvideo!= null||aaudio!=null)
