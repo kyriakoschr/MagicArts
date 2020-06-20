@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
-using UnityEngine.Networking;
 
 namespace cakeslice
 {
@@ -53,7 +52,7 @@ namespace cakeslice
         }
 
         public void KokosIn() {
-            Debug.Log("KOKOKOOKKOOKKOS");
+            Debug.Log("In");
             if (GameObject.FindGameObjectWithTag("Menu"))
                 return;
             if (this.name.Equals("Video")||GetComponent<VideoPlayer>() != null)
@@ -69,47 +68,11 @@ namespace cakeslice
                 outlineMaterial.SetColor("_SolidOutline",Color.red);
                 outlineMaterial.SetFloat("_OutlineEnabled", 1.0f);
             }
-
-            /*if(vvideo!= null||aaudio!=null)
-            {
-                if(!aaudio.GetComponent<AudioSource>().isPlaying)
-                {
-                    //Debug.Log("LAMPIKE" + vvideo.GetComponent<VideoPlayer>().isPlaying);
-                    //CmdOutline(false, 0);
-                    if (go.enabled == false)
-                    {
-                        go.color = 0;
-                        go.enabled = true;
-                    }
-                }
-                else if (!vvideo.GetComponent<VideoPlayer>().isPlaying)
-                {
-                    //Debug.Log("LAMPIKE" + vvideo.GetComponent<VideoPlayer>().isPlaying);
-                    //CmdOutline(true, 0);
-                    if (go.enabled == false)
-                    {
-                        go.color = 0;
-                        go.enabled = true;
-                    }
-                }
-            }*/
-            /*else
-            {
-                //Debug.Log("LAMPIKE" + vvideo.GetComponent<VideoPlayer>().isPlaying);
-                CmdOutline(true, 0);
-                go.color = 0;
-                go.enabled = true;
-            }
-            if (!(vvideo != null && vvideo.GetComponent<VideoPlayer>().isPlaying) && !(aaudio != null && aaudio.GetComponent<AudioSource>().isPlaying))
-            {
-                Debug.Log("LAMPIKE" + vvideo.GetComponent<VideoPlayer>().isPlaying);
-                go.color = 0;
-                go.enabled = true;
-            }*/
         }
         
         public void OpenMenu()
         {
+            Debug.Log("Open");
             if (Menu.activeInHierarchy)
                 Canvas.SetActive(true);
             else
@@ -117,7 +80,7 @@ namespace cakeslice
         }
 
         public void KokosOut() {
-            Debug.Log("KOKOKOOKKOOKKOS");
+            Debug.Log("Out");
             if (GameObject.FindGameObjectWithTag("Menu"))
                 return;
             if (this.name.Equals("Video")||GetComponent<VideoPlayer>() != null)
@@ -133,43 +96,6 @@ namespace cakeslice
                 outlineMaterial.SetColor("_SolidOutline",Color.red);
                 outlineMaterial.SetFloat("_OutlineEnabled", 0.0f);
             }
-
-            /*if(vvideo!= null||aaudio!=null)
-            {
-                if(!aaudio.GetComponent<AudioSource>().isPlaying)
-                {
-                    //Debug.Log("LAMPIKE" + vvideo.GetComponent<VideoPlayer>().isPlaying);
-                    //CmdOutline(false, 0);
-                    if (go.enabled == false)
-                    {
-                        go.color = 0;
-                        go.enabled = true;
-                    }
-                }
-                else if (!vvideo.GetComponent<VideoPlayer>().isPlaying)
-                {
-                    //Debug.Log("LAMPIKE" + vvideo.GetComponent<VideoPlayer>().isPlaying);
-                    //CmdOutline(true, 0);
-                    if (go.enabled == false)
-                    {
-                        go.color = 0;
-                        go.enabled = true;
-                    }
-                }
-            }*/
-            /*else
-            {
-                //Debug.Log("LAMPIKE" + vvideo.GetComponent<VideoPlayer>().isPlaying);
-                CmdOutline(true, 0);
-                go.color = 0;
-                go.enabled = true;
-            }
-            if (!(vvideo != null && vvideo.GetComponent<VideoPlayer>().isPlaying) && !(aaudio != null && aaudio.GetComponent<AudioSource>().isPlaying))
-            {
-                Debug.Log("LAMPIKE" + vvideo.GetComponent<VideoPlayer>().isPlaying);
-                go.color = 0;
-                go.enabled = true;
-            }*/
         }
 
         void OnMouseExit () {
@@ -266,7 +192,7 @@ namespace cakeslice
             }*/
         }
 
-        [Command]
+        /*[Command]
         void CmdOutline(bool on, int color)
         {
             RpcOutline(on, color);
@@ -283,6 +209,6 @@ namespace cakeslice
             outlineMaterial.SetFloat("_OutlineEnabled", 1.0f);
             //go.color = color;
             //go.enabled = on;
-        }
+        }*/
     }
 }

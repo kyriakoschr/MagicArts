@@ -25,6 +25,8 @@ TagManager:
   - Video
   - SIcon
   - Wall
+  - NonTeleportable
+  - Teleportable
   layers:
   - Default
   - TransparentFX
