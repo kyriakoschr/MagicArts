@@ -27,6 +27,7 @@ TagManager:
   - Wall
   - NonTeleportable
   - Teleportable
+  - Extra
   layers:
   - Default
   - TransparentFX

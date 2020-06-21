@@ -95,6 +95,14 @@ for the game:
 - [X] keep results and show at the end of each round
 - [X] think about when/how to choose the next storyteller
 
+- [X] sync paintings opening
+- [ ] sync videos and audio playing
+- [ ] sync outlines
+- [ ] interact with ui canvas of paintings
+- [ ] copy above to every painting
+- [ ] integrate game functionality
+- [ ] enable collisions with wall (& other users)
+
 ## TRANSFORM TO HTC VIVE
 - First 2 versions
 - Avatars might need to be replaced with simplier (ghosts or handless robots)
