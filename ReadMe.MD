@@ -72,7 +72,7 @@
 
 ## 11/6
 - [X] na paizei i perigrafi kai patontas to kimeno (na megalwsw to collider) kai to video me tin cameroula
-- [ ] diskolia stin ploigisi me to pontiki
+- [X] diskolia stin ploigisi me to pontiki
 - [X] na koitaxw to prwto frame sta video 
 - [X] den koitazoun to scoreboard meta to move
 - [X] me to drag na metaferete ligo pio mprosta
@@ -96,12 +96,21 @@ for the game:
 - [X] think about when/how to choose the next storyteller
 
 - [X] sync paintings opening
-- [ ] sync videos and audio playing
+- [ ] sync videos 
+- [ ] sync audio
 - [ ] sync outlines
 - [ ] interact with ui canvas of paintings
 - [ ] copy above to every painting
 - [ ] integrate game functionality
 - [ ] enable collisions with wall (& other users)
+
+##23/6
+- [ ] try to have the mic always on
+- [ ] find out what's going on with the server timeouts
+- [ ] disable rotation from keyboards
+
+- [ ] invite users to play
+- [ ] instructions of how to play the game
 
 ## TRANSFORM TO HTC VIVE
 - First 2 versions

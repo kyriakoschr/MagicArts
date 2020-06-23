@@ -1,4 +1,6 @@
 ﻿using Photon.Pun;
+using Photon.Voice.PUN;
+using Photon.Voice.Unity;
 using System.Collections;
 using System.Collections.Generic;
 using Tilia.Indicators.ObjectPointers;
@@ -37,7 +39,9 @@ public class InitPPlayer : MonoBehaviourPun
         left = GameObject.Find("LeftControllerAlias");
         right = GameObject.Find("RightControllerAlias");
         head = GameObject.Find("HeadsetAlias");
-
+        GameObject voice = GameObject.Find("Voice");
+        voice.GetComponent<Recorder>().Init(voice.GetComponent<PhotonVoiceNetwork>().VoiceClient);
+        transform.GetComponent<PhotonVoiceView>().RecorderInUse = voice.GetComponent<Recorder>();
         /*button1 = GameObject.Find("ButtonOne").GetComponent<BooleanAction>();
         button2 = GameObject.Find("ButtonTwo").GetComponent<BooleanAction>();
         

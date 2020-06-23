@@ -23,7 +23,7 @@ namespace cakeslice
         void Start(){
             //go = GetComponentInParent<Outline>();
             //go.enabled = false;
-            if (this.name.Equals("Video"))
+            if (this.name.Contains("Video"))
             {
                 outlineMaterial = new Material(this.GetComponent<MeshRenderer>().material);
                 this.GetComponent<MeshRenderer>().material = outlineMaterial;
@@ -43,6 +43,32 @@ namespace cakeslice
                     outlineMaterial.SetColor("_SolidOutline", Color.green);
             }
 //            outlineShader = outlineMaterial.shader;
+        }
+
+        void Awake()
+        {
+            //go = GetComponentInParent<Outline>();
+            //go.enabled = false;
+            if (this.name.Contains("Video"))
+            {
+                outlineMaterial = new Material(this.GetComponent<MeshRenderer>().material);
+                this.GetComponent<MeshRenderer>().material = outlineMaterial;
+                outlineMaterial.SetColor("_SolidOutline", Color.green);
+                outlineMaterial.SetFloat("_OutlineEnabled", 0.0f);
+            }
+            else
+            {
+                outlineMaterial = new Material(this.GetComponent<SpriteRenderer>().material);
+                this.GetComponent<SpriteRenderer>().material = outlineMaterial;
+                if (GetComponent<VideoPlayer>() == null)
+                {
+                    outlineMaterial.SetColor("_SolidOutline", Color.red);
+                    outlineMaterial.SetFloat("_OutlineEnabled", 0.0f);
+                }
+                else
+                    outlineMaterial.SetColor("_SolidOutline", Color.green);
+            }
+            //            outlineShader = outlineMaterial.shader;
         }
 
         private void OnCollisionEnter(Collision collision)
