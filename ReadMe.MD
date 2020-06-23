@@ -103,14 +103,18 @@ for the game:
 - [ ] copy above to every painting
 - [ ] integrate game functionality
 - [ ] enable collisions with wall (& other users)
+- [X] fix tags for teleport and point
 
 ##23/6
-- [ ] try to have the mic always on
-- [ ] find out what's going on with the server timeouts
-- [ ] disable rotation from keyboards
+- [X] OK ON VIVE EDITION try to have the mic always on
+- [X] OK ON VIVE EDITION find out what's going on with the server timeouts
+- [X] OK ON VIVE EDITION disable rotation from keyboards
 
 - [ ] invite users to play
 - [ ] instructions of how to play the game
+
+- [ ] bound camera
+- [ ] CHECK ON VIVE! vive takes me away (think i fixed that  with InitUXR) 
 
 ## TRANSFORM TO HTC VIVE
 - First 2 versions

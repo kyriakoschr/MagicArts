@@ -28,6 +28,7 @@ TagManager:
   - NonTeleportable
   - Teleportable
   - Extra
+  - Image
   layers:
   - Default
   - TransparentFX
