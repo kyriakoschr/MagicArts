@@ -117,7 +117,7 @@ namespace cakeslice
                 go.color = 0;
                 go.enabled = true;
             }*/
-            if (outlineMaterial.GetFloat("_OutlineEnabled").Equals(1.0f))
+            if (outlineMaterial.GetFloat("_OutlineEnabled").Equals(1.0f)&& !outlineMaterial.GetColor("_SolidOutline").Equals(Color.green))
             {
                 outlineMaterial.SetColor("_SolidOutline",Color.red);
                 outlineMaterial.SetFloat("_OutlineEnabled", 0.0f);

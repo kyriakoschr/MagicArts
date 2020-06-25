@@ -33,41 +33,24 @@ public class VideoManager : MonoBehaviourPun, IPunObservable, IPunOwnershipCallb
     {
         if (stream.IsReading) // rec
         {
-            //for (int i = 0; i < isPlaying.Length; i++)
-                isPlaying[2] = (int)stream.ReceiveNext();
-            /*for (int ind = 0; ind < vids.Count; ind++)
-            {
-                GameObject video = vids.Find(x => x.name.Equals("Video" + ind.ToString()));*/
-                GameObject video = vids.Find(x => x.name.Equals("Video2"));
-                /*if (video.GetComponent<MouseOver2>() == null||video.GetComponent<VideoPlayer>()==null)
-                    continue;*/
-                if (isPlaying[2] > 0)
-                //if (isPlaying[ind] > 0)
+            for (int i = 0; i < isPlaying.Length; i++)
+                isPlaying[i] = (int)stream.ReceiveNext();
+            for (int i = 0; i < isPlaying.Length; i++)
+                if (isPlaying[i] > 0)
                 {
-                    Debug.LogError("video2 has " + isPlaying[2]);
-                    video.GetComponent<MouseOver2>().outlineMaterial.SetColor("_SolidOutline", Color.green);
-                    video.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 1.0f);
+                    GameObject go = vids.Find(x => x.name.Equals("Video" + i.ToString()));
+                    go.GetComponent<MouseOver2>().outlineMaterial.SetColor("_SolidOutline", Color.green);
+                    go.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 1.0f);
                     if (version.Equals(2))
                     {
-                        video.GetComponent<VideoPlayer>().Play();
+                        go.GetComponent<VideoPlayer>().Play();
                     }
                 }
-                else
-                {
-                    Debug.LogError("video2 has " + isPlaying[2]);
-                    video.GetComponent<MouseOver2>().outlineMaterial.SetColor("_SolidOutline", Color.green);
-                    video.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 0.0f);
-                    if (version.Equals(2))
-                    {
-                        video.GetComponent<VideoPlayer>().Pause();
-                    }
-                }
-            //}
         }
         else if (stream.IsWriting) //send
         {
-            //for (int i = 0; i < isPlaying.Length; i++)
-                stream.SendNext(isPlaying[2]);
+            for (int i = 0; i < isPlaying.Length; i++)
+                stream.SendNext(isPlaying[i]);
         }
     }
 
@@ -76,32 +59,75 @@ public class VideoManager : MonoBehaviourPun, IPunObservable, IPunOwnershipCallb
     {
         vids = FindInActiveObjectsByTag("Video");
         Debug.LogError("Videos are " + vids.Count);
-        PhotonNetwork.SendRate = 40;
-        PhotonNetwork.SerializationRate = 40;
+        /*PhotonNetwork.SendRate = 40;
+        PhotonNetwork.SerializationRate = 40;*/
     }
 
     public void ReqAndPlay(bool PlayPause,int i)
     {
-        Debug.LogError(base.photonView.Owner +" is owner");
+        if (PlayPause)
+        {
+            //isPlaying[i]++;
+            this.photonView.RPC("Play", RpcTarget.All, i);
+        }
+        else
+        {
+            //isPlaying[i]--;
+            this.photonView.RPC("Pause", RpcTarget.All, i);
+        }
+        /*Debug.LogError(base.photonView.Owner +" is owner");
         base.photonView.RequestOwnership();
-        /*GameObject go = vids.Find(x => x.name.Equals("Video" + i.ToString()));
-        Debug.LogError("b4 " + photonView.IsMine + " " + go.name + " " + isPlaying[i]+" " + PlayPause);*/
+        GameObject go = vids.Find(x => x.name.Equals("Video" + i.ToString()));
+        Debug.LogError("b4 " + photonView.IsMine + " " + go.name + " " + isPlaying[i] + " " + PlayPause);
         if (PlayPause)
         {
             isPlaying[i]=isPlaying[i]+1;
-            /*go.GetComponent<MouseOver2>().outlineMaterial.SetColor("_SolidOutline", Color.green);
-            go.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 1.0f);*/
+            go.GetComponent<MouseOver2>().outlineMaterial.SetColor("_SolidOutline", Color.green);
+            go.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 1.0f);
         }
         else
         {
             isPlaying[i] = isPlaying[i] - 1;
-            /*if (isPlaying[i] == 0)
+            if (isPlaying[i] == 0)
             {
                 go.GetComponent<MouseOver2>().outlineMaterial.SetColor("_SolidOutline", Color.green);
                 go.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 0.0f);
-            }*/
+            }
         }
-        //Debug.LogError("after "+photonView.IsMine + " " + go.name + " " + isPlaying[i] + " " + PlayPause);
+        //Debug.LogError("after "+photonView.IsMine + " " + go.name + " " + isPlaying[i] + " " + PlayPause);*/
+
+    }
+
+    [PunRPC]
+    void Play(int paint)
+    {
+        isPlaying[paint]++;
+        if (isPlaying[paint] > 0)
+        {
+            GameObject go = vids.Find(x => x.name.Equals("Video" + paint.ToString()));
+            go.GetComponent<MouseOver2>().outlineMaterial.SetColor("_SolidOutline", Color.green);
+            go.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 1.0f);
+            if (version.Equals(2))
+            {
+                go.GetComponent<VideoPlayer>().Play();
+            }
+        }
+    }
+
+    [PunRPC]
+    void Pause(int paint)
+    {
+        isPlaying[paint]--;
+        if (isPlaying[paint] == 0)
+        {
+            GameObject go = vids.Find(x => x.name.Equals("Video" + paint.ToString()));
+            go.GetComponent<MouseOver2>().outlineMaterial.SetColor("_SolidOutline", Color.green);
+            go.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 0.0f);
+            if (version.Equals(2))
+            {
+                go.GetComponent<VideoPlayer>().Pause();
+            }
+        }
     }
 
     // Update is called once per frame

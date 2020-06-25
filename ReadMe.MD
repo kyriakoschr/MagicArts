@@ -96,9 +96,12 @@ for the game:
 - [X] think about when/how to choose the next storyteller
 
 - [X] sync paintings opening
-- [ ] sync videos 
-- [ ] sync audio
-- [ ] sync outlines
+- [X] sync videos 
+- [X] sync audio
+- [X] only one multimedia at a time for each user on V1
+- [ ] when video/audio ends remove outline
+- [ ] first frame on videos
+- [X] sync outlines
 - [ ] interact with ui canvas of paintings
 - [ ] copy above to every painting
 - [ ] integrate game functionality

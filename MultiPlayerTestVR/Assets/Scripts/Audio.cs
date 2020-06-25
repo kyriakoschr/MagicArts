@@ -1,63 +1,59 @@
-﻿using cakeslice;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.Video;
 
-public class VideoAwake : MonoBehaviour {
-	GameObject videoManager;
-	VideoPlayer vp;
+public class Audio : MonoBehaviour
+{
 	MMManger mmm;
 
-	// Use this for initialization
-	void Start () {
-		videoManager = GameObject.Find("VideoManager");
+	public AudioManager audioManager;
+    // Start is called before the first frame update
+    void Start()
+    {
 		mmm = GameObject.Find("MultiMediaManager").GetComponent<MMManger>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-	void OnEnable(){
-		vp = GetComponent<VideoPlayer> ();
-		vp.Play ();
-		vp.Pause ();
 	}
 
 	public void PlayPause(int painting)
-    {
+	{
+		AudioSource vp = this.GetComponent<AudioSource>();
 		if (vp.isPlaying)
 		{
 			vp.Pause();
-			mmm.listRemove(this.gameObject, 2, painting);
+			mmm.listRemove(this.gameObject, 1, painting);
 			/*GetComponent<MouseOver2>().outlineMaterial.SetColor("_SolidOutline", Color.green);
 			GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 0.0f);
 			videoManager.GetComponent<VideoManager>().isPlaying[painting]--;*/
-			videoManager.GetComponent<VideoManager>().ReqAndPlay(false, painting);
+			audioManager.GetComponent<AudioManager>().ReqAndPlay(false, painting);
 		}
 		else
 		{
-			MMManger.LObject rem = mmm.insertInList(this.gameObject, 2, painting);
+			MMManger.LObject rem = mmm.insertInList(this.gameObject, 1, painting);
 			if (rem != null)
 			{
 				if (rem.getAV().Equals(1))
 				{
 					rem.getGo().GetComponent<AudioSource>().Pause();
-					GameObject.Find("AudioManager").GetComponent<AudioManager>().ReqAndPlay(false, rem.getNo());
+					audioManager.GetComponent<AudioManager>().ReqAndPlay(false, rem.getNo());
 				}
 				else
 				{
 					rem.getGo().GetComponent<VideoPlayer>().Pause();
-					videoManager.GetComponent<VideoManager>().ReqAndPlay(false, rem.getNo());
+					GameObject.Find("VideoManager").GetComponent<VideoManager>().ReqAndPlay(false, rem.getNo());
 				}
 			}
 			vp.Play();
 			/*GetComponent<MouseOver2>().outlineMaterial.SetColor("_SolidOutline", Color.green);
 			GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 1.0f);
 			videoManager.GetComponent<VideoManager>().isPlaying[painting]++;*/
-			videoManager.GetComponent<VideoManager>().ReqAndPlay(true, painting);
+			audioManager.GetComponent<AudioManager>().ReqAndPlay(true, painting);
 		}
 	}
+
+	// Update is called once per frame
+	void Update()
+    {
+        
+    }
 }
