@@ -71,8 +71,9 @@ public class AudioManager : MonoBehaviourPun, IPunObservable
     void Pause(int paint)
     {
         isPlaying[paint]--;
-        if (isPlaying[paint] == 0)
+        if (isPlaying[paint] <= 0)
         {
+            isPlaying[paint] = 0;
             GameObject audio = audios.Find(x => x.name.Equals("AudioSource" + paint.ToString()));
             GameObject painting = paintings.Find(x => x.name.Equals("paint" + paint.ToString()));
             painting.GetComponent<MouseOver2>().outlineMaterial.SetColor("_SolidOutline", Color.green);

@@ -29,7 +29,7 @@ public class Audio : MonoBehaviour
 		}
 		else
 		{
-			MMManger.LObject rem = mmm.insertInList(this.gameObject, 1, painting);
+			MMManger.LObject rem = mmm.insertInList(this.gameObject, 1, painting, StartCoroutine(timer(vp.clip.length - vp.time, vp,painting)));
 			if (rem != null)
 			{
 				if (rem.getAV().Equals(1))
@@ -49,6 +49,15 @@ public class Audio : MonoBehaviour
 			videoManager.GetComponent<VideoManager>().isPlaying[painting]++;*/
 			audioManager.GetComponent<AudioManager>().ReqAndPlay(true, painting);
 		}
+	}
+
+	IEnumerator timer(double t, AudioSource go,int painting)
+	{
+		yield return new WaitForSeconds((float)t);
+		//if (go.transform.parent.parent.GetComponent<MouseOver2>().outlineMaterial.GetFloat("_OutlineEnabled").Equals(1.0f))
+		go.Stop();
+		go.time = 0;
+		audioManager.GetComponent<AudioManager>().ReqAndPlay(false, painting);
 	}
 
 	// Update is called once per frame

@@ -99,8 +99,8 @@ for the game:
 - [X] sync videos 
 - [X] sync audio
 - [X] only one multimedia at a time for each user on V1
-- [ ] when video/audio ends remove outline
-- [ ] first frame on videos
+- [X] when video/audio ends remove outline
+- [X] first frame on videos
 - [X] sync outlines
 - [ ] interact with ui canvas of paintings
 - [ ] copy above to every painting

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Video;
 
 public class VideoAwake : MonoBehaviour {
+	bool started = true;
 	GameObject videoManager;
 	VideoPlayer vp;
 	MMManger mmm;
@@ -17,13 +18,27 @@ public class VideoAwake : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (started && vp.isPlaying && vp.isPrepared)
+		{
+			started = false;
+			vp.frame = 2;
+			vp.Pause();
+			vp.frame = 2;
+		}
 	}
 
-	void OnEnable(){
-		vp = GetComponent<VideoPlayer> ();
-		vp.Play ();
-		vp.Pause ();
+	private void OnBecameVisible()
+	{
+		vp = GetComponent<VideoPlayer>();
+		/*vp.Play();*/
+		//vp.Pause ();
+	}
+	void Awake()
+	{
+		Debug.Log("awaken");
+		vp = GetComponent<VideoPlayer>();
+		/*vp.Play();
+        vp.Pause ();*/
 	}
 
 	public void PlayPause(int painting)
@@ -38,8 +53,8 @@ public class VideoAwake : MonoBehaviour {
 			videoManager.GetComponent<VideoManager>().ReqAndPlay(false, painting);
 		}
 		else
-		{
-			MMManger.LObject rem = mmm.insertInList(this.gameObject, 2, painting);
+		{ 
+			MMManger.LObject rem = mmm.insertInList(this.gameObject, 2, painting,StartCoroutine(timer(vp.length-vp.time,vp,painting)));
 			if (rem != null)
 			{
 				if (rem.getAV().Equals(1))
@@ -59,5 +74,15 @@ public class VideoAwake : MonoBehaviour {
 			videoManager.GetComponent<VideoManager>().isPlaying[painting]++;*/
 			videoManager.GetComponent<VideoManager>().ReqAndPlay(true, painting);
 		}
+	}
+
+	IEnumerator timer(double t, VideoPlayer go,int painting)
+	{
+		yield return new WaitForSeconds((float)t);
+		//if (go.transform.parent.parent.GetComponent<MouseOver2>().outlineMaterial.GetFloat("_OutlineEnabled").Equals(1.0f))
+		vp.frame = 2;
+		vp.Pause();
+		vp.frame = 2;
+		videoManager.GetComponent<VideoManager>().ReqAndPlay(false, painting);
 	}
 }

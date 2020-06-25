@@ -118,8 +118,9 @@ public class VideoManager : MonoBehaviourPun, IPunObservable, IPunOwnershipCallb
     void Pause(int paint)
     {
         isPlaying[paint]--;
-        if (isPlaying[paint] == 0)
+        if (isPlaying[paint] <= 0)
         {
+            isPlaying[paint] = 0;
             GameObject go = vids.Find(x => x.name.Equals("Video" + paint.ToString()));
             go.GetComponent<MouseOver2>().outlineMaterial.SetColor("_SolidOutline", Color.green);
             go.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 0.0f);

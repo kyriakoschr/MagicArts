@@ -10,6 +10,7 @@ public class MMManger : MonoBehaviour
         int number;
         int audioVideo;
         GameObject go;
+        Coroutine corout;
 
         public int getAV()
         {
@@ -18,6 +19,11 @@ public class MMManger : MonoBehaviour
         public int getNo()
         {
             return number;
+        }
+
+        public Coroutine getCo()
+        {
+            return corout;
         }
 
         public GameObject getGo()
@@ -29,9 +35,15 @@ public class MMManger : MonoBehaviour
         {
             audioVideo = av;
         }
+
         public void setNo(int no)
         {
             number = no;
+        }
+        
+        public void setCo(Coroutine co)
+        {
+            corout = co;
         }
 
         public void setGo(GameObject gobj)
@@ -51,19 +63,23 @@ public class MMManger : MonoBehaviour
 
     public void listRemove(GameObject go,int av,int no)
     {
-        currentlyPlayingLocally.RemoveAll(x => x.getAV().Equals(av) && x.getGo().Equals(go) && x.getNo().Equals(no));
+        LObject lo = currentlyPlayingLocally.Find(x => x.getAV().Equals(av) && x.getGo().Equals(go) && x.getNo().Equals(no));
+        StopCoroutine(lo.getCo());
+        currentlyPlayingLocally.Remove(lo);
     }
 
-    public LObject insertInList(GameObject media,int av,int no)
+    public LObject insertInList(GameObject media,int av,int no,Coroutine co)
     {
         LObject newObj = new LObject();
         newObj.setAv(av);
         newObj.setGo(media);
         newObj.setNo(no);
+        newObj.setCo(co);
         LObject ret =null;
         if (Version.Equals(1)&&currentlyPlayingLocally.Count>0)
         {
             ret = currentlyPlayingLocally[0];
+            StopCoroutine(ret.getCo());
             currentlyPlayingLocally.RemoveAt(0);
         }
         currentlyPlayingLocally.Add(newObj);
