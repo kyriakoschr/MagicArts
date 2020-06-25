@@ -102,6 +102,8 @@ for the game:
 - [X] when video/audio ends remove outline
 - [X] first frame on videos
 - [X] sync outlines
+- [ ] deal with paint 8 1
+- [ ] common videos should not play on start
 - [ ] interact with ui canvas of paintings
 - [ ] copy above to every painting
 - [ ] integrate game functionality
