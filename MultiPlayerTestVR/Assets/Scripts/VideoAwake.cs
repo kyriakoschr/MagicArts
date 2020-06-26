@@ -43,6 +43,9 @@ public class VideoAwake : MonoBehaviour {
 
 	public void PlayPause(int painting)
     {
+		if (vp == null)
+			vp = GetComponent<VideoPlayer>();
+		Debug.Log(vp.clip);
 		if (vp.isPlaying)
 		{
 			vp.Pause();
@@ -80,9 +83,9 @@ public class VideoAwake : MonoBehaviour {
 	{
 		yield return new WaitForSeconds((float)t);
 		//if (go.transform.parent.parent.GetComponent<MouseOver2>().outlineMaterial.GetFloat("_OutlineEnabled").Equals(1.0f))
-		vp.frame = 2;
-		vp.Pause();
-		vp.frame = 2;
+		go.frame = 2;
+		go.Pause();
+		go.frame = 2;
 		videoManager.GetComponent<VideoManager>().ReqAndPlay(false, painting);
 	}
 }
