@@ -100,12 +100,12 @@ for the game:
 - [X] sync audio
 - [X] only one multimedia at a time for each user on V1
 - [X] when video/audio ends remove outline
-- [X] first frame on videos
+- [X] first frame on all videos
 - [X] sync outlines
-- [ ] deal with paint 8 1
-- [ ] common videos should not play on start
+- [ ] sync emotions
 - [ ] interact with ui canvas of paintings
-- [ ] copy above to every painting
+- [X] deal with paint 8 1
+- [X] sync common videos
 - [ ] integrate game functionality
 - [ ] enable collisions with wall (& other users)
 - [X] fix tags for teleport and point

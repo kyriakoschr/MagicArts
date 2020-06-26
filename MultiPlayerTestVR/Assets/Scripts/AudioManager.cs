@@ -58,6 +58,12 @@ public class AudioManager : MonoBehaviourPun, IPunObservable
             GameObject audio = audios.Find(x => x.name.Equals("AudioSource" + paint.ToString()));
             GameObject painting = paintings.Find(x => x.name.Equals("paint" + paint.ToString()));
             Debug.Log(audio.name + " " + painting.name);
+            if (paint.Equals(8))
+            {
+                GameObject painting81 = paintings.Find(x => x.name.Equals("paint8(1)"));
+                painting81.GetComponent<MouseOver2>().outlineMaterial.SetColor("_SolidOutline", Color.green);
+                painting81.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 1.0f);
+            }
             painting.GetComponent<MouseOver2>().outlineMaterial.SetColor("_SolidOutline", Color.green);
             painting.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 1.0f);
             if (version.Equals(2))
@@ -76,6 +82,12 @@ public class AudioManager : MonoBehaviourPun, IPunObservable
             isPlaying[paint] = 0;
             GameObject audio = audios.Find(x => x.name.Equals("AudioSource" + paint.ToString()));
             GameObject painting = paintings.Find(x => x.name.Equals("paint" + paint.ToString()));
+            if (paint.Equals(8))
+            {
+                GameObject painting81 = paintings.Find(x => x.name.Equals("paint8(1)"));
+                painting81.GetComponent<MouseOver2>().outlineMaterial.SetColor("_SolidOutline", Color.green);
+                painting81.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 0.0f);
+            }
             painting.GetComponent<MouseOver2>().outlineMaterial.SetColor("_SolidOutline", Color.green);
             painting.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 0.0f);
             if (version.Equals(2))

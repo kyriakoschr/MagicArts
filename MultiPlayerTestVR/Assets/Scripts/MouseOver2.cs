@@ -23,7 +23,7 @@ namespace cakeslice
         void Start(){
             //go = GetComponentInParent<Outline>();
             //go.enabled = false;
-            if (this.name.Contains("Video"))
+            if (this.CompareTag("Video"))
             {
                 outlineMaterial = new Material(this.GetComponent<MeshRenderer>().material);
                 this.GetComponent<MeshRenderer>().material = outlineMaterial;
@@ -49,7 +49,7 @@ namespace cakeslice
         {
             //go = GetComponentInParent<Outline>();
             //go.enabled = false;
-            if (this.name.Contains("Video"))
+            if (this.CompareTag("Video"))
             {
                 outlineMaterial = new Material(this.GetComponent<MeshRenderer>().material);
                 this.GetComponent<MeshRenderer>().material = outlineMaterial;
