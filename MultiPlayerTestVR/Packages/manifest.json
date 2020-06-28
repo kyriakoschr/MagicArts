@@ -32,7 +32,7 @@
     "io.extendreality.tilia.indicators.objectpointers.unity": "1.2.13",
     "io.extendreality.tilia.indicators.spatialtargets.unity": "1.0.13",
     "io.extendreality.tilia.input.unityinputmanager": "1.2.14",
-    "io.extendreality.tilia.interactions.interactables.unity": "1.8.1",
+    "io.extendreality.tilia.interactions.interactables.unity": "1.9.0",
     "io.extendreality.tilia.locomotors.teleporter.unity": "1.2.1",
     "io.extendreality.tilia.locomotors.teleporttargets.unity": "1.0.7",
     "io.extendreality.tilia.mutators.objectfollower.unity": "1.1.2",

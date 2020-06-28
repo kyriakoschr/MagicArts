@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class GameController : MonoBehaviourPunCallbacks
 {
+    public GameObject myLocalPlayer;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +16,7 @@ public class GameController : MonoBehaviourPunCallbacks
     private void CreatePlayer()
     {
         Debug.Log("Creating Player");
-        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PPlayer"), Vector3.zero, Quaternion.identity);
+        myLocalPlayer=PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PPlayer"), Vector3.zero, Quaternion.identity);
     }
 
     // Update is called once per frame

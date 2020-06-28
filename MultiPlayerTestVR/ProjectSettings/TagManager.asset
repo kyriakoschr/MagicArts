@@ -29,6 +29,7 @@ TagManager:
   - Teleportable
   - Extra
   - Image
+  - Bubble
   layers:
   - Default
   - TransparentFX

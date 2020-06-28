@@ -102,12 +102,11 @@ for the game:
 - [X] when video/audio ends remove outline
 - [X] first frame on all videos
 - [X] sync outlines
-- [ ] sync emotions
+- [X] sync emotions
 - [ ] interact with ui canvas of paintings
 - [X] deal with paint 8 1
 - [X] sync common videos
 - [ ] integrate game functionality
-- [ ] enable collisions with wall (& other users)
 - [X] fix tags for teleport and point
 
 ##23/6
@@ -115,9 +114,12 @@ for the game:
 - [X] OK ON VIVE EDITION find out what's going on with the server timeouts
 - [X] OK ON VIVE EDITION disable rotation from keyboards
 
+## Vivi suggestions
 - [ ] invite users to play
 - [ ] instructions of how to play the game
 
+## bugs to fix on vive
+- [ ] enable collisions with wall (& other users)
 - [ ] bound camera
 - [ ] CHECK ON VIVE! vive takes me away (think i fixed that  with InitUXR) 
 
