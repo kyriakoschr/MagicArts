@@ -61,9 +61,16 @@ public class MMManger : MonoBehaviour
         
     }
 
+    public int length()
+    {
+        return currentlyPlayingLocally.Count;
+    }
+
     public void listRemove(GameObject go,int av,int no)
     {
-        LObject lo = currentlyPlayingLocally.Find(x => x.getAV().Equals(av) && x.getGo().Equals(go) && x.getNo().Equals(no));
+        Debug.Log("length is " + currentlyPlayingLocally.Count);
+        LObject lo = currentlyPlayingLocally.Find(x => x.getAV().Equals(av) && x.getNo().Equals(no));
+        Debug.Log(lo.getAV() + " " + lo.getGo()+" "+lo.getNo());
         StopCoroutine(lo.getCo());
         currentlyPlayingLocally.Remove(lo);
     }

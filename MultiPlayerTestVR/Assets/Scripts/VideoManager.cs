@@ -8,9 +8,11 @@ using UnityEngine.Video;
 
 public class VideoManager : MonoBehaviourPun, IPunObservable, IPunOwnershipCallbacks
 {
-    public int version = 1; // 1=first 2=second
+    int version; // 1=first 2=second
     public int[] isPlaying=new int[19];
     List<GameObject> vids;
+    
+    MMManger mmm;
 
     List<GameObject> FindInActiveObjectsByTag(string tag)
     {
@@ -59,8 +61,11 @@ public class VideoManager : MonoBehaviourPun, IPunObservable, IPunOwnershipCallb
     {
         vids = FindInActiveObjectsByTag("Video");
         Debug.LogError("Videos are " + vids.Count);
+
+        mmm = GameObject.Find("MultiMediaManager").GetComponent<MMManger>();
+        version = mmm.Version;
         /*PhotonNetwork.SendRate = 40;
-        PhotonNetwork.SerializationRate = 40;*/
+         PhotonNetwork.SerializationRate = 40;*/
     }
 
     public void ReqAndPlay(bool PlayPause,int i)
@@ -68,12 +73,12 @@ public class VideoManager : MonoBehaviourPun, IPunObservable, IPunOwnershipCallb
         if (PlayPause)
         {
             //isPlaying[i]++;
-            this.photonView.RPC("Play", RpcTarget.All, i);
+            this.photonView.RPC("Play", RpcTarget.All, i, PhotonNetwork.LocalPlayer.UserId);
         }
         else
         {
             //isPlaying[i]--;
-            this.photonView.RPC("Pause", RpcTarget.All, i);
+            this.photonView.RPC("Pause", RpcTarget.All, i, PhotonNetwork.LocalPlayer.UserId);
         }
         /*Debug.LogError(base.photonView.Owner +" is owner");
         base.photonView.RequestOwnership();
@@ -98,24 +103,38 @@ public class VideoManager : MonoBehaviourPun, IPunObservable, IPunOwnershipCallb
 
     }
 
+    IEnumerator timer(double t, VideoPlayer go, int painting)
+    {
+        yield return new WaitForSeconds((float)t);
+        //if (go.transform.parent.parent.GetComponent<MouseOver2>().outlineMaterial.GetFloat("_OutlineEnabled").Equals(1.0f))
+        go.frame = 2;
+        go.Pause();
+        go.frame = 2;
+    }
+
     [PunRPC]
-    void Play(int paint)
+    void Play(int paint, string usr)
     {
         isPlaying[paint]++;
         if (isPlaying[paint] > 0)
         {
             GameObject go = vids.Find(x => x.name.Equals("Video" + paint.ToString()));
+            VideoPlayer vp = go.GetComponent<VideoPlayer>();
             go.GetComponent<MouseOver2>().outlineMaterial.SetColor("_SolidOutline", Color.green);
             go.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 1.0f);
-            if (version.Equals(2))
+            Debug.Log("HHERERERERE");
+            if (version.Equals(2) && !usr.Equals(PhotonNetwork.LocalPlayer.UserId)) //here is the bug
             {
                 go.GetComponent<VideoPlayer>().Play();
+                Debug.Log("Playing on 2nd");
+                mmm.insertInList(go, 2, paint, StartCoroutine(timer(vp.length - vp.time, vp, paint)));
+                Debug.Log(mmm.length() +" is len");
             }
         }
     }
 
     [PunRPC]
-    void Pause(int paint)
+    void Pause(int paint, string usr)
     {
         isPlaying[paint]--;
         if (isPlaying[paint] <= 0)
@@ -124,8 +143,9 @@ public class VideoManager : MonoBehaviourPun, IPunObservable, IPunOwnershipCallb
             GameObject go = vids.Find(x => x.name.Equals("Video" + paint.ToString()));
             go.GetComponent<MouseOver2>().outlineMaterial.SetColor("_SolidOutline", Color.green);
             go.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 0.0f);
-            if (version.Equals(2))
+            if (version.Equals(2) && !usr.Equals(PhotonNetwork.LocalPlayer.UserId))
             {
+                mmm.listRemove(go, 2, paint);
                 go.GetComponent<VideoPlayer>().Pause();
             }
         }

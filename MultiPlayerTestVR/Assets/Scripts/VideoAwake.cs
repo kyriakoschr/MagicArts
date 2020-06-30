@@ -48,6 +48,7 @@ public class VideoAwake : MonoBehaviour {
 		Debug.Log(vp.clip);
 		if (vp.isPlaying)
 		{
+			Debug.Log("IS PLAYING");
 			vp.Pause();
 			mmm.listRemove(this.gameObject, 2, painting);
 			/*GetComponent<MouseOver2>().outlineMaterial.SetColor("_SolidOutline", Color.green);
