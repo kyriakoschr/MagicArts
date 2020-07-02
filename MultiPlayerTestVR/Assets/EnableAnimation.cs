@@ -7,16 +7,42 @@ using UnityEngine.Video;
 public class EnableAnimation : MonoBehaviour
 {
     public int cntr;
+    public GameController gc;
+    public MMManger mmm;
+    GameObject VideoToAnimate = null;
+    VideoPlayer vp = null;
+
     // Start is called before the first frame update
     void Start()
     {
         cntr = 0;
+        if (this.transform.parent.name == "paint11")
+            VideoToAnimate = this.transform.parent.transform.Find("VideoFirstSteps").gameObject;
+        else if (this.transform.parent.name == "paint10")
+            VideoToAnimate = this.transform.parent.transform.Find("VideoCafe").gameObject;
+        else if (this.transform.parent.name == "paint5")
+            VideoToAnimate = this.transform.parent.transform.Find("VideoPotato").gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (VideoToAnimate.activeSelf)
+        {
+            float dist = Vector3.Distance(VideoToAnimate.transform.position, gc.myLocalPlayer.transform.Find("Head").transform.position);
+            float vlm;
+            if (dist < 25)
+                vlm = 1f;
+            else if (dist < 50)
+                vlm = 0.7f;
+            else if (dist < 100)
+                vlm = 0.3f;
+            else if (dist < 150)
+                vlm = 0.05f;
+            else vlm = 0.0f;
+            vp = VideoToAnimate.GetComponent<VideoPlayer>();
+            vp.GetTargetAudioSource(0).volume = vlm;
+        }
     }
 
     IEnumerator videowait(GameObject go)
@@ -35,13 +61,6 @@ public class EnableAnimation : MonoBehaviour
             cntr++;
             if (cntr == 1)
             {
-                GameObject VideoToAnimate = null;
-                if (this.transform.parent.name == "paint11")
-                    VideoToAnimate = this.transform.parent.transform.Find("VideoFirstSteps").gameObject;
-                else if (this.transform.parent.name == "paint10")
-                    VideoToAnimate = this.transform.parent.transform.Find("VideoCafe").gameObject;
-                else if (this.transform.parent.name == "paint5")
-                    VideoToAnimate = this.transform.parent.transform.Find("VideoPotato").gameObject;
                 if (!VideoToAnimate.GetComponent<VideoPlayer>().isPlaying)
                 {
                     VideoToAnimate.SetActive(true);
@@ -61,13 +80,6 @@ public class EnableAnimation : MonoBehaviour
             cntr--;
             if (cntr == 0)
             {
-                GameObject VideoToAnimate = null;
-                if (this.transform.parent.name == "paint11")
-                    VideoToAnimate = this.transform.parent.transform.Find("VideoFirstSteps").gameObject;
-                else if (this.transform.parent.name == "paint10")
-                    VideoToAnimate = this.transform.parent.transform.Find("VideoCafe").gameObject;
-                else if (this.transform.parent.name == "paint5")
-                    VideoToAnimate = this.transform.parent.transform.Find("VideoPotato").gameObject;
                 VideoToAnimate.GetComponent<VideoPlayer>().Pause();
                 VideoToAnimate.GetComponent<MouseOver2>().outlineMaterial.SetColor("_SolidOutline", Color.green);
                 VideoToAnimate.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 0.0f);

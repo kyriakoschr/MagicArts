@@ -108,6 +108,8 @@ for the game:
 - [X] sync common videos
 - [ ] integrate game functionality ( is teleport to a "game room" or in the middle of the museum a good idea to explain the game, choose painting/answer and reveal result? )
 - [X] fix tags for teleport and point
+- [X] depending on version, change icon of sound and determine the volume
+- [ ] depending on version, enable disable hmd and headset
 
 ##23/6
 - [X] OK ON VIVE EDITION try to have the mic always on
@@ -120,11 +122,10 @@ for the game:
 
 ## bugs to fix on vive
 - [ ] enable collisions with wall (& other users)
-- [ ] bound camera
+- [ ] bound camera on y-axis
 - [ ] check why long teleporting is not available and check height
 - [ ] CHECK ON VIVE! vive takes me away (think i fixed that  with InitUXR) 
-
-- [ ] LIKEIT!!! Another idea is a "magnifier" to zoom in the painting itself instead of usin UI (bad idea in VR).
+- [ ] CHECK ON VIVE! I like it!! Another idea is a "magnifier" to zoom in the painting itself instead of usin UI (bad idea in VR).
 
 ## TRANSFORM TO HTC VIVE
 - First 2 versions

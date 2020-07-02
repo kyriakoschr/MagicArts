@@ -7,17 +7,19 @@ using UnityEngine.Video;
 public class Audio : MonoBehaviour
 {
 	MMManger mmm;
-
+	AudioSource vp ;
 	public AudioManager audioManager;
+	public GameController gc;
+	GameObject descr;
     // Start is called before the first frame update
     void Start()
     {
 		mmm = GameObject.Find("MultiMediaManager").GetComponent<MMManger>();
+		descr = transform.parent.transform.Find("Descr0").gameObject;
 	}
 
 	public void PlayPause(int painting)
 	{
-		AudioSource vp = this.GetComponent<AudioSource>();
 		if (vp.isPlaying)
 		{
 			vp.Pause();
@@ -60,9 +62,35 @@ public class Audio : MonoBehaviour
 		audioManager.GetComponent<AudioManager>().ReqAndPlay(false, painting);
 	}
 
+    private void Awake()
+    {
+		if (vp == null)
+			vp = GetComponent<AudioSource>();
+	}
+	
+	private void OnBecameVisible()
+    {
+		if (vp == null)
+			vp = GetComponent<AudioSource>();
+	}
+
 	// Update is called once per frame
 	void Update()
     {
-        
-    }
+		if (vp.isPlaying&&mmm.Version.Equals(2))
+		{
+			float dist = Vector3.Distance(descr.transform.position, gc.myLocalPlayer.transform.Find("Head").transform.position);
+			float vlm;
+			if (dist < 25)
+				vlm = 1f;
+			else if (dist < 50)
+				vlm = 0.7f;
+			else if (dist < 100)
+				vlm = 0.3f;
+			else if (dist < 150)
+				vlm = 0.05f;
+			else vlm = 0.0f;
+			vp.volume = vlm;
+		}
+	}
 }

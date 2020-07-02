@@ -9,6 +9,7 @@ public class VideoAwake : MonoBehaviour {
 	GameObject videoManager;
 	VideoPlayer vp;
 	MMManger mmm;
+	public GameController gc;
 
 	// Use this for initialization
 	void Start () {
@@ -25,6 +26,21 @@ public class VideoAwake : MonoBehaviour {
 			vp.Pause();
 			vp.frame = 2;
 		}
+		if (vp.isPlaying&&mmm.Version.Equals(2))
+		{
+			float dist = Vector3.Distance(gameObject.transform.position, gc.myLocalPlayer.transform.Find("Head").transform.position);
+			float vlm;
+			if (dist < 25)
+				vlm = 1f;
+			else if (dist < 50)
+				vlm = 0.7f;
+			else if (dist < 100)
+				vlm = 0.3f;
+			else if (dist < 150)
+				vlm = 0.05f;
+			else vlm = 0.0f;
+			vp.GetTargetAudioSource(0).volume = vlm;
+		}
 	}
 
 	private void OnBecameVisible()
@@ -33,6 +49,7 @@ public class VideoAwake : MonoBehaviour {
 		/*vp.Play();*/
 		//vp.Pause ();
 	}
+	
 	void Awake()
 	{
 		Debug.Log("awaken");
@@ -43,8 +60,6 @@ public class VideoAwake : MonoBehaviour {
 
 	public void PlayPause(int painting)
     {
-		if (vp == null)
-			vp = GetComponent<VideoPlayer>();
 		Debug.Log(vp.clip);
 		if (vp.isPlaying)
 		{
@@ -73,6 +88,7 @@ public class VideoAwake : MonoBehaviour {
 				}
 			}
 			vp.Play();
+			
 			/*GetComponent<MouseOver2>().outlineMaterial.SetColor("_SolidOutline", Color.green);
 			GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 1.0f);
 			videoManager.GetComponent<VideoManager>().isPlaying[painting]++;*/

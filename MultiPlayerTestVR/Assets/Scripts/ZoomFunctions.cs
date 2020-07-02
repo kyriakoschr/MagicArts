@@ -10,7 +10,8 @@ public class ZoomFunctions : MonoBehaviour
     public GameObject uxr;
     public GameObject sim;
 
-    public bool rightOn = true;
+    [Tooltip("Default magnifier on right hand")]
+    public bool rightOn = true; 
     // Start is called before the first frame update
     void Start()
     {
