@@ -14,6 +14,7 @@ namespace cakeslice
         public Material outlineMaterial;
         private bool over = false;
         public int b;
+        public ZoomFunctions zf;
 
         public void greenOutline(int nval)
         {
@@ -23,6 +24,7 @@ namespace cakeslice
         void Start(){
             //go = GetComponentInParent<Outline>();
             //go.enabled = false;
+            zf = GameObject.Find("ZoomFunctions").GetComponent<ZoomFunctions>();
             if (this.CompareTag("Video"))
             {
                 outlineMaterial = new Material(this.GetComponent<MeshRenderer>().material);
@@ -100,7 +102,7 @@ namespace cakeslice
         {
             Debug.Log("Open");
             if (Menu.activeInHierarchy)
-                Canvas.SetActive(true);
+                zf.EnableDisable();
             else
                 Menu.SetActive(true);
         }

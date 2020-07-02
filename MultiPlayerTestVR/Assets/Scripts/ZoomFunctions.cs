@@ -6,11 +6,23 @@ public class ZoomFunctions : MonoBehaviour
 {
     public GameObject LZoom;
     public GameObject RZoom;
-    
+
+    public GameObject uxr;
+    public GameObject sim;
+
+    public bool rightOn = true;
     // Start is called before the first frame update
     void Start()
     {
         
+    }
+
+    public void EnableDisable()
+    {
+        if (rightOn)
+            EnableDisableR();
+        else
+            EnableDisableL();
     }
 
     public void EnableDisableL()
