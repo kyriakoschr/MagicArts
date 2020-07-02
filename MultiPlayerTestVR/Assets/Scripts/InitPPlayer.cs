@@ -18,6 +18,10 @@ public class InitPPlayer : MonoBehaviourPun
     public GameObject left;
     public GameObject right;
     public GameObject head;
+    public GameObject lzoom;
+    public GameObject rzoom;
+    public GameObject flz;
+    public GameObject frz;
 
 /*    public BooleanAction button1;
     public BooleanAction button2;
@@ -56,6 +60,10 @@ public class InitPPlayer : MonoBehaviourPun
         this.transform.Find("FollowRightHand").GetComponent<ObjectFollower>().Sources.InsertAt(right,0);
         this.transform.Find("FollowHMD").GetComponent<ObjectFollower>().Sources.InsertAt(head, 0);
 
+        ZoomFunctions zm = GameObject.Find("ZoomFunctions").GetComponent<ZoomFunctions>();
+        zm.LZoom = lzoom;
+        zm.RZoom = rzoom;
+        
         /*GameObject temp = this.transform.Find("Indicators.ObjectPointers.Curved").gameObject;
         temp.GetComponent<PointerFacade>().FollowSource = left;
         temp.GetComponent<PointerFacade>().ActivationAction = button2;

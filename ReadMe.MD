@@ -103,10 +103,10 @@ for the game:
 - [X] first frame on all videos
 - [X] sync outlines
 - [X] sync emotions
-- [ ] interact with ui canvas of paintings
+- [ ] teleport to and from night room and fix rotation
 - [X] deal with paint 8 1
 - [X] sync common videos
-- [ ] integrate game functionality
+- [ ] integrate game functionality ( is teleport to a "game room" or in the middle of the museum a good idea to explain the game, choose painting/answer and reveal result? )
 - [X] fix tags for teleport and point
 
 ##23/6
@@ -121,7 +121,10 @@ for the game:
 ## bugs to fix on vive
 - [ ] enable collisions with wall (& other users)
 - [ ] bound camera
+- [ ] check why long teleporting is not available and check height
 - [ ] CHECK ON VIVE! vive takes me away (think i fixed that  with InitUXR) 
+
+- [ ] LIKEIT!!! Another idea is a "magnifier" to zoom in the painting itself instead of usin UI (bad idea in VR).
 
 ## TRANSFORM TO HTC VIVE
 - First 2 versions
