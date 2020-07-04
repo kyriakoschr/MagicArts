@@ -23,6 +23,9 @@ public class InitPPlayer : MonoBehaviourPun
     public GameObject flz;
     public GameObject frz;
 
+    public GameObject headphones;
+    public GameObject hmd;
+
 /*    public BooleanAction button1;
     public BooleanAction button2;
 
@@ -33,6 +36,15 @@ public class InitPPlayer : MonoBehaviourPun
 
     public GameObject spatialDispatcher;*/
 
+    public void EnableDisableHMD(bool input)
+    {
+        hmd.SetActive(input);
+    }
+    
+    public void EnableDisableHeadphones(bool input)
+    {
+        headphones.SetActive(input);
+    }
     
     // Start is called before the first frame update
     void Start()

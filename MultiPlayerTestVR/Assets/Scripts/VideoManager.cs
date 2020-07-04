@@ -14,6 +14,10 @@ public class VideoManager : MonoBehaviourPun, IPunObservable, IPunOwnershipCallb
     
     MMManger mmm;
 
+    public GameController gc;
+    public int hmd = 0;
+    public int hp = 0;
+
     List<GameObject> FindInActiveObjectsByTag(string tag)
     {
         List<GameObject> validTransforms = new List<GameObject>();
@@ -154,6 +158,16 @@ public class VideoManager : MonoBehaviourPun, IPunObservable, IPunOwnershipCallb
     // Update is called once per frame
     void Update()
     {
+        if (version.Equals(2))
+            return;
+        if (hmd > 0)
+            gc.GetComponent<EmotionManager>().addHMD();
+        else
+            gc.GetComponent<EmotionManager>().removeHMD();
+        if (hp > 0)
+            gc.GetComponent<EmotionManager>().addHP();
+        else
+            gc.GetComponent<EmotionManager>().removeHP();
         //Debug.LogError(isPlaying[2]);
     }
 

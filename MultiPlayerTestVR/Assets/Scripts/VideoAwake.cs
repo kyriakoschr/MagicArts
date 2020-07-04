@@ -10,6 +10,8 @@ public class VideoAwake : MonoBehaviour {
 	VideoPlayer vp;
 	MMManger mmm;
 	public GameController gc;
+	GameObject mplayer;
+	InitPPlayer initpp;
 
 	// Use this for initialization
 	void Start () {
@@ -19,6 +21,11 @@ public class VideoAwake : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (mplayer == null)
+		{
+			mplayer = gc.myLocalPlayer;
+			/*initpp = gc.myLocalPlayer.GetComponent<InitPPlayer>();*/
+		}
 		if (started && vp.isPlaying && vp.isPrepared)
 		{
 			started = false;
@@ -26,20 +33,22 @@ public class VideoAwake : MonoBehaviour {
 			vp.Pause();
 			vp.frame = 2;
 		}
-		if (vp.isPlaying&&mmm.Version.Equals(2))
+		if (vp.isPlaying)
 		{
-			float dist = Vector3.Distance(gameObject.transform.position, gc.myLocalPlayer.transform.Find("Head").transform.position);
-			float vlm;
-			if (dist < 25)
-				vlm = 1f;
-			else if (dist < 50)
-				vlm = 0.7f;
-			else if (dist < 100)
-				vlm = 0.3f;
-			else if (dist < 150)
-				vlm = 0.05f;
-			else vlm = 0.0f;
-			vp.GetTargetAudioSource(0).volume = vlm;
+			if (mmm.Version.Equals(2))
+			{
+				float dist = Vector3.Distance(gameObject.transform.position, mplayer.transform.Find("Head").transform.position);
+				float vlm;
+				if (dist < 25)
+					vlm = 1f;
+				else if (dist < 50)
+					vlm = 0.7f;
+				else if (dist < 100)
+					vlm = 0.3f;
+				else if (dist < 150)
+					vlm = 0.05f;
+				else vlm = 0.0f;
+			}
 		}
 	}
 
@@ -70,6 +79,8 @@ public class VideoAwake : MonoBehaviour {
 			GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 0.0f);
 			videoManager.GetComponent<VideoManager>().isPlaying[painting]--;*/
 			videoManager.GetComponent<VideoManager>().ReqAndPlay(false, painting);
+			videoManager.GetComponent<VideoManager>().hp--;
+			videoManager.GetComponent<VideoManager>().hmd--;
 		}
 		else
 		{ 
@@ -80,15 +91,19 @@ public class VideoAwake : MonoBehaviour {
 				{
 					rem.getGo().GetComponent<AudioSource>().Pause();
 					GameObject.Find("AudioManager").GetComponent<AudioManager>().ReqAndPlay(false, rem.getNo());
+					videoManager.GetComponent<VideoManager>().hp--;
 				}
 				else
 				{
 					rem.getGo().GetComponent<VideoPlayer>().Pause();
-					videoManager.GetComponent<VideoManager>().ReqAndPlay(false, rem.getNo());
+                    videoManager.GetComponent<VideoManager>().ReqAndPlay(false, rem.getNo());
+					videoManager.GetComponent<VideoManager>().hp--;
+					videoManager.GetComponent<VideoManager>().hmd--;
 				}
 			}
 			vp.Play();
-			
+			videoManager.GetComponent<VideoManager>().hp++;
+			videoManager.GetComponent<VideoManager>().hmd++;
 			/*GetComponent<MouseOver2>().outlineMaterial.SetColor("_SolidOutline", Color.green);
 			GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 1.0f);
 			videoManager.GetComponent<VideoManager>().isPlaying[painting]++;*/

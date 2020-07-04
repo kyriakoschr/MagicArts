@@ -25,12 +25,50 @@ public class EmotionManager : MonoBehaviourPun
 
     public GameController gc;
     public float secsForFeeling = 30;
-
+    
     public void addFeel(int feeling)
     {
         this.photonView.RPC("addFeeling", RpcTarget.All, gc.myLocalPlayer.GetComponent<PhotonView>().ViewID, feeling);
     }
 
+    public void addHMD()
+    {
+        this.photonView.RPC("addHMDMask", RpcTarget.All, gc.myLocalPlayer.GetComponent<PhotonView>().ViewID,true);
+    }
+    
+    public void removeHMD()
+    {
+        this.photonView.RPC("addHMDMask", RpcTarget.All, gc.myLocalPlayer.GetComponent<PhotonView>().ViewID,false);
+    }
+    
+    public void addHP()
+    {
+        Debug.Log("adding headphones");
+        this.photonView.RPC("addHP", RpcTarget.All, gc.myLocalPlayer.GetComponent<PhotonView>().ViewID,true);
+    }
+    
+    public void removeHP()
+    {
+        this.photonView.RPC("addHP", RpcTarget.All, gc.myLocalPlayer.GetComponent<PhotonView>().ViewID,false);
+    }
+
+    [PunRPC]
+    public void addHMDMask(int player,bool inputB)
+    {
+        GameObject play = PhotonView.Find(player).gameObject;
+        List<GameObject> headphones = FindInActiveObjectsByTag("HMD", play.transform);
+        headphones[0].SetActive(inputB);
+    }
+    
+    [PunRPC]
+    public void addHP(int player,bool inputB)
+    {
+        GameObject play = PhotonView.Find(player).gameObject;
+        List<GameObject> headphones = FindInActiveObjectsByTag("HeadPhones", play.transform);
+        Debug.Log("name of headphones " + headphones[0].name+ " "+inputB);
+        headphones[0].SetActive(inputB);
+    }
+    
     [PunRPC]
     public void addFeeling(int player, int feeling) 
     {

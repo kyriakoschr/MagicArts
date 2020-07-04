@@ -42,6 +42,8 @@ MonoBehaviour:
   - Add
   - Remove
   - addFeeling
+  - addHMDMask
+  - addHP
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

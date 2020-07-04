@@ -103,13 +103,14 @@ for the game:
 - [X] first frame on all videos
 - [X] sync outlines
 - [X] sync emotions
-- [ ] teleport to and from night room and fix rotation
 - [X] deal with paint 8 1
 - [X] sync common videos
-- [ ] integrate game functionality ( is teleport to a "game room" or in the middle of the museum a good idea to explain the game, choose painting/answer and reveal result? )
 - [X] fix tags for teleport and point
+- [X] depending on version, enable disable hmd and headset
 - [X] depending on version, change icon of sound and determine the volume
-- [ ] depending on version, enable disable hmd and headset
+- [ ] integrate game functionality ( is teleport to a "game room" or in the middle of the museum a good idea to explain the game, choose painting/answer and reveal result? )
+- [ ] enable sound effects
+- [ ] teleport to and from night room and fix rotation
 
 ##23/6
 - [X] OK ON VIVE EDITION try to have the mic always on
@@ -126,6 +127,7 @@ for the game:
 - [ ] check why long teleporting is not available and check height
 - [ ] CHECK ON VIVE! vive takes me away (think i fixed that  with InitUXR) 
 - [ ] CHECK ON VIVE! I like it!! Another idea is a "magnifier" to zoom in the painting itself instead of usin UI (bad idea in VR).
+- [ ] check hands movement
 
 ## TRANSFORM TO HTC VIVE
 - First 2 versions

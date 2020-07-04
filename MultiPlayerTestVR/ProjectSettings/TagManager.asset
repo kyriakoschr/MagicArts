@@ -30,6 +30,8 @@ TagManager:
   - Extra
   - Image
   - Bubble
+  - HMD
+  - HeadPhones
   layers:
   - Default
   - TransparentFX
