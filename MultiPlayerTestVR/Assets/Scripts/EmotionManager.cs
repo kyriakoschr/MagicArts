@@ -25,7 +25,8 @@ public class EmotionManager : MonoBehaviourPun
 
     public GameController gc;
     public float secsForFeeling = 30;
-    
+    public GameObject sound;
+
     public void addFeel(int feeling)
     {
         this.photonView.RPC("addFeeling", RpcTarget.All, gc.myLocalPlayer.GetComponent<PhotonView>().ViewID, feeling);
@@ -97,6 +98,7 @@ public class EmotionManager : MonoBehaviourPun
                 StartCoroutine(timer(bubbles.Find(x => x.name.Equals("angrycloud")).gameObject));
                 break;
         }
+        sound.GetComponent<AudioSource>().Play();
     }
 
     IEnumerator timer( GameObject go)

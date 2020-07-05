@@ -9,6 +9,7 @@ public class OpenPaintings : MonoBehaviourPun,IPunObservable,IPunOwnershipCallba
     public bool[] isOpen = new bool[19];
     public int[] isPlaying = new int[19];
     List<GameObject> extras;
+    public GameObject sound;
 
     List<GameObject> FindInActiveObjectsByTag(string tag)
     {
@@ -46,7 +47,17 @@ public class OpenPaintings : MonoBehaviourPun,IPunObservable,IPunOwnershipCallba
         base.photonView.RequestOwnership();
         Debug.LogError("req "+photonView.IsMine);
         isOpen[i] = true;
+        this.photonView.RPC("soundON", RpcTarget.All);
     }
+
+
+    [PunRPC]
+    public void soundON()
+    {
+        sound.GetComponent<AudioSource>().Play();
+    }
+
+
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
