@@ -49,6 +49,7 @@ public class InitPPlayer : MonoBehaviourPun
     // Start is called before the first frame update
     void Start()
     {
+        GameObject.Find("SpawnSound").GetComponent<AudioSource>().Play();
         if (!photonView.IsMine)
             return;
         Debug.LogError("photon view is mine");

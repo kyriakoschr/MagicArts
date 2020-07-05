@@ -15,6 +15,7 @@ public class Teleport : MonoBehaviour {
 	public Transform roomDay;
 	public Transform museum;
 	public int inMuseum = 0;
+	public GameObject sound;
 
     void OnTriggerEnter(Collider other) 
 	{
@@ -28,6 +29,7 @@ public class Teleport : MonoBehaviour {
 				teleporter.Teleport(roomDay);
 			else
 				teleporter.Teleport(museum);
+			sound.GetComponent<AudioSource>().Play();
 		}
 	}
 		

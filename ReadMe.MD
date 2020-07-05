@@ -110,7 +110,7 @@ for the game:
 - [X] depending on version, change icon of sound and determine the volume
 - [ ] integrate game functionality ( is teleport to a "game room" or in the middle of the museum a good idea to explain the game, choose painting/answer and reveal result? )
 - [X] enable sound effects
-- [ ] teleport to and from night room with a physical trigger and fix rotation
+- [ ] teleport to and from night room with a physical trigger
 
 ##23/6
 - [X] OK ON VIVE EDITION try to have the mic always on
