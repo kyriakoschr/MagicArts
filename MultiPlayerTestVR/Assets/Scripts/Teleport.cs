@@ -17,7 +17,13 @@ public class Teleport : MonoBehaviour {
 	public int inMuseum = 0;
 	public GameObject sound;
 
-    void OnTriggerEnter(Collider other) 
+	public void teleTo(Transform to)
+	{
+		teleporter.Teleport(to);
+		sound.GetComponent<AudioSource>().Play();
+	}
+
+	void OnTriggerEnter(Collider other) 
 	{
 		if (simulator.activeInHierarchy)
 			teleporter = teleporterSim;
