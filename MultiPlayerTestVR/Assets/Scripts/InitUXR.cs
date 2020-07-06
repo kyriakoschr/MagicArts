@@ -11,10 +11,6 @@ public class InitUXR : MonoBehaviour
         
     }
 
-    void OnEnable()
-    {
-        this.transform.position = trackedAllias.position;
-    }
     // Update is called once per frame
     void Update()
     {
