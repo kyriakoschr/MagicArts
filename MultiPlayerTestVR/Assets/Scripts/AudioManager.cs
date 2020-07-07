@@ -40,6 +40,7 @@ public class AudioManager : MonoBehaviourPun, IPunObservable
         version = mmm.Version;
         Debug.Log(string.Format("Audios are {0} and paintigs are {1} ", audios.Count, paintings.Count));
     }
+    
     public void ReqAndPlay(bool PlayPause, int i)
     {
         if (PlayPause)

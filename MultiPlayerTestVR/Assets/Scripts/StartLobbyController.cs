@@ -26,7 +26,7 @@ public class StartLobbyController : MonoBehaviourPunCallbacks
 
     void CreateRoom()
     {
-        int randomNumber = Random.Range(0, 10000);
+        int randomNumber = 654;
         RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte)RoomSize };
         PhotonNetwork.CreateRoom("Room" + randomNumber, roomOps);
         Debug.Log(randomNumber);

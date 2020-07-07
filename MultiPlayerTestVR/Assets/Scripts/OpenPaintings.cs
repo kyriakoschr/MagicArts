@@ -57,8 +57,6 @@ public class OpenPaintings : MonoBehaviourPun,IPunObservable,IPunOwnershipCallba
         sound.GetComponent<AudioSource>().Play();
     }
 
-
-
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsReading)//receiver

@@ -123,9 +123,9 @@ for the game:
 ## bugs to fix on VIVE
 
 ## bugs to fix
-- [ ] bound camera on y-axis
-- [ ] enable collisions with wall, other users and painting 5 10 11
-- [ ] not connecting in the same room from diff pc
+- [ ] bound camera on y-axis for the sim
+- [ ] enable collisions with wall, other users and painting 5 10 11 areas
+- [ ] connection issues from diff sometimes
 - [ ] fix appearance of physical button and its movement in both rooms
 
 ## TRANSFORM TO HTC VIVE
