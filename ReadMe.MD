@@ -121,14 +121,12 @@ for the game:
 - [ ] instructions of how to play the game
 
 ## bugs to fix on VIVE
-- [ ] enable collisions with wall, other users, room painting, light switch and painting 5 10 11
 
 ## bugs to fix
 - [ ] bound camera on y-axis
+- [ ] enable collisions with wall, other users and painting 5 10 11
 - [ ] not connecting in the same room from diff pc
 - [ ] fix appearance of physical button and its movement in both rooms
-- [X] CHECK ON VIVE! vive takes me away (think i fixed that  with InitUXR) 
-- [X] CHECK ON VIVE! I like it!! Another idea is a "magnifier" to zoom in the painting itself instead of using UI (bad idea in VR).
 
 ## TRANSFORM TO HTC VIVE
 - First 2 versions

@@ -10,8 +10,6 @@ public class Teleport : MonoBehaviour {
 
 	public GameObject simulator;
 	public TeleporterFacade teleporter;
-	public TeleporterFacade teleporterSim;
-	public TeleporterFacade teleporterUXR;
 	public Transform roomDay;
 	public Transform museum;
 	public int inMuseum = 0;
@@ -25,10 +23,7 @@ public class Teleport : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) 
 	{
-		if (simulator.activeInHierarchy)
-			teleporter = teleporterSim;
-		else
-			teleporter = teleporterUXR; 
+		Debug.Log(other.tag+" is tag");
 		if (other.name.Equals("ExampleAvatar") && other.CompareTag ("NonTeleportable")) {
 			Debug.Log(inMuseum + " in museuem");
 			if (inMuseum.Equals(0))
