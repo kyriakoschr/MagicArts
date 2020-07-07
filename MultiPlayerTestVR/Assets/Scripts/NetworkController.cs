@@ -7,7 +7,8 @@ using Photon.Realtime;
 public class NetworkController : MonoBehaviourPunCallbacks
 {
 
-    
+    public GameObject btn;
+    public GameObject loading;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +18,8 @@ public class NetworkController : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         Debug.Log("Connected to "+PhotonNetwork.CloudRegion+" server!");
+        loading.SetActive(false);
+        btn.SetActive(true);
         //base.OnConnectedToMaster();
     }
 
