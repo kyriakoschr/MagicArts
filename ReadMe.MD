@@ -110,6 +110,7 @@ for the game:
 - [X] depending on version, change icon of sound and determine the volume
 - [X] enable sound effects
 - [ ] integrate game functionality ( is teleport to a "game room" or in the middle of the museum a good idea to explain the game, choose painting/answer and reveal result? )
+- [ ] name above avatars and enhance them
 
 ##23/6
 - [X] OK ON VIVE EDITION try to have the mic always on
@@ -121,10 +122,19 @@ for the game:
 - [ ] instructions of how to play the game
 
 ## bugs to fix on VIVE
+- [ ] teleport a little bit away from the walls
+- [ ] zoom and make a little bit bigger the zoomer
+- [ ] enlarge the teleporter
+- [ ] adjust the card holder
 
 ## bugs to fix
+- [ ] outline the feelings emoji instead of the painting
+- [ ] adjust voice and audio to give priotiy to chat
+- [ ] on version 1 adjsut volume too
 - [ ] bound camera on y-axis for the sim
 - [ ] enable collisions with wall, other users and painting 5 10 11 areas
+- [ ] check the wrong teleport from the room
+- [ ] move videos a little bit above
 - [ ] connection issues from diff pcs sometimes
 - [ ] fix appearance of physical button and its movement in both rooms
 
