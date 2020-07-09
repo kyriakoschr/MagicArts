@@ -1168,8 +1168,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2216013120874972901}
   m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
-  m_LocalPosition: {x: -0.000000017386, y: -0.0000000030788, z: 0.000000040863}
-  m_LocalScale: {x: -0.3721561, y: 0.000053218322, z: -0.3721561}
+  m_LocalPosition: {x: 0.04984, y: -0.02386, z: 0.000000054159}
+  m_LocalScale: {x: -0.5041957, y: 0.00007209998, z: -0.5041957}
   m_Children:
   - {fileID: 2052810701471921251}
   - {fileID: 7205643432007855143}
@@ -1800,8 +1800,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4312755450068081771}
   m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
-  m_LocalPosition: {x: -0.000000017386, y: -0.0000000030788, z: 0.000000040863}
-  m_LocalScale: {x: -0.3721561, y: 0.000053218322, z: -0.3721561}
+  m_LocalPosition: {x: -2.5418, y: 1.2169, z: 9.5367e-10}
+  m_LocalScale: {x: -0.5041957, y: 0.00007209998, z: -0.5041957}
   m_Children:
   - {fileID: 8942213571454123526}
   - {fileID: 5838269020540808533}
@@ -2150,7 +2150,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4815139624481844957}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.94}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7848907614120275000}
@@ -2612,13 +2612,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6069412134879311603}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: -0.62306076, y: 0, z: 0, w: 0.7821734}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7848907614120275000}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -77.08, y: 0, z: 0}
 --- !u!20 &8066519021999616492
 Camera:
   m_ObjectHideFlags: 0
@@ -2635,7 +2635,7 @@ Camera:
   m_FOVAxisMode: 0
   m_SensorSize: {x: 70.41, y: 52.63}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 166.14638
+  m_FocalLength: 273.29175
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -2644,7 +2644,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 18
+  field of view: 10.999999
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -3573,13 +3573,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7921525065149790682}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: -0.62306076, y: 0, z: 0, w: 0.7821734}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1327739653737017299}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -77.08, y: 0, z: 0}
 --- !u!20 &1337560718045632000
 Camera:
   m_ObjectHideFlags: 0
@@ -3596,7 +3596,7 @@ Camera:
   m_FOVAxisMode: 0
   m_SensorSize: {x: 70.41, y: 52.63}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 166.14638
+  m_FocalLength: 273.29175
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -3605,7 +3605,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 18
+  field of view: 10.999999
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -4200,7 +4200,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8726574228299388377}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.94}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1327739653737017299}
@@ -4955,7 +4955,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 3934b250f4d8ba4479ac60f4724da4f9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.437
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3934b250f4d8ba4479ac60f4724da4f9,
         type: 3}
