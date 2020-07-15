@@ -110,7 +110,7 @@ for the game:
 - [X] depending on version, change icon of sound and determine the volume
 - [X] enable sound effects
 - [ ] integrate game functionality ( is teleport to a "game room" or in the middle of the museum a good idea to explain the game, choose painting/answer and reveal result? )
-- [ ] name above avatars and enhance the avatars
+- [ ] name above avatars and enhance the avatars (LOW PR)
 
 ##23/6
 - [X] OK ON VIVE EDITION try to have the mic always on
@@ -129,14 +129,14 @@ for the game:
 
 ## bugs to fix
 - [ ] outline the feelings emoji instead of the painting (LOW PR)
-- [ ] adjust voice and audio to give priotiy to chat
-- [ ] on version 1 adjsut volume too
-- [ ] bound camera on y-axis for the sim
-- [ ] enable collisions with wall, other users and painting 5 10 11 areas
+- [Χ] adjust voice and audio to give priotiy to chat
+- [X] on version 1 adjsut volume too
+- [X] bound camera on y-axis for the sim (HIGH PR)
+- [ ] enable collisions with wall, other users and painting 5 10 11 areas (HIGH PR)
 - [X] check the wrong teleport from the room
 - [x] move videos a little bit above
-- [ ] connection issues from diff pcs sometimes
-- [ ] fix appearance of physical button and its movement in both rooms
+- [ ] connection issues from diff pcs sometimes (HIGH PR)
+- [ ] fix appearance of physical button and its movement in both rooms (HIGH PR)
 
 ## TRANSFORM TO HTC VIVE
 - First 2 versions

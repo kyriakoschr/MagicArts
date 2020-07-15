@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Analytics;
@@ -13,6 +14,7 @@ public class Audio : MonoBehaviour
 	GameObject descr;
 	GameObject mplayer;
     InitPPlayer initpp;
+    AudioSource voiceSpeaker;
 
 	// Start is called before the first frame update
 	void Start()
@@ -89,23 +91,24 @@ public class Audio : MonoBehaviour
 			mplayer = gc.myLocalPlayer;
 /*			initpp = gc.myLocalPlayer.GetComponent<InitPPlayer>(); 
 */		}
+		if (voiceSpeaker == null)
+			voiceSpeaker = mplayer.transform.Find("Speaker").GetComponent<AudioSource>();
 		if (vp.isPlaying)
 		{
-			if (mmm.Version.Equals(2))
-			{
-				float dist = Vector3.Distance(descr.transform.position, mplayer.transform.Find("Head").transform.position);
-				float vlm;
-				if (dist < 25)
-					vlm = 1f;
-				else if (dist < 50)
-					vlm = 0.7f;
-				else if (dist < 100)
-					vlm = 0.3f;
-				else if (dist < 150)
-					vlm = 0.05f;
-				else vlm = 0.0f;
-				vp.volume = vlm;
-			}
+			float dist = Vector3.Distance(descr.transform.position, mplayer.transform.Find("Head").transform.position);
+			float vlm;
+			if (dist < 25)
+				vlm = 1f;
+			else if (dist < 50)
+				vlm = 0.7f;
+			else if (dist < 100)
+				vlm = 0.3f;
+			else if (dist < 150)
+				vlm = 0.05f;
+			else vlm = 0.0f;
+			if (voiceSpeaker.isPlaying)
+				vlm *= 0.5f;
+			vp.volume = vlm;
 		}
 	}
 }

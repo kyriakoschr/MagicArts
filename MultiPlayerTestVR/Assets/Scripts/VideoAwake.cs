@@ -12,6 +12,7 @@ public class VideoAwake : MonoBehaviour {
 	public GameController gc;
 	GameObject mplayer;
 	InitPPlayer initpp;
+	AudioSource voiceSpeaker;
 
 	// Use this for initialization
 	void Start () {
@@ -26,6 +27,8 @@ public class VideoAwake : MonoBehaviour {
 			mplayer = gc.myLocalPlayer;
 			/*initpp = gc.myLocalPlayer.GetComponent<InitPPlayer>();*/
 		}
+		if (voiceSpeaker == null)
+			voiceSpeaker = mplayer.transform.Find("Speaker").GetComponent<AudioSource>();
 		if (started && vp.isPlaying && vp.isPrepared)
 		{
 			started = false;
@@ -35,20 +38,20 @@ public class VideoAwake : MonoBehaviour {
 		}
 		if (vp.isPlaying)
 		{
-			if (mmm.Version.Equals(2))
-			{
-				float dist = Vector3.Distance(gameObject.transform.position, mplayer.transform.Find("Head").transform.position);
-				float vlm;
-				if (dist < 25)
-					vlm = 1f;
-				else if (dist < 50)
-					vlm = 0.7f;
-				else if (dist < 100)
-					vlm = 0.3f;
-				else if (dist < 150)
-					vlm = 0.05f;
-				else vlm = 0.0f;
-			}
+			float dist = Vector3.Distance(gameObject.transform.position, mplayer.transform.Find("Head").transform.position);
+			float vlm;
+			if (dist < 25)
+				vlm = 1f;
+			else if (dist < 50)
+				vlm = 0.7f;
+			else if (dist < 100)
+				vlm = 0.3f;
+			else if (dist < 150)
+				vlm = 0.05f;
+			else vlm = 0.0f;
+			if (voiceSpeaker.isPlaying)
+				vlm *= 0.5f;
+			vp.SetDirectAudioVolume(0, vlm);
 		}
 	}
 
