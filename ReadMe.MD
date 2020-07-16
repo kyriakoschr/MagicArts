@@ -132,7 +132,7 @@ for the game:
 - [Χ] adjust voice and audio to give priotiy to chat
 - [X] on version 1 adjsut volume too
 - [X] bound camera on y-axis for the sim (HIGH PR)
-- [ ] enable collisions with wall, other users and painting 5 10 11 areas (HIGH PR)
+- [ ] enable collisions with wall, other users (HIGH PR)
 - [X] check the wrong teleport from the room
 - [x] move videos a little bit above
 - [ ] connection issues from diff pcs sometimes (HIGH PR)
