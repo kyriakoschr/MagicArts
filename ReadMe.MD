@@ -123,17 +123,18 @@ for the game:
 
 ## TEST on VIVE
 - [ ] check if body coll script is component (UnityXR->HeadAnchor) of the right object and how it feels
+- [ ] fix physical movement of button in both rooms
 
 ## bugs to fix
 - [ ] outline the feelings emoji instead of the painting (LOW PR)
 - [Χ] adjust voice and audio to give priotiy to chat
 - [X] on version 1 adjsut volume too
 - [X] bound camera on y-axis for the sim (HIGH PR)
-- [ ] enable collisions with table and things in rooms (HIGH PR)
+- [X] enable collisions with table and things in rooms (HIGH PR)
 - [X] check the wrong teleport from the room
 - [x] move videos a little bit above
 - [ ] connection issues from diff pcs sometimes (HIGH PR)
-- [ ] fix appearance of physical button and its movement in both rooms (HIGH PR)
+- [ ] enable ui buttons for lights on simulator
 
 ## TRANSFORM TO HTC VIVE
 - First 2 versions
