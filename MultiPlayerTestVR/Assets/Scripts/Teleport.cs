@@ -14,10 +14,16 @@ public class Teleport : MonoBehaviour {
 	public Transform museum;
 	public int inMuseum = 0;
 	public GameObject sound;
+	public GameObject canvasD;
+	public GameObject canvasN;
 
 	public void teleTo(Transform to)
 	{
 		teleporter.Teleport(to);
+		/*if (simulator.activeInHierarchy) {
+			canvasD.SetActive(!canvasD.activeInHierarchy);
+			canvasN.SetActive(!canvasN.activeInHierarchy);
+		}*/
 		sound.GetComponent<AudioSource>().Play();
 	}
 
@@ -27,9 +33,19 @@ public class Teleport : MonoBehaviour {
 		if (other.name.Equals("ExampleAvatar") && other.CompareTag ("NonTeleportable")) {
 			Debug.Log(inMuseum + " in museuem");
 			if (inMuseum.Equals(0))
+			{
 				teleporter.Teleport(roomDay);
-			else
+				if (simulator.activeInHierarchy)
+					canvasN.SetActive(true);
+			}
+			else {
 				teleporter.Teleport(museum);
+				if (simulator.activeInHierarchy)
+                {
+					canvasD.SetActive(false);
+					canvasN.SetActive(false);
+                }
+			}
 			sound.GetComponent<AudioSource>().Play();
 		}
 	}

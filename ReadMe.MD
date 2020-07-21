@@ -134,7 +134,7 @@ for the game:
 - [X] check the wrong teleport from the room
 - [x] move videos a little bit above
 - [ ] connection issues from diff pcs sometimes (HIGH PR)
-- [ ] enable ui buttons for lights on simulator
+- [ ] dual collider on paint 9?
 
 ## TRANSFORM TO HTC VIVE
 - First 2 versions
