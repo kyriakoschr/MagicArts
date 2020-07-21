@@ -121,18 +121,15 @@ for the game:
 - [ ] invite users to play
 - [ ] instructions of how to play the game
 
-## bugs to fix on VIVE
-- [X] teleport a little bit away from the walls
-- [X] zoom and make a little bit bigger the zoomer
-- [X] enlarge the teleporter
-- [X] adjust the card holder
+## TEST on VIVE
+- [ ] check if body coll script is component (UnityXR->HeadAnchor) of the right object and how it feels
 
 ## bugs to fix
 - [ ] outline the feelings emoji instead of the painting (LOW PR)
 - [Χ] adjust voice and audio to give priotiy to chat
 - [X] on version 1 adjsut volume too
 - [X] bound camera on y-axis for the sim (HIGH PR)
-- [ ] enable collisions with wall, other users (HIGH PR)
+- [ ] enable collisions with table and things in rooms (HIGH PR)
 - [X] check the wrong teleport from the room
 - [x] move videos a little bit above
 - [ ] connection issues from diff pcs sometimes (HIGH PR)
