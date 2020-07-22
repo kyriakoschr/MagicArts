@@ -126,6 +126,7 @@ for the game:
 - [ ] fix physical movement of button in both rooms
 
 ## bugs to fix
+- [ ] double click
 - [ ] outline the feelings emoji instead of the painting (LOW PR)
 - [Χ] adjust voice and audio to give priotiy to chat
 - [X] on version 1 adjsut volume too
@@ -134,7 +135,7 @@ for the game:
 - [X] check the wrong teleport from the room
 - [x] move videos a little bit above
 - [ ] connection issues from diff pcs sometimes (HIGH PR)
-- [ ] dual collider on paint 9?
+- [X] dual collider on paint 9?
 
 ## TRANSFORM TO HTC VIVE
 - First 2 versions
