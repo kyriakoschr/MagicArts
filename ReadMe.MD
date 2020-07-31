@@ -127,6 +127,7 @@ for the game:
 
 ## bugs to fix
 - [ ] double click
+- [ ] connection issues from diff pcs sometimes (HIGH PR)
 - [ ] outline the feelings emoji instead of the painting (LOW PR)
 - [Χ] adjust voice and audio to give priotiy to chat
 - [X] on version 1 adjsut volume too
@@ -134,7 +135,6 @@ for the game:
 - [X] enable collisions with table and things in rooms (HIGH PR)
 - [X] check the wrong teleport from the room
 - [x] move videos a little bit above
-- [ ] connection issues from diff pcs sometimes (HIGH PR)
 - [X] dual collider on paint 9?
 
 ## TRANSFORM TO HTC VIVE
