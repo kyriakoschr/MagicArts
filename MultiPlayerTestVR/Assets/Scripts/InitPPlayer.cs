@@ -26,6 +26,8 @@ public class InitPPlayer : MonoBehaviourPun
     public GameObject headphones;
     public GameObject hmd;
 
+    public GameObject AcceptDecline;
+
 /*    public BooleanAction button1;
     public BooleanAction button2;
 
@@ -44,6 +46,11 @@ public class InitPPlayer : MonoBehaviourPun
     public void EnableDisableHeadphones(bool input)
     {
         headphones.SetActive(input);
+    }
+
+    public void AcceptInvitation()
+    {
+        GameObject.Find("GameManager").GetComponent<GameManager>().addPlayer();
     }
     
     // Start is called before the first frame update
