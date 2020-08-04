@@ -127,7 +127,7 @@ for the game:
 
 ## bugs to fix
 - [ ] double click
-- [ ] connection issues from diff pcs sometimes (HIGH PR)
+- [ ] connection issues (HIGH PR)
 - [ ] outline the feelings emoji instead of the painting (LOW PR)
 - [Χ] adjust voice and audio to give priotiy to chat
 - [X] on version 1 adjsut volume too

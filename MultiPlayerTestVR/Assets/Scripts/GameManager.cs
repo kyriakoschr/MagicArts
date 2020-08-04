@@ -1,12 +1,14 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Tilia.Indicators.SpatialTargets;
 using UnityEngine;
-using UnityEngine.Networking;
-using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
+using UnityEngine.XR.WSA;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourPun
 {
     // Start is called before the first frame update
     public GameObject dText;
@@ -28,6 +30,7 @@ public class GameManager : MonoBehaviour
     public GameObject sGroup;
     public GameObject btn;
     public AudioSource Sound;
+    public GameController gameController;
 
     public void generateRows()
     {
@@ -86,6 +89,36 @@ public class GameManager : MonoBehaviour
     {
         //hide.onClick.AddListener(onHide);
 
+    }
+
+    public void addPlayer()
+    {
+        this.photonView.RPC("Accept", RpcTarget.All, gameController.myLocalPlayer.GetComponent<PhotonView>().ViewID.ToString()); //set avatar instead of viewid
+    }
+
+    [PunRPC]
+    public void Accept(string username)
+    {
+        if (!gameController.myLocalPlayer.GetComponent<PhotonView>().ViewID.ToString().Equals(username))
+        {
+            answers.Add("username", "");
+        }
+    }
+
+    public void InviteUsers()
+    {   
+        this.photonView.RPC("AcceptDecline", RpcTarget.All, gameController.myLocalPlayer.GetComponent<PhotonView>().ViewID.ToString()); //set avatar instead of viewid
+    }
+
+    [PunRPC]
+    public void AcceptDecline(string initiator)
+    {
+        if (!gameController.myLocalPlayer.GetComponent<PhotonView>().ViewID.ToString().Equals(initiator))
+        {
+            GameObject AcceptDecline = gameController.myLocalPlayer.GetComponent<InitPPlayer>().AcceptDecline.gameObject;
+            AcceptDecline.SetActive(true);
+            AcceptDecline.transform.Find("Canvas/Text/Storyteller").GetComponent<Text>().text = initiator;
+        }
     }
 
     // Update is called once per frame
