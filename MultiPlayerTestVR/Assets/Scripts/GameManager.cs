@@ -7,6 +7,7 @@ using Tilia.Indicators.SpatialTargets;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.WSA;
+using Zinnia.Data.Collection.List;
 
 public class GameManager : MonoBehaviourPun
 {
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviourPun
     public GameObject btn;
     public AudioSource Sound;
     public GameController gameController;
+    public GameObjectObservableList placeholder;
 
     public void generateRows()
     {
@@ -93,13 +95,13 @@ public class GameManager : MonoBehaviourPun
 
     public void addPlayer()
     {
-        this.photonView.RPC("Accept", RpcTarget.All, gameController.myLocalPlayer.GetComponent<PhotonView>().ViewID.ToString()); //set avatar instead of viewid
+        this.photonView.RPC("Accept", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName); //set avatar instead of viewid
     }
 
     [PunRPC]
     public void Accept(string username)
     {
-        if (!gameController.myLocalPlayer.GetComponent<PhotonView>().ViewID.ToString().Equals(username))
+        if (!PhotonNetwork.LocalPlayer.NickName.Equals(username))
         {
             answers.Add("username", "");
         }
@@ -107,18 +109,29 @@ public class GameManager : MonoBehaviourPun
 
     public void InviteUsers()
     {   
-        this.photonView.RPC("AcceptDecline", RpcTarget.All, gameController.myLocalPlayer.GetComponent<PhotonView>().ViewID.ToString()); //set avatar instead of viewid
+        this.photonView.RPC("AcceptDecline", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName); //set avatar instead of viewid
     }
 
     [PunRPC]
     public void AcceptDecline(string initiator)
     {
-        if (!gameController.myLocalPlayer.GetComponent<PhotonView>().ViewID.ToString().Equals(initiator))
+        if (!PhotonNetwork.LocalPlayer.NickName.Equals(initiator))
         {
             GameObject AcceptDecline = gameController.myLocalPlayer.GetComponent<InitPPlayer>().AcceptDecline.gameObject;
             AcceptDecline.SetActive(true);
             AcceptDecline.transform.Find("Canvas/Text/Storyteller").GetComponent<Text>().text = initiator;
         }
+    }
+
+    public void CardPlaced(GameObject obj)
+    {
+        this.photonView.RPC("CardPlaced", RpcTarget.All,obj.name); //set avatar instead of viewid
+    }
+
+    [PunRPC]
+    public void CardPlaced(string answer)
+    {
+        correctAnswer = answer;
     }
 
     // Update is called once per frame
