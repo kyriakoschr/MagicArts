@@ -109,7 +109,11 @@ for the game:
 - [X] depending on version, enable disable hmd and headset
 - [X] depending on version, change icon of sound and determine the volume
 - [X] enable sound effects
-- [ ] integrate game functionality ( is teleport to a "game room" or in the middle of the museum a good idea to explain the game, choose painting/answer and reveal result? )
+- [ ] integrate game functionality
+	- [ ] become storyteller
+	- [ ] accept/decline invitation
+	- [ ] storyteller to choose card
+	- [ ] players to choose card
 - [ ] change avatars (LOW PR)
 - [X] name above avatars
 
@@ -124,7 +128,7 @@ for the game:
 
 ## TEST on VIVE
 - [ ] check if body coll script is component (UnityXR->HeadAnchor) of the right object and how it feels
-- [ ] fix physical movement of button in both rooms
+- [ ] fix physical movement of button in both rooms and table
 
 ## bugs to fix
 - [ ] double click

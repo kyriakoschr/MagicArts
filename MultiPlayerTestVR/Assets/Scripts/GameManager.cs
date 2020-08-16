@@ -162,17 +162,17 @@ public class GameManager : MonoBehaviourPun
         Sound.Play();
     }
 
-    // public void onHide()
-    // {
-    //     Debug.LogError("narrator is " + narrator);
-    //     if (narrator.Equals("") )
-    //         startGame.gameObject.SetActive(true);
-    //     else
-    //     {
-    //         sGroup.SetActive(false);
-    //         choose.gameObject.SetActive(true);
-    //     }
-    // }
+    public void onHide()
+    {
+        Debug.LogError("narrator is " + narrator);
+        if (narrator.Equals("") )
+            startGame.gameObject.SetActive(true);
+        else
+        {
+            sGroup.SetActive(false);
+            choose.gameObject.SetActive(true);
+        }
+    }
 
     void Start()
     {
