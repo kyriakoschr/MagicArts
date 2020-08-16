@@ -31,8 +31,95 @@ public class GameManager : MonoBehaviourPun
     public GameObject sGroup;
     public GameObject btn;
     public AudioSource Sound;
+    public int answered = 0;
     public GameController gameController;
     public GameObjectObservableList placeholder;
+
+    public void calcScore()
+    {
+        int dvalues = answers.Values.Distinct().ToList().Count;
+        if (dvalues > 1 && answers.Values.Distinct().Contains(correctAnswer))
+        {
+            foreach (string s in answers.Keys)
+                if (answers[s].Equals(correctAnswer))
+                {
+                    if (!scores.ContainsKey(s))
+                    {
+                        Debug.Log("first score " + s);
+                        //scores = gManager.scores;
+                        //scores.Add(s, 3); 
+                        if (scores.ContainsKey(name))
+                            scores[name] += 3;
+                        else
+                            scores.Add(name, 3);
+                    }
+                    else
+                    {
+                        //scores = gManager.scores;
+                        //scores[s] += 3;
+                        scores[name] += 3;
+                    }
+                }
+                else
+                {
+                    if (!scores.ContainsKey(s))
+                    {
+                        //scores = gManager.scores;
+                        //scores.Add(s, 0);
+                        if (scores.ContainsKey(name))
+                            scores[name] += 0;
+                        else
+                            scores.Add(name, 0);
+                    }
+                }
+            if (!scores.ContainsKey(narrator))
+            {
+                //scores = gManager.scores;
+                //scores.Add(gManager.narrator, 3);
+                if (scores.ContainsKey(name))
+                    scores[name] += 3;
+                else
+                    scores.Add(name, 3);
+            }
+            else
+            {
+                //scores = gManager.scores;
+                //scores[gManager.narrator] += 3;
+                scores[name] += 3;
+            }
+        }
+        else
+        {
+            foreach (string s in answers.Keys)
+            {
+                Debug.Log(s + " " + answers[s]);
+                if (!scores.ContainsKey(s))
+                {
+                    //scores = gManager.scores;
+                    //scores.Add(s, 2);
+                    if (scores.ContainsKey(name))
+                        scores[name] += 2;
+                    else
+                        scores.Add(name, 2);
+                }
+                else
+                {
+                    //scores = gManager.scores;
+                    //scores[s] += 2;
+                    scores[name] += 2;
+                }
+            }
+            if (!scores.ContainsKey(narrator))
+            {
+                //scores = gManager.scores;
+                //scores.Add(gManager.narrator, 0);
+                if (scores.ContainsKey(name))
+                    scores[name] += 0;
+                else
+                    scores.Add(name, 0);
+            }
+        }
+    }
 
     public void generateRows()
     {
@@ -103,7 +190,7 @@ public class GameManager : MonoBehaviourPun
     {
         if (!PhotonNetwork.LocalPlayer.NickName.Equals(username))
         {
-            answers.Add("username", "");
+            answers.Add(username, "");
         }
     }
 
@@ -115,6 +202,7 @@ public class GameManager : MonoBehaviourPun
     [PunRPC]
     public void AcceptDecline(string initiator)
     {
+        narrator = initiator;
         if (!PhotonNetwork.LocalPlayer.NickName.Equals(initiator))
         {
             GameObject AcceptDecline = gameController.myLocalPlayer.GetComponent<InitPPlayer>().AcceptDecline.gameObject;
@@ -125,13 +213,38 @@ public class GameManager : MonoBehaviourPun
 
     public void CardPlaced(GameObject obj)
     {
-        this.photonView.RPC("CardPlaced", RpcTarget.All,obj.name); //set avatar instead of viewid
+        if(narrator.Equals(PhotonNetwork.LocalPlayer.NickName))
+            this.photonView.RPC("CardPlaced", RpcTarget.All,obj.name); //set avatar instead of viewid
+        else
+        {
+            this.photonView.RPC("Answered", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName,obj.name); //set avatar instead of viewid
+        }
+    }
+
+    [PunRPC]
+    public void Answered(string user,string answer)
+    {
+        answers[user] = answer;
+        answered++;
+        if (answers.Count.Equals(answered))
+        {
+            calcScore();
+            generateRows();
+            //show scoreboard
+            answered = 0;
+        }
+
     }
 
     [PunRPC]
     public void CardPlaced(string answer)
     {
         correctAnswer = answer;
+        if (!PhotonNetwork.LocalPlayer.NickName.Equals(narrator)&&answers.ContainsKey(PhotonNetwork.LocalPlayer.NickName))
+        {
+            GameObject chooseAnswer = gameController.myLocalPlayer.GetComponent<InitPPlayer>().ChooseAnswer.gameObject;
+            chooseAnswer.SetActive(true);
+        }
     }
 
     // Update is called once per frame
@@ -139,4 +252,5 @@ public class GameManager : MonoBehaviourPun
     {
 
     }
+
 }

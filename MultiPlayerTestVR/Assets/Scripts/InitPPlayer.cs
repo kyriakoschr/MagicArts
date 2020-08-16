@@ -27,6 +27,7 @@ public class InitPPlayer : MonoBehaviourPun
     public GameObject hmd;
 
     public GameObject AcceptDecline;
+    public GameObject ChooseAnswer;
 
 /*    public BooleanAction button1;
     public BooleanAction button2;
