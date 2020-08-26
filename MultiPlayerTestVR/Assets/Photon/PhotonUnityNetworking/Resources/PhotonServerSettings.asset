@@ -43,6 +43,12 @@ MonoBehaviour:
   - Play
   - RespawnSpaceship
   - soundON
+  - AcceptDecline
+  - Accept
+  - CardPlaced
+  - Answered
+  - CardPlacedRPC
+  - setUname
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

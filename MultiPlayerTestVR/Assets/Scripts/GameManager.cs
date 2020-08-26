@@ -12,13 +12,16 @@ using Zinnia.Data.Collection.List;
 public class GameManager : MonoBehaviourPun
 {
     // Start is called before the first frame update
+    public GameObject Simulator;
+    public GameObject AccDecSim;
     public GameObject dText;
     public GameObject aText;
-    public Button startGame;
+    public GameObject startGame;
     public Button startRound;
-    public Button hide;
+    public GameObject hide;
     public Button choose;
     public GameObject choosePanel;
+    public Dictionary<string, int> rounds = new Dictionary<string, int>();
     public Dictionary<string, string> answers = new Dictionary<string, string>();
     public Dictionary<string, int> scores = new Dictionary<string, int>();
     public string correctAnswer;
@@ -42,82 +45,43 @@ public class GameManager : MonoBehaviourPun
         {
             foreach (string s in answers.Keys)
                 if (answers[s].Equals(correctAnswer))
-                {
-                    if (!scores.ContainsKey(s))
-                    {
-                        Debug.Log("first score " + s);
-                        //scores = gManager.scores;
-                        //scores.Add(s, 3); 
-                        if (scores.ContainsKey(name))
-                            scores[name] += 3;
-                        else
-                            scores.Add(name, 3);
-                    }
+                    if (scores.ContainsKey(s))
+                            scores[s] += 3;
                     else
-                    {
-                        //scores = gManager.scores;
-                        //scores[s] += 3;
-                        scores[name] += 3;
-                    }
-                }
+                        scores.Add(s, 3);
+                
                 else
-                {
                     if (!scores.ContainsKey(s))
-                    {
-                        //scores = gManager.scores;
-                        //scores.Add(s, 0);
-                        if (scores.ContainsKey(name))
-                            scores[name] += 0;
-                        else
-                            scores.Add(name, 0);
-                    }
-                }
-            if (!scores.ContainsKey(narrator))
-            {
-                //scores = gManager.scores;
-                //scores.Add(gManager.narrator, 3);
-                if (scores.ContainsKey(name))
-                    scores[name] += 3;
+                        if (!scores.ContainsKey(s))
+                            scores.Add(s, 0);
+            if (scores.ContainsKey(narrator))
+                    scores[narrator] += 3;
                 else
-                    scores.Add(name, 3);
-            }
-            else
-            {
-                //scores = gManager.scores;
-                //scores[gManager.narrator] += 3;
-                scores[name] += 3;
-            }
+                    scores.Add(narrator, 3);
         }
         else
         {
             foreach (string s in answers.Keys)
-            {
-                Debug.Log(s + " " + answers[s]);
-                if (!scores.ContainsKey(s))
-                {
-                    //scores = gManager.scores;
-                    //scores.Add(s, 2);
-                    if (scores.ContainsKey(name))
-                        scores[name] += 2;
-                    else
-                        scores.Add(name, 2);
-                }
+                if (scores.ContainsKey(s))
+                    scores[s] += 2;
                 else
-                {
-                    //scores = gManager.scores;
-                    //scores[s] += 2;
-                    scores[name] += 2;
-                }
-            }
+                    scores.Add(s, 2);
             if (!scores.ContainsKey(narrator))
-            {
                 //scores = gManager.scores;
                 //scores.Add(gManager.narrator, 0);
-                if (scores.ContainsKey(name))
-                    scores[name] += 0;
+                if (!scores.ContainsKey(narrator))
+                    scores.Add(narrator, 0);
+        }
+        if (rounds.Count.Equals(0))
+            foreach (string uname in scores.Keys)
+                rounds.Add(uname, 1);
+        else
+        {
+            foreach (string uname in scores.Keys)
+                if (rounds.ContainsKey(uname))
+                    rounds[uname] += 1;
                 else
-                    scores.Add(name, 0);
-            }
+                    rounds[uname] = 1;
         }
     }
 
@@ -140,18 +104,20 @@ public class GameManager : MonoBehaviourPun
         int i = 1;
         foreach (string uname in scores.Keys)
         {
-            GameObject myrow = Instantiate(prefab, scoreboard1.transform.Find("Head").transform);
-            GameObject myrow1 = Instantiate(prefab, scoreboard2.transform.Find("Head").transform);
+            GameObject myrow = Instantiate(prefab, scoreboard1.transform);
+            GameObject myrow1 = Instantiate(prefab, scoreboard2.transform);
             myrow.transform.Find("Rank").GetComponent<Text>().text = i.ToString();
             myrow.transform.Find("Name").GetComponent<Text>().text = uname;
             myrow.transform.Find("Score").GetComponent<Text>().text = scores[uname].ToString();
+            myrow.transform.Find("Rounds").GetComponent<Text>().text = rounds[uname].ToString();
             myrow.transform.parent = scoreboard1.transform;
-            myrow.GetComponent<RectTransform>().localPosition = new Vector3(myrow.GetComponent<RectTransform>().localPosition.x, myrow.GetComponent<RectTransform>().localPosition.y,11);
+            myrow.GetComponent<RectTransform>().localPosition = new Vector3(myrow.GetComponent<RectTransform>().localPosition.x, myrow.GetComponent<RectTransform>().localPosition.y,0);
             myrow1.transform.Find("Rank").GetComponent<Text>().text = i.ToString();
             myrow1.transform.Find("Name").GetComponent<Text>().text = uname;
             myrow1.transform.Find("Score").GetComponent<Text>().text = scores[uname].ToString();
+            myrow1.transform.Find("Rounds").GetComponent<Text>().text = rounds[uname].ToString();
             myrow1.transform.parent = scoreboard2.transform;
-            myrow1.GetComponent<RectTransform>().localPosition = new Vector3(myrow1.GetComponent<RectTransform>().localPosition.x, myrow1.GetComponent<RectTransform>().localPosition.y, 11);
+            myrow1.GetComponent<RectTransform>().localPosition = new Vector3(myrow1.GetComponent<RectTransform>().localPosition.x, myrow1.GetComponent<RectTransform>().localPosition.y, 0);
             i++;
         }
         //btn.SetActive(true); //start round btn enabled
@@ -165,19 +131,18 @@ public class GameManager : MonoBehaviourPun
     public void onHide()
     {
         Debug.LogError("narrator is " + narrator);
-        if (narrator.Equals("") )
-            startGame.gameObject.SetActive(true);
-        else
+        if (correctAnswer.Equals("")) 
+            startGame.SetActive(true);
+        /*else
         {
             sGroup.SetActive(false);
             choose.gameObject.SetActive(true);
-        }
+        }*/
     }
 
     void Start()
     {
         //hide.onClick.AddListener(onHide);
-
     }
 
     public void addPlayer()
@@ -188,10 +153,7 @@ public class GameManager : MonoBehaviourPun
     [PunRPC]
     public void Accept(string username)
     {
-        if (!PhotonNetwork.LocalPlayer.NickName.Equals(username))
-        {
-            answers.Add(username, "");
-        }
+        answers.Add(username, "accepted");
     }
 
     public void InviteUsers()
@@ -205,16 +167,34 @@ public class GameManager : MonoBehaviourPun
         narrator = initiator;
         if (!PhotonNetwork.LocalPlayer.NickName.Equals(initiator))
         {
-            GameObject AcceptDecline = gameController.myLocalPlayer.GetComponent<InitPPlayer>().AcceptDecline.gameObject;
-            AcceptDecline.SetActive(true);
-            AcceptDecline.transform.Find("Canvas/Text/Storyteller").GetComponent<Text>().text = initiator;
+            if (!Simulator.activeSelf)
+            {
+                GameObject AcceptDecline = gameController.myLocalPlayer.GetComponent<InitPPlayer>().AcceptDecline.gameObject;
+                AcceptDecline.SetActive(true);
+                AcceptDecline.transform.Find("Canvas/Text/Storyteller").GetComponent<Text>().text = initiator;
+            }
+            else
+            {
+                AccDecSim.SetActive(true);
+                AccDecSim.transform.Find("AcceptDeclineVR/Canvas/Text/Storyteller").GetComponent<Text>().text = initiator;
+            }
+        }
+    }
+
+    public void CardPlacedSim(Text input)
+    {
+        if (narrator.Equals(PhotonNetwork.LocalPlayer.NickName))
+            this.photonView.RPC("CardPlacedRPC", RpcTarget.All, input.text); //set avatar instead of viewid
+        else
+        {
+            this.photonView.RPC("Answered", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName, input.text); //set avatar instead of viewid
         }
     }
 
     public void CardPlaced(GameObject obj)
     {
         if(narrator.Equals(PhotonNetwork.LocalPlayer.NickName))
-            this.photonView.RPC("CardPlaced", RpcTarget.All,obj.name); //set avatar instead of viewid
+            this.photonView.RPC("CardPlacedRPC", RpcTarget.All,obj.name); //set avatar instead of viewid
         else
         {
             this.photonView.RPC("Answered", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName,obj.name); //set avatar instead of viewid
@@ -237,13 +217,19 @@ public class GameManager : MonoBehaviourPun
     }
 
     [PunRPC]
-    public void CardPlaced(string answer)
+    public void CardPlacedRPC(string answer)
     {
         correctAnswer = answer;
-        if (!PhotonNetwork.LocalPlayer.NickName.Equals(narrator)&&answers.ContainsKey(PhotonNetwork.LocalPlayer.NickName))
+        if (!PhotonNetwork.LocalPlayer.NickName.Equals(narrator))
         {
-            GameObject chooseAnswer = gameController.myLocalPlayer.GetComponent<InitPPlayer>().ChooseAnswer.gameObject;
-            chooseAnswer.SetActive(true);
+            if (Simulator.activeInHierarchy) {
+                choosePanel.SetActive(true);
+            }
+            else
+            {
+                GameObject chooseAnswer = gameController.myLocalPlayer.GetComponent<InitPPlayer>().ChooseAnswer.gameObject;
+                chooseAnswer.SetActive(true);
+            }
         }
     }
 

@@ -10,6 +10,8 @@ public class OnEnableOfSimulator : MonoBehaviour
     public GameObject canvasN;
     public GameObject btnD;
     public GameObject btnN;
+    public GameObject VRBtn;
+    public GameObject SimBtn;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +25,8 @@ public class OnEnableOfSimulator : MonoBehaviour
         rInteractor.SimON();
         btnD.SetActive(false);
         btnN.SetActive(false);
+        SimBtn.SetActive(true);
+        VRBtn.SetActive(false);
     }
 
     private void OnDisable()
@@ -33,6 +37,8 @@ public class OnEnableOfSimulator : MonoBehaviour
         canvasN.SetActive(false);
         btnD.SetActive(true);
         btnN.SetActive(true);
+        SimBtn.SetActive(false);
+        VRBtn.SetActive(true);
     }
 
     // Update is called once per frame

@@ -109,11 +109,12 @@ for the game:
 - [X] depending on version, enable disable hmd and headset
 - [X] depending on version, change icon of sound and determine the volume
 - [X] enable sound effects
-- [ ] integrate game functionality
-	- [ ] become storyteller
-	- [ ] accept/decline invitation
-	- [ ] storyteller to choose card
-	- [ ] players to choose card
+- [X] integrate game functionality
+	- [X] become storyteller
+	- [X] accept/decline invitation
+	- [X] storyteller to choose card
+	- [X] players to choose card
+	- [ ] next turn is not working properly
 - [ ] change avatars (LOW PR)
 - [X] name above avatars
 
@@ -123,7 +124,7 @@ for the game:
 - [X] OK ON VIVE EDITION disable rotation from keyboards
 
 ## Vivi suggestions
-- [ ] invite users to play
+- [X] invite users to play
 - [ ] instructions of how to play the game
 
 ## TEST on VIVE

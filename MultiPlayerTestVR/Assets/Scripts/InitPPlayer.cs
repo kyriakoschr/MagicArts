@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Tilia.Indicators.ObjectPointers;
 using Tilia.Indicators.SpatialTargets;
 using Tilia.Locomotors.Teleporter;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zinnia.Action;
@@ -84,7 +85,9 @@ public class InitPPlayer : MonoBehaviourPun
         ZoomFunctions zm = GameObject.Find("ZoomFunctions").GetComponent<ZoomFunctions>();
         zm.LZoom = lzoom;
         zm.RZoom = rzoom;
-        
+
+        //this.photonView.RPC("setUname", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName); //set avatar instead of viewid
+
         /*GameObject temp = this.transform.Find("Indicators.ObjectPointers.Curved").gameObject;
         temp.GetComponent<PointerFacade>().FollowSource = left;
         temp.GetComponent<PointerFacade>().ActivationAction = button2;
@@ -105,6 +108,11 @@ public class InitPPlayer : MonoBehaviourPun
         temp.GetComponent<PointerFacade>().Selected.AddListener(spatialDispatcher.GetComponent<SpatialTargetDispatcher>().DoDispatchSelect);*/
     }
 
+    [PunRPC]
+    void setUname(string uname)
+    {
+        transform.Find("Head/Username").GetComponent<TextMeshPro>().SetText(uname);
+    }
     // Update is called once per frame
     void Update()
     {
