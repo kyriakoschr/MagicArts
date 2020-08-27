@@ -126,13 +126,16 @@ public class GameManager : MonoBehaviourPun
         correctAnswer = "";
         //sGroup.transform.Find("Storyteller").GetComponent<Text>().text = ""; //clear storyteller holder in ui
         Sound.Play();
+        startGame.SetActive(true);
     }
 
     public void onHide()
     {
         Debug.LogError("narrator is " + narrator);
-        if (correctAnswer.Equals("")) 
+        if (correctAnswer.Equals(""))
             startGame.SetActive(true);
+        else
+            hide.SetActive(true);
         /*else
         {
             sGroup.SetActive(false);
@@ -148,6 +151,7 @@ public class GameManager : MonoBehaviourPun
     public void addPlayer()
     {
         this.photonView.RPC("Accept", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName); //set avatar instead of viewid
+        startGame.SetActive(false);
     }
 
     [PunRPC]
@@ -158,7 +162,9 @@ public class GameManager : MonoBehaviourPun
 
     public void InviteUsers()
     {   
-        this.photonView.RPC("AcceptDecline", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName); //set avatar instead of viewid
+        if(narrator.Equals(""))
+            this.photonView.RPC("AcceptDecline", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName); //set avatar instead of viewid
+        //startGame.SetActive(false);
     }
 
     [PunRPC]

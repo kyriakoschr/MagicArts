@@ -114,7 +114,7 @@ for the game:
 	- [X] accept/decline invitation
 	- [X] storyteller to choose card
 	- [X] players to choose card
-	- [ ] next turn is not working properly
+	- [X] next turn is not working properly
 - [ ] change avatars (LOW PR)
 - [X] name above avatars
 
