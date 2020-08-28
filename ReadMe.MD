@@ -115,6 +115,10 @@ for the game:
 	- [X] storyteller to choose card
 	- [X] players to choose card
 	- [X] next turn is not working properly
+	- [X] INITIATE ROUND: If they accept, an icon will float above their avatar showing that the are playing
+	- [ ] INITIATE ROUND: If they decline or do not accept until the storyteller makes his choice, they will be muted from the rest group
+	- [ ] USER'S CHOICE: They will can navigate in the museum and investigate the paintings and when they are ready they will vote
+	- [ ] AT THE END OF THE ROUND: Their picks are revealed on the table as well as the storyteller’s pick
 - [ ] change avatars (LOW PR)
 - [X] name above avatars
 
@@ -132,8 +136,8 @@ for the game:
 - [ ] fix physical movement of button in both rooms and table
 
 ## bugs to fix
-- [ ] double click
-- [ ] connection issues (HIGH PR)
+- [ ] double click (HIGH PR)
+- [X] connection issues (HIGH PR)
 - [ ] outline the feelings emoji instead of the painting (LOW PR)
 - [Χ] adjust voice and audio to give priotiy to chat
 - [X] on version 1 adjsut volume too

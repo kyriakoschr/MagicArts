@@ -23,6 +23,8 @@ public class InitPPlayer : MonoBehaviourPun
     public GameObject rzoom;
     public GameObject flz;
     public GameObject frz;
+    public GameObject accepted;
+    public GameObject st;
 
     public GameObject headphones;
     public GameObject hmd;
@@ -48,6 +50,26 @@ public class InitPPlayer : MonoBehaviourPun
     public void EnableDisableHeadphones(bool input)
     {
         headphones.SetActive(input);
+    }
+
+    public void acceptON()
+    {
+        this.photonView.RPC("trueAccept", RpcTarget.All);
+    }
+
+    public void acceptOFF()
+    {
+        this.photonView.RPC("falseAccept", RpcTarget.All);
+    }
+
+    public void sttON()
+    {
+        this.photonView.RPC("trueST", RpcTarget.All);
+    }
+
+    public void stOFF()
+    {
+        this.photonView.RPC("falseST", RpcTarget.All);
     }
 
     public void AcceptInvitation()
@@ -106,6 +128,30 @@ public class InitPPlayer : MonoBehaviourPun
         temp.GetComponent<PointerFacade>().Entered.AddListener(spatialDispatcher.GetComponent<SpatialTargetDispatcher>().DoDispatchEnter);
         temp.GetComponent<PointerFacade>().Exited.AddListener(spatialDispatcher.GetComponent<SpatialTargetDispatcher>().DoDispatchExit);
         temp.GetComponent<PointerFacade>().Selected.AddListener(spatialDispatcher.GetComponent<SpatialTargetDispatcher>().DoDispatchSelect);*/
+    }
+
+    [PunRPC]
+    void trueAccept()
+    {
+        accepted.SetActive(true);
+    }
+
+    [PunRPC]
+    void falseAccept()
+    {
+        accepted.SetActive(false);
+    }
+
+    [PunRPC]
+    void trueST()
+    {
+        st.SetActive(true);
+    }
+
+    [PunRPC]
+    void falseST()
+    {
+        st.SetActive(false);
     }
 
     [PunRPC]

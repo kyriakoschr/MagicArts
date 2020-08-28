@@ -127,6 +127,14 @@ public class GameManager : MonoBehaviourPun
         //sGroup.transform.Find("Storyteller").GetComponent<Text>().text = ""; //clear storyteller holder in ui
         Sound.Play();
         startGame.SetActive(true);
+        this.photonView.RPC("deAccept", RpcTarget.All); //set avatar instead of viewid
+    }
+
+    [PunRPC]
+    public void deAccept()
+    {
+        gameController.myLocalPlayer.GetComponent<InitPPlayer>().acceptOFF();
+        gameController.myLocalPlayer.GetComponent<InitPPlayer>().stOFF();
     }
 
     public void onHide()
@@ -152,6 +160,7 @@ public class GameManager : MonoBehaviourPun
     {
         this.photonView.RPC("Accept", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName); //set avatar instead of viewid
         startGame.SetActive(false);
+        gameController.myLocalPlayer.GetComponent<InitPPlayer>().acceptON();
     }
 
     [PunRPC]
@@ -161,10 +170,12 @@ public class GameManager : MonoBehaviourPun
     }
 
     public void InviteUsers()
-    {   
-        if(narrator.Equals(""))
+    {
+        if (narrator.Equals(""))
+        {
             this.photonView.RPC("AcceptDecline", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName); //set avatar instead of viewid
-        //startGame.SetActive(false);
+            gameController.myLocalPlayer.GetComponent<InitPPlayer>().sttON();
+        }
     }
 
     [PunRPC]

@@ -29,6 +29,7 @@ public class PlayerNameScript : MonoBehaviourPun, IPunObservable
     void Update()
     {
         GetComponent<TextMeshPro>().text = playerName;
+        transform.GetChild(1).GetComponent<TextMeshPro>().text = playerName;
     }
 
 }
