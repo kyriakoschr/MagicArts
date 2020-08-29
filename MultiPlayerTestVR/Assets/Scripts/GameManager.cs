@@ -1,4 +1,6 @@
 ﻿using Photon.Pun;
+using Photon.Voice.PUN;
+using Photon.Voice.Unity;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -37,6 +39,8 @@ public class GameManager : MonoBehaviourPun
     public int answered = 0;
     public GameController gameController;
     public GameObjectObservableList placeholder;
+    public PhotonVoiceNetwork punvn;
+    public Recorder recorder;
 
     public void calcScore()
     {
@@ -135,6 +139,8 @@ public class GameManager : MonoBehaviourPun
     {
         gameController.myLocalPlayer.GetComponent<InitPPlayer>().acceptOFF();
         gameController.myLocalPlayer.GetComponent<InitPPlayer>().stOFF();
+        punvn.Client.ChangeAudioGroups(new byte[1] { 1 }, new byte[1] { 0 });
+        //recorder.AudioGroup = 0;
     }
 
     public void onHide()
@@ -161,6 +167,8 @@ public class GameManager : MonoBehaviourPun
         this.photonView.RPC("Accept", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName); //set avatar instead of viewid
         startGame.SetActive(false);
         gameController.myLocalPlayer.GetComponent<InitPPlayer>().acceptON();
+        punvn.Client.ChangeAudioGroups(new byte[1] { 0 }, new byte[1] { 1 });
+        //recorder.AudioGroup = 1;
     }
 
     [PunRPC]
@@ -175,6 +183,7 @@ public class GameManager : MonoBehaviourPun
         {
             this.photonView.RPC("AcceptDecline", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName); //set avatar instead of viewid
             gameController.myLocalPlayer.GetComponent<InitPPlayer>().sttON();
+            punvn.Client.ChangeAudioGroups(new byte[1] { 0 }, new byte[1] { 1 });
         }
     }
 
