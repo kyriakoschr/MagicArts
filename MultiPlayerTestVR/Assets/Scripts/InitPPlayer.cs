@@ -31,16 +31,38 @@ public class InitPPlayer : MonoBehaviourPun
 
     public GameObject AcceptDecline;
     public GameObject ChooseAnswer;
+    
+    public GameObject MyCard;
+    public GameObject cards;
 
-/*    public BooleanAction button1;
-    public BooleanAction button2;
+    /*    public BooleanAction button1;
+        public BooleanAction button2;
 
-    public GameObject playArea;
-    public GameObject headset;
+        public GameObject playArea;
+        public GameObject headset;
 
-    public ListContainsRule cameras;
+        public ListContainsRule cameras;
 
-    public GameObject spatialDispatcher;*/
+        public GameObject spatialDispatcher;*/
+
+    IEnumerator hideAnswer()
+    {
+        yield return new WaitForSeconds(180);
+        MyCard.SetActive(false);
+    }
+
+    [PunRPC]
+    public void revealAnswer(string cardname)
+    {
+        MyCard.GetComponent<MeshRenderer>().material = cards.transform.Find(cardname+ "/" + cardname).GetComponent<MeshRenderer>().material;
+        MyCard.SetActive(true);
+        StartCoroutine(hideAnswer());
+    }
+
+    public void revealMyAnswer(string cardname)
+    {
+        this.photonView.RPC("revealAnswer", RpcTarget.All,cardname);
+    }
 
     public void EnableDisableHMD(bool input)
     {

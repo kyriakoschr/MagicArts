@@ -116,9 +116,9 @@ for the game:
 	- [X] players to choose card
 	- [X] next turn is not working properly
 	- [X] INITIATE ROUND: If they accept, an icon will float above their avatar showing that the are playing
-	- [ ] INITIATE ROUND: If they decline or do not accept until the storyteller makes his choice, they will be muted from the rest group
+	- [X] INITIATE ROUND: If they decline or do not accept until the storyteller makes his choice, they will be muted from the rest group
 	- [X] USER'S CHOICE: They will can navigate in the museum and investigate the paintings and when they are ready they will vote
-	- [ ] AT THE END OF THE ROUND: Their picks are revealed on the table as well as the storyteller’s pick
+	- [X] AT THE END OF THE ROUND: Their picks are revealed on the table as well as the storyteller’s pick
 - [ ] change avatars (LOW PR)
 - [X] name above avatars
 

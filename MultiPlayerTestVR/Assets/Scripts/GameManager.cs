@@ -89,6 +89,21 @@ public class GameManager : MonoBehaviourPun
         }
     }
 
+    public void revealAnswer()
+    {
+        string myname = PhotonNetwork.LocalPlayer.NickName;
+        string cardname;
+        if (narrator.Equals(myname))
+        {
+            cardname = correctAnswer;
+        }
+        else
+        {
+            cardname = answers[myname];
+        }
+        gameController.myLocalPlayer.GetComponent<InitPPlayer>().revealMyAnswer(cardname);
+    }
+
     public void generateRows()
     {
         Debug.Log("Generate rows");
@@ -234,6 +249,7 @@ public class GameManager : MonoBehaviourPun
         answered++;
         if (answers.Count.Equals(answered))
         {
+            revealAnswer();
             calcScore();
             generateRows();
             //show scoreboard
