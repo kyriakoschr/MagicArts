@@ -44,6 +44,12 @@ public class GameManager : MonoBehaviourPun
 
     public void calcScore()
     {
+        /*scores.Add("kokos", 1);
+        scores.Add("koka", 2);
+        scores.Add("koki", 3);
+        rounds.Add("kokos", 1);
+        rounds.Add("koka", 1);
+        rounds.Add("koki", 1);*/
         int dvalues = answers.Values.Distinct().ToList().Count;
         if (dvalues > 1 && answers.Values.Distinct().Contains(correctAnswer))
         {
@@ -87,12 +93,15 @@ public class GameManager : MonoBehaviourPun
                 else
                     rounds[uname] = 1;
         }
+        revealAnswer();
+        //generateRows();
     }
 
     public void revealAnswer()
     {
         string myname = PhotonNetwork.LocalPlayer.NickName;
         string cardname;
+        Debug.LogError("narr is " + narrator+" myname is "+myname);
         if (narrator.Equals(myname))
         {
             cardname = correctAnswer;
@@ -101,12 +110,13 @@ public class GameManager : MonoBehaviourPun
         {
             cardname = answers[myname];
         }
+        Debug.LogError("cardname is " + cardname);
         gameController.myLocalPlayer.GetComponent<InitPPlayer>().revealMyAnswer(cardname);
     }
 
     public void generateRows()
     {
-        Debug.Log("Generate rows");
+        Debug.LogError("Generate rows "+scores.Count+" "+answers.Count);
         foreach (Transform child in scoreboard1.transform)
         {
             if (child.name.Equals("Head"))
@@ -140,12 +150,17 @@ public class GameManager : MonoBehaviourPun
             i++;
         }
         //btn.SetActive(true); //start round btn enabled
+        //sGroup.transform.Find("Storyteller").GetComponent<Text>().text = ""; //clear storyteller holder in ui
+        Debug.LogError("scores written");
+        Sound.Play();
+        Debug.LogError("sound played"); 
+        startGame.SetActive(true);
+        Debug.LogError("button active");
+        //revealAnswer();
+        Debug.LogError("answers revealed");
         answers.Clear();
         narrator = "";
         correctAnswer = "";
-        //sGroup.transform.Find("Storyteller").GetComponent<Text>().text = ""; //clear storyteller holder in ui
-        Sound.Play();
-        startGame.SetActive(true);
         this.photonView.RPC("deAccept", RpcTarget.All); //set avatar instead of viewid
     }
 
@@ -245,13 +260,13 @@ public class GameManager : MonoBehaviourPun
     [PunRPC]
     public void Answered(string user,string answer)
     {
+        Debug.LogError(user + " answered " + answer);
         answers[user] = answer;
         answered++;
         if (answers.Count.Equals(answered))
         {
-            revealAnswer();
+            //revealAnswer();
             calcScore();
-            generateRows();
             //show scoreboard
             answered = 0;
         }
@@ -262,6 +277,7 @@ public class GameManager : MonoBehaviourPun
     public void CardPlacedRPC(string answer)
     {
         correctAnswer = answer;
+        calcScore();
         if (!PhotonNetwork.LocalPlayer.NickName.Equals(narrator))
         {
             if (Simulator.activeInHierarchy) {

@@ -33,7 +33,8 @@ public class InitPPlayer : MonoBehaviourPun
     public GameObject ChooseAnswer;
     
     public GameObject MyCard;
-    public GameObject cards;
+    public Material[] cards;
+
 
     /*    public BooleanAction button1;
         public BooleanAction button2;
@@ -54,8 +55,17 @@ public class InitPPlayer : MonoBehaviourPun
     [PunRPC]
     public void revealAnswer(string cardname)
     {
-        MyCard.GetComponent<MeshRenderer>().material = cards.transform.Find(cardname+ "/" + cardname).GetComponent<MeshRenderer>().material;
-        MyCard.SetActive(true);
+        Debug.LogError(cardname + " is cardname ");
+        foreach (Material m in cards)
+        {
+            Debug.LogError(m.name);
+            if (m.name.Equals(cardname))
+            {
+                MyCard.GetComponent<MeshRenderer>().material = m;
+                MyCard.SetActive(true);
+                break;
+            }
+        }
         StartCoroutine(hideAnswer());
     }
 
@@ -105,6 +115,7 @@ public class InitPPlayer : MonoBehaviourPun
         GameObject.Find("SpawnSound").GetComponent<AudioSource>().Play();
         if (!photonView.IsMine)
             return;
+        cards= Resources.LoadAll<Material>("BackColor_Blue/");
         Debug.LogError("photon view is mine");
         left = GameObject.Find("LeftControllerAlias");
         right = GameObject.Find("RightControllerAlias");
