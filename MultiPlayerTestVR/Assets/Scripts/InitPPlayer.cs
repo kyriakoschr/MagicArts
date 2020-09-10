@@ -35,6 +35,7 @@ public class InitPPlayer : MonoBehaviourPun
     public GameObject MyCard;
     public Material[] cards;
 
+    public PhotonVoiceNetwork punvn;
 
     /*    public BooleanAction button1;
         public BooleanAction button2;
@@ -50,12 +51,16 @@ public class InitPPlayer : MonoBehaviourPun
     {
         yield return new WaitForSeconds(180);
         MyCard.SetActive(false);
+        acceptOFF();
+        stOFF();
+        punvn.Client.ChangeAudioGroups(new byte[1] { 1 }, new byte[1] { 0 });
     }
 
     [PunRPC]
     public void revealAnswer(string cardname)
     {
-        Debug.LogError(cardname + " is cardname ");
+        cards = Resources.LoadAll<Material>("BackColor_Blue/");
+        Debug.LogError(cardname + " is cardname and total cards "+cards.Length+" cardname "+cardname);
         foreach (Material m in cards)
         {
             Debug.LogError(m.name);
@@ -123,6 +128,7 @@ public class InitPPlayer : MonoBehaviourPun
         GameObject voice = GameObject.Find("Voice");
         voice.GetComponent<Recorder>().Init(voice.GetComponent<PhotonVoiceNetwork>().VoiceClient);
         transform.GetComponent<PhotonVoiceView>().RecorderInUse = voice.GetComponent<Recorder>();
+        punvn = GameObject.Find("Voice").GetComponent<PhotonVoiceNetwork>();
         /*button1 = GameObject.Find("ButtonOne").GetComponent<BooleanAction>();
         button2 = GameObject.Find("ButtonTwo").GetComponent<BooleanAction>();
         

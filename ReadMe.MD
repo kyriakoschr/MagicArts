@@ -136,7 +136,7 @@ for the game:
 - [ ] fix physical movement of button in both rooms and table
 
 ## bugs to fix
-- [ ] double click (HIGH PR)
+- [X] double click (HIGH PR)
 - [X] connection issues (HIGH PR)
 - [ ] outline the feelings emoji instead of the painting (LOW PR)
 - [Χ] adjust voice and audio to give priotiy to chat

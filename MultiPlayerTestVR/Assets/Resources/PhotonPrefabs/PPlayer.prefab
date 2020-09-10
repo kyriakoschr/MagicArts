@@ -10761,6 +10761,7 @@ MonoBehaviour:
   MyCard: {fileID: 7076896992639202994}
   cards:
   - {fileID: 0}
+  punvn: {fileID: 0}
 --- !u!114 &6186584710567735861
 MonoBehaviour:
   m_ObjectHideFlags: 0

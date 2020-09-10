@@ -93,8 +93,8 @@ public class GameManager : MonoBehaviourPun
                 else
                     rounds[uname] = 1;
         }
-        revealAnswer();
-        //generateRows();
+        //revealAnswer();
+        generateRows();
     }
 
     public void revealAnswer()
@@ -161,7 +161,7 @@ public class GameManager : MonoBehaviourPun
         answers.Clear();
         narrator = "";
         correctAnswer = "";
-        this.photonView.RPC("deAccept", RpcTarget.All); //set avatar instead of viewid
+        //this.photonView.RPC("deAccept", RpcTarget.All); //set avatar instead of viewid
     }
 
     [PunRPC]
@@ -253,6 +253,15 @@ public class GameManager : MonoBehaviourPun
             this.photonView.RPC("CardPlacedRPC", RpcTarget.All,obj.name); //set avatar instead of viewid
         else
         {
+            answers[PhotonNetwork.LocalPlayer.NickName] = obj.name;
+            answered++;
+            if (answers.Count.Equals(answered))
+            {
+                revealAnswer();
+                calcScore();
+                //show scoreboard
+                answered = 0;
+            }
             this.photonView.RPC("Answered", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName,obj.name); //set avatar instead of viewid
         }
     }
@@ -265,7 +274,7 @@ public class GameManager : MonoBehaviourPun
         answered++;
         if (answers.Count.Equals(answered))
         {
-            //revealAnswer();
+            revealAnswer();
             calcScore();
             //show scoreboard
             answered = 0;
@@ -277,7 +286,7 @@ public class GameManager : MonoBehaviourPun
     public void CardPlacedRPC(string answer)
     {
         correctAnswer = answer;
-        calcScore();
+        //calcScore();
         if (!PhotonNetwork.LocalPlayer.NickName.Equals(narrator))
         {
             if (Simulator.activeInHierarchy) {
