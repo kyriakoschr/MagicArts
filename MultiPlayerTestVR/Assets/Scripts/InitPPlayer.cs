@@ -49,8 +49,8 @@ public class InitPPlayer : MonoBehaviourPun
 
     IEnumerator hideAnswer()
     {
-        yield return new WaitForSeconds(180);
-        MyCard.SetActive(false);
+        yield return new WaitForSeconds(20);
+        hideMyAns();
         acceptOFF();
         stOFF();
         punvn.Client.ChangeAudioGroups(new byte[1] { 1 }, new byte[1] { 0 });
@@ -97,6 +97,11 @@ public class InitPPlayer : MonoBehaviourPun
     public void acceptOFF()
     {
         this.photonView.RPC("falseAccept", RpcTarget.All);
+    }
+    
+    public void hideMyAns()
+    {
+        this.photonView.RPC("hideRPC", RpcTarget.All);
     }
 
     public void sttON()
@@ -173,6 +178,12 @@ public class InitPPlayer : MonoBehaviourPun
     void trueAccept()
     {
         accepted.SetActive(true);
+    }
+
+    [PunRPC]
+    void hideRPC()
+    {
+        MyCard.SetActive(false);
     }
 
     [PunRPC]

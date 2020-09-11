@@ -253,7 +253,7 @@ public class GameManager : MonoBehaviourPun
             this.photonView.RPC("CardPlacedRPC", RpcTarget.All,obj.name); //set avatar instead of viewid
         else
         {
-            answers[PhotonNetwork.LocalPlayer.NickName] = obj.name;
+            /*answers[PhotonNetwork.LocalPlayer.NickName] = obj.name;
             answered++;
             if (answers.Count.Equals(answered))
             {
@@ -261,7 +261,7 @@ public class GameManager : MonoBehaviourPun
                 calcScore();
                 //show scoreboard
                 answered = 0;
-            }
+            }*/
             this.photonView.RPC("Answered", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName,obj.name); //set avatar instead of viewid
         }
     }
