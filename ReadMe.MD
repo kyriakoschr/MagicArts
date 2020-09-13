@@ -109,6 +109,7 @@ for the game:
 - [X] depending on version, enable disable hmd and headset
 - [X] depending on version, change icon of sound and determine the volume
 - [X] enable sound effects
+- [ ] on simulator change zoom function
 - [X] integrate game functionality
 	- [X] become storyteller
 	- [X] accept/decline invitation
