@@ -10754,7 +10754,6 @@ MonoBehaviour:
   frz: {fileID: 0}
   accepted: {fileID: 423775893006775500}
   st: {fileID: 6193408376878694801}
-  defaultMaterial: {fileID: 2100000, guid: ff3b506d72452344fb8a4a36e3628f1c, type: 2}
   headphones: {fileID: 8464134413780435811}
   hmd: {fileID: 5448983626916305839}
   AcceptDecline: {fileID: 0}
