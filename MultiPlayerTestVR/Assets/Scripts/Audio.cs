@@ -25,6 +25,7 @@ public class Audio : MonoBehaviour
 
 	public void PlayPause(int painting)
 	{
+		Debug.Log("PLLPAUSE");
 		if (vp.isPlaying)
 		{
 			vp.Pause();
@@ -70,9 +71,10 @@ public class Audio : MonoBehaviour
 		go.Stop();
 		go.time = 0;
 		audioManager.GetComponent<AudioManager>().ReqAndPlay(false, painting);
+		GameObject.Find("VideoManager").GetComponent<VideoManager>().hp--;
 	}
 
-    private void Awake()
+	private void Awake()
     {
 		if (vp == null)
 			vp = GetComponent<AudioSource>();

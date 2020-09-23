@@ -122,5 +122,7 @@ public class VideoAwake : MonoBehaviour {
 		go.Pause();
 		go.frame = 4;
 		videoManager.GetComponent<VideoManager>().ReqAndPlay(false, painting);
+		videoManager.GetComponent<VideoManager>().hp--;
+		videoManager.GetComponent<VideoManager>().hmd--;
 	}
 }

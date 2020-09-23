@@ -120,13 +120,20 @@ for the game:
 	- [X] INITIATE ROUND: If they decline or do not accept until the storyteller makes his choice, they will be muted from the rest group
 	- [X] USER'S CHOICE: They will can navigate in the museum and investigate the paintings and when they are ready they will vote
 	- [X] AT THE END OF THE ROUND: Their picks are revealed on the table as well as the storyteller’s pick
-- [ ] change avatars (LOW PR)
 - [X] name above avatars
 
 ##23/6
 - [X] OK ON VIVE EDITION try to have the mic always on
 - [X] OK ON VIVE EDITION find out what's going on with the server timeouts
 - [X] OK ON VIVE EDITION disable rotation from keyboards
+
+##22/9
+- [X] change status to accepted -> voted. show for 2 mins and hide when next round starts
+- [ ] try drag on vive
+- [ ] try teleporting everybody around scoreboard
+- [X] change avatars
+- [ ] add guest choice and fix ui menus
+- [X] deactivate headphones when audio finish
 
 ## Vivi suggestions
 - [X] invite users to play

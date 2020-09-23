@@ -206,11 +206,23 @@ public class GameManager : MonoBehaviourPun
     {
         answers.Add(username, "accepted");
     }
+    
+    [PunRPC]
+    public void interruptH()
+    {
+        gameController.myLocalPlayer.GetComponent<InitPPlayer>().interruptHide();
+    }
+
+    public void interrupt()
+    {
+        this.photonView.RPC("interruptH", RpcTarget.All); 
+    }
 
     public void InviteUsers()
     {
         if (narrator.Equals(""))
         {
+            interrupt();
             this.photonView.RPC("AcceptDecline", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName); //set avatar instead of viewid
             gameController.myLocalPlayer.GetComponent<InitPPlayer>().sttON();
             punvn.Client.ChangeAudioGroups(new byte[1] { 0 }, new byte[1] { 1 });
@@ -244,12 +256,14 @@ public class GameManager : MonoBehaviourPun
         else
         {
             this.photonView.RPC("Answered", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName, input.text); //set avatar instead of viewid
+            gameController.myLocalPlayer.GetComponent<InitPPlayer>().acceptOFF();
+            gameController.myLocalPlayer.GetComponent<InitPPlayer>().votedON();
         }
     }
 
     public void CardPlaced(GameObject obj)
     {
-        if(narrator.Equals(PhotonNetwork.LocalPlayer.NickName))
+        if (narrator.Equals(PhotonNetwork.LocalPlayer.NickName))
             this.photonView.RPC("CardPlacedRPC", RpcTarget.All,obj.name); //set avatar instead of viewid
         else
         {
@@ -263,6 +277,8 @@ public class GameManager : MonoBehaviourPun
                 answered = 0;
             }*/
             this.photonView.RPC("Answered", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName,obj.name); //set avatar instead of viewid
+            gameController.myLocalPlayer.GetComponent<InitPPlayer>().acceptOFF();
+            gameController.myLocalPlayer.GetComponent<InitPPlayer>().votedON();
         }
     }
 

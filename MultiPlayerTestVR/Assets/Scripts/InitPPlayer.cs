@@ -24,6 +24,7 @@ public class InitPPlayer : MonoBehaviourPun
     public GameObject flz;
     public GameObject frz;
     public GameObject accepted;
+    public GameObject voted;
     public GameObject st;
 
     public GameObject headphones;
@@ -36,6 +37,7 @@ public class InitPPlayer : MonoBehaviourPun
     public Material[] cards;
 
     public PhotonVoiceNetwork punvn;
+    Coroutine currentHide=null;
 
     /*    public BooleanAction button1;
         public BooleanAction button2;
@@ -47,13 +49,31 @@ public class InitPPlayer : MonoBehaviourPun
 
         public GameObject spatialDispatcher;*/
 
-    IEnumerator hideAnswer()
+    public void interruptHide()
     {
-        yield return new WaitForSeconds(20);
+        if(currentHide!=null)
+            this.photonView.RPC("immediateHide", RpcTarget.All);
+    }
+
+    [PunRPC]
+    void immediateHide()
+    {
+        StopCoroutine(currentHide);
+        currentHide = null;
         hideMyAns();
-        acceptOFF();
+        votedOFF();
         stOFF();
         punvn.Client.ChangeAudioGroups(new byte[1] { 1 }, new byte[1] { 0 });
+    }
+
+    IEnumerator hideAnswer()
+    {
+        yield return new WaitForSeconds(120);
+        hideMyAns();
+        votedOFF();
+        stOFF();
+        punvn.Client.ChangeAudioGroups(new byte[1] { 1 }, new byte[1] { 0 });
+        currentHide = null;
     }
 
     [PunRPC]
@@ -71,7 +91,7 @@ public class InitPPlayer : MonoBehaviourPun
                 break;
             }
         }
-        StartCoroutine(hideAnswer());
+        currentHide=StartCoroutine(hideAnswer());
     }
 
     public void revealMyAnswer(string cardname)
@@ -93,10 +113,20 @@ public class InitPPlayer : MonoBehaviourPun
     {
         this.photonView.RPC("trueAccept", RpcTarget.All);
     }
+    
+    public void votedON()
+    {
+        this.photonView.RPC("trueVoted", RpcTarget.All);
+    }
 
     public void acceptOFF()
     {
         this.photonView.RPC("falseAccept", RpcTarget.All);
+    }
+    
+    public void votedOFF()
+    {
+        this.photonView.RPC("falseVoted", RpcTarget.All);
     }
     
     public void hideMyAns()
@@ -179,6 +209,12 @@ public class InitPPlayer : MonoBehaviourPun
     {
         accepted.SetActive(true);
     }
+    
+    [PunRPC]
+    void trueVoted()
+    {
+        voted.SetActive(true);
+    }
 
     [PunRPC]
     void hideRPC()
@@ -190,6 +226,12 @@ public class InitPPlayer : MonoBehaviourPun
     void falseAccept()
     {
         accepted.SetActive(false);
+    }
+    
+    [PunRPC]
+    void falseVoted()
+    {
+        voted.SetActive(false);
     }
 
     [PunRPC]

@@ -16,6 +16,7 @@ public class Teleport : MonoBehaviour {
 	public GameObject sound;
 	public GameObject canvasD;
 	public GameObject canvasN;
+	public GameObject toggleAction;
 
 	public void teleTo(Transform to)
 	{
@@ -37,6 +38,7 @@ public class Teleport : MonoBehaviour {
 				teleporter.Teleport(roomDay);
 				if (simulator.activeInHierarchy)
 					canvasN.SetActive(true);
+					//toggleAction.GetComponent("Toggle)
 			}
 			else {
 				teleporter.Teleport(museum);
