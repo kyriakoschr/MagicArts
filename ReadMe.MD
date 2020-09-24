@@ -133,7 +133,7 @@ for the game:
 - [ ] try teleporting everybody around scoreboard
 - [X] change avatars
 - [X] guest mode & fix ui menus
-- [ ] dress them on their answer instead of cards
+- [X] dress them on their answer instead of cards
 - [X] deactivate headphones when audio finish
 
 ## Vivi suggestions

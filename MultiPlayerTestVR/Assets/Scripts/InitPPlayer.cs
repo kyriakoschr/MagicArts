@@ -36,6 +36,7 @@ public class InitPPlayer : MonoBehaviourPun
     
     public GameObject MyCard;
     public Material[] cards;
+    public Material dMaterial;
 
     public PhotonVoiceNetwork punvn;
     Coroutine currentHide=null;
@@ -81,7 +82,7 @@ public class InitPPlayer : MonoBehaviourPun
     [PunRPC]
     public void revealAnswer(string cardname)
     {
-        cards = Resources.LoadAll<Material>("BackColor_Blue/");
+        cards = Resources.LoadAll<Material>("TexturesM/");
         Debug.LogError(cardname + " is cardname and total cards "+cards.Length+" cardname "+cardname);
         foreach (Material m in cards)
         {
@@ -89,7 +90,7 @@ public class InitPPlayer : MonoBehaviourPun
             if (m.name.Equals(cardname))
             {
                 MyCard.GetComponent<MeshRenderer>().material = m;
-                MyCard.SetActive(true);
+                //MyCard.SetActive(true);
                 break;
             }
         }
@@ -243,7 +244,8 @@ public class InitPPlayer : MonoBehaviourPun
     [PunRPC]
     void hideRPC()
     {
-        MyCard.SetActive(false);
+        MyCard.GetComponent<MeshRenderer>().material = dMaterial;
+        //MyCard.SetActive(false);
     }
 
     [PunRPC]
