@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviourPun
     public GameObjectObservableList placeholder;
     public PhotonVoiceNetwork punvn;
     public Recorder recorder;
+    public List<String> guests;
 
     public void calcScore()
     {
@@ -101,6 +102,8 @@ public class GameManager : MonoBehaviourPun
     {
         string myname = PhotonNetwork.LocalPlayer.NickName;
         string cardname;
+        if (guests.Contains(myname))
+            return;
         Debug.LogError("narr is " + narrator+" myname is "+myname);
         if (narrator.Equals(myname))
         {
@@ -159,6 +162,7 @@ public class GameManager : MonoBehaviourPun
         //revealAnswer();
         Debug.LogError("answers revealed");
         answers.Clear();
+        guests.Clear();
         narrator = "";
         correctAnswer = "";
         //this.photonView.RPC("deAccept", RpcTarget.All); //set avatar instead of viewid
@@ -200,11 +204,26 @@ public class GameManager : MonoBehaviourPun
         punvn.Client.ChangeAudioGroups(new byte[1] { 0 }, new byte[1] { 1 });
         //recorder.AudioGroup = 1;
     }
+    
+    public void addGuest()
+    {
+        this.photonView.RPC("Guest", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName); //set avatar instead of viewid
+        startGame.SetActive(false);
+        gameController.myLocalPlayer.GetComponent<InitPPlayer>().guestON();
+        punvn.Client.ChangeAudioGroups(new byte[1] { 0 }, new byte[1] { 1 });
+        //recorder.AudioGroup = 1;
+    }
 
     [PunRPC]
     public void Accept(string username)
     {
         answers.Add(username, "accepted");
+    }
+    
+    [PunRPC]
+    public void Guest(string username)
+    {
+        guests.Add(username);
     }
     
     [PunRPC]
@@ -225,6 +244,9 @@ public class GameManager : MonoBehaviourPun
             interrupt();
             this.photonView.RPC("AcceptDecline", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName); //set avatar instead of viewid
             gameController.myLocalPlayer.GetComponent<InitPPlayer>().sttON();
+            gameController.myLocalPlayer.GetComponent<InitPPlayer>().guestOff();
+            gameController.myLocalPlayer.GetComponent<InitPPlayer>().votedOFF();
+            gameController.myLocalPlayer.GetComponent<InitPPlayer>().acceptOFF();
             punvn.Client.ChangeAudioGroups(new byte[1] { 0 }, new byte[1] { 1 });
         }
     }
@@ -305,6 +327,8 @@ public class GameManager : MonoBehaviourPun
         //calcScore();
         if (!PhotonNetwork.LocalPlayer.NickName.Equals(narrator))
         {
+            if (!answers.ContainsKey(PhotonNetwork.LocalPlayer.NickName))
+                return;
             if (Simulator.activeInHierarchy) {
                 choosePanel.SetActive(true);
             }

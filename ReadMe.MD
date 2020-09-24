@@ -132,7 +132,8 @@ for the game:
 - [ ] try drag on vive
 - [ ] try teleporting everybody around scoreboard
 - [X] change avatars
-- [ ] add guest choice and fix ui menus
+- [ ] fix ui menus
+- [ ] dress them on their answer instead of cards
 - [X] deactivate headphones when audio finish
 
 ## Vivi suggestions

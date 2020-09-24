@@ -25,6 +25,7 @@ public class InitPPlayer : MonoBehaviourPun
     public GameObject frz;
     public GameObject accepted;
     public GameObject voted;
+    public GameObject guest;
     public GameObject st;
 
     public GameObject headphones;
@@ -63,6 +64,7 @@ public class InitPPlayer : MonoBehaviourPun
         hideMyAns();
         votedOFF();
         stOFF();
+        guestOff();
         punvn.Client.ChangeAudioGroups(new byte[1] { 1 }, new byte[1] { 0 });
     }
 
@@ -72,8 +74,8 @@ public class InitPPlayer : MonoBehaviourPun
         hideMyAns();
         votedOFF();
         stOFF();
+        guestOff();
         punvn.Client.ChangeAudioGroups(new byte[1] { 1 }, new byte[1] { 0 });
-        currentHide = null;
     }
 
     [PunRPC]
@@ -112,6 +114,16 @@ public class InitPPlayer : MonoBehaviourPun
     public void acceptON()
     {
         this.photonView.RPC("trueAccept", RpcTarget.All);
+    }
+    
+    public void guestON()
+    {
+        this.photonView.RPC("guestTrue", RpcTarget.All);
+    }
+    
+    public void guestOff()
+    {
+        this.photonView.RPC("guestFalse", RpcTarget.All);
     }
     
     public void votedON()
@@ -208,6 +220,18 @@ public class InitPPlayer : MonoBehaviourPun
     void trueAccept()
     {
         accepted.SetActive(true);
+    }
+    
+    [PunRPC]
+    void guestTrue()
+    {
+        guest.SetActive(true);
+    }
+    
+    [PunRPC]
+    void guestFalse()
+    {
+        guest.SetActive(false);
     }
     
     [PunRPC]

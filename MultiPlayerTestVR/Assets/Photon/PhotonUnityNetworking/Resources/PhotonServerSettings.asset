@@ -49,6 +49,21 @@ MonoBehaviour:
   - Answered
   - CardPlacedRPC
   - setUname
+  - trueAccept
+  - falseAccept
+  - deAccept
+  - falseST
+  - trueST
+  - revealAnswer
+  - hideAnswerRPC
+  - hideRPC
+  - falseVoted
+  - trueVoted
+  - immediateHide
+  - interruptH
+  - guestTrue
+  - guestFalse
+  - Guest
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
