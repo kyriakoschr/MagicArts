@@ -132,7 +132,7 @@ for the game:
 - [ ] try drag on vive
 - [ ] try teleporting everybody around scoreboard
 - [X] change avatars
-- [ ] fix ui menus
+- [X] guest mode & fix ui menus
 - [ ] dress them on their answer instead of cards
 - [X] deactivate headphones when audio finish
 
