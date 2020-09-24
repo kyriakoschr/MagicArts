@@ -130,7 +130,7 @@ for the game:
 ##22/9
 - [X] change status to accepted -> voted. show for 2 mins and hide when next round starts
 - [ ] try drag on vive
-- [ ] try teleporting everybody around scoreboard
+- [X] try teleporting everybody around scoreboard
 - [X] change avatars
 - [X] guest mode & fix ui menus
 - [X] dress them on their answer instead of cards

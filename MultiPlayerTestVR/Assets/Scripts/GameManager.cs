@@ -102,8 +102,10 @@ public class GameManager : MonoBehaviourPun
     {
         string myname = PhotonNetwork.LocalPlayer.NickName;
         string cardname;
-        if (guests.Contains(myname))
+        if (guests.Contains(myname)) {
+            gameController.myLocalPlayer.GetComponent<InitPPlayer>().teleGuest();
             return;
+        }
         Debug.LogError("narr is " + narrator+" myname is "+myname);
         if (narrator.Equals(myname))
         {

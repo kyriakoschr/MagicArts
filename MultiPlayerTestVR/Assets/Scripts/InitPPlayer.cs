@@ -27,6 +27,9 @@ public class InitPPlayer : MonoBehaviourPun
     public GameObject voted;
     public GameObject guest;
     public GameObject st;
+    public GameObject sound;
+
+    public TeleporterFacade teleporter;
 
     public GameObject headphones;
     public GameObject hmd;
@@ -40,6 +43,8 @@ public class InitPPlayer : MonoBehaviourPun
 
     public PhotonVoiceNetwork punvn;
     Coroutine currentHide=null;
+
+    Transform scoreboard;
 
     /*    public BooleanAction button1;
         public BooleanAction button2;
@@ -79,6 +84,23 @@ public class InitPPlayer : MonoBehaviourPun
         punvn.Client.ChangeAudioGroups(new byte[1] { 1 }, new byte[1] { 0 });
     }
 
+    public void teleGuest()
+    {
+        this.photonView.RPC("tGuest", RpcTarget.All);
+    }
+
+    [PunRPC]
+    void tGuest()
+    {
+        GameObject emptyGO = new GameObject();
+        Transform newTransform = emptyGO.transform;
+        Vector3 v3 = scoreboard.position + new Vector3(Random.Range(1,3)==1? Random.Range(10, 30): Random.Range(-30, -10), 0, Random.Range(1, 3) == 1 ? Random.Range(10, 30) : Random.Range(-30, -10));
+        newTransform.position = v3;
+        newTransform.LookAt(scoreboard);
+        teleporter.Teleport(newTransform);
+        sound.GetComponent<AudioSource>().Play();
+    }
+
     [PunRPC]
     public void revealAnswer(string cardname)
     {
@@ -94,7 +116,14 @@ public class InitPPlayer : MonoBehaviourPun
                 break;
             }
         }
-        currentHide=StartCoroutine(hideAnswer());
+        GameObject emptyGO = new GameObject();
+        Transform newTransform = emptyGO.transform;
+        Vector3 v3 = scoreboard.position + new Vector3(Random.Range(1, 3) == 1 ? Random.Range(10, 30) : Random.Range(-30, -10), 0, Random.Range(1, 3) == 1 ? Random.Range(10, 30) : Random.Range(-30, -10));
+        newTransform.position = v3;
+        newTransform.LookAt(scoreboard);
+        teleporter.Teleport(newTransform);
+        sound.GetComponent<AudioSource>().Play();
+        currentHide =StartCoroutine(hideAnswer());
     }
 
     public void revealMyAnswer(string cardname)
@@ -190,6 +219,10 @@ public class InitPPlayer : MonoBehaviourPun
         this.transform.Find("FollowLeftHand").GetComponent<ObjectFollower>().Sources.InsertAt(left,0);
         this.transform.Find("FollowRightHand").GetComponent<ObjectFollower>().Sources.InsertAt(right,0);
         this.transform.Find("FollowHMD").GetComponent<ObjectFollower>().Sources.InsertAt(head, 0);
+
+        scoreboard = GameObject.Find("MenuBoard_double").transform;
+        sound = GameObject.Find("SpawnSound");
+        teleporter = GameObject.Find("CameraRigs.TrackedAlias/Locomotors.Teleporter.Instant").GetComponent<TeleporterFacade>();
 
         ZoomFunctions zm = GameObject.Find("ZoomFunctions").GetComponent<ZoomFunctions>();
         zm.LZoom = lzoom;

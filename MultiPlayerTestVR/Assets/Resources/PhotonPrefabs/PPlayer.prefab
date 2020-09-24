@@ -11835,6 +11835,8 @@ MonoBehaviour:
   voted: {fileID: 381337844555727898}
   guest: {fileID: 6245442247709412388}
   st: {fileID: 6193408376878694801}
+  sound: {fileID: 0}
+  teleporter: {fileID: 0}
   headphones: {fileID: 8464134413780435811}
   hmd: {fileID: 5448983626916305839}
   AcceptDecline: {fileID: 0}
