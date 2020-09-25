@@ -15,6 +15,8 @@ namespace cakeslice
         private bool over = false;
         public int b;
         public ZoomFunctions zf;
+        public GameObject sim;
+        public Zinnia.Action.ToggleAction togleAction;
 
         public void greenOutline(int nval)
         {
@@ -97,16 +99,22 @@ namespace cakeslice
                 outlineMaterial.SetFloat("_OutlineEnabled", 1.0f);
             }
         }
-        
+
         public void OpenMenu()
         {
             Debug.Log("Open");
-            if (Menu.activeInHierarchy)
-                zf.EnableDisable();
+            if (Menu.activeInHierarchy) {
+                if (!sim.activeInHierarchy)
+                {
+                    togleAction.Receive(true);
+                    Canvas.SetActive(true);
+                }
+                else
+                    zf.EnableDisable();
+            }
             else
                 Menu.SetActive(true);
         }
-
         public void KokosOut() {
             Debug.Log("Out");
             if (GameObject.FindGameObjectWithTag("Menu"))
