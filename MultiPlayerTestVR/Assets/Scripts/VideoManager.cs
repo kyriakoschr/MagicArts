@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 
-public class VideoManager : MonoBehaviourPun, IPunObservable, IPunOwnershipCallbacks
+public class VideoManager : MonoBehaviourPun
 {
     int version; // 1=first 2=second
     public int[] isPlaying=new int[19];
@@ -35,7 +35,7 @@ public class VideoManager : MonoBehaviourPun, IPunObservable, IPunOwnershipCallb
         return validTransforms;
     }
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    /*void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsReading) // rec
         {
@@ -58,7 +58,7 @@ public class VideoManager : MonoBehaviourPun, IPunObservable, IPunOwnershipCallb
             for (int i = 0; i < isPlaying.Length; i++)
                 stream.SendNext(isPlaying[i]);
         }
-    }
+    }*/
 
     // Start is called before the first frame update
     void Start()
@@ -158,7 +158,7 @@ public class VideoManager : MonoBehaviourPun, IPunObservable, IPunOwnershipCallb
     // Update is called once per frame
     void Update()
     {
-        if (version.Equals(2))
+        /*if (version.Equals(2))
             return;
         if (hmd > 0)
             gc.GetComponent<EmotionManager>().addHMD();
@@ -167,17 +167,8 @@ public class VideoManager : MonoBehaviourPun, IPunObservable, IPunOwnershipCallb
         if (hp > 0)
             gc.GetComponent<EmotionManager>().addHP();
         else
-            gc.GetComponent<EmotionManager>().removeHP();
+            gc.GetComponent<EmotionManager>().removeHP();*/
         //Debug.LogError(isPlaying[2]);
     }
 
-    public void OnOwnershipRequest(PhotonView targetView, Player requestingPlayer)
-    {
-        Debug.LogError(requestingPlayer + " requested");
-    }
-
-    public void OnOwnershipTransfered(PhotonView targetView, Player previousOwner)
-    {
-        Debug.LogError(previousOwner + " given");
-    }
 }

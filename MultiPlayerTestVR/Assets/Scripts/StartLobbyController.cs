@@ -19,9 +19,15 @@ public class StartLobbyController : MonoBehaviourPunCallbacks
 
     public void QuickStart()
     {
-        //PhotonNetwork.JoinRandomRoom();
-        PhotonNetwork.JoinRoom("Room0");
+        PhotonNetwork.JoinRandomRoom();
+        //PhotonNetwork.JoinRoom("Room0");
         PhotonNetwork.LocalPlayer.NickName = username.text;
+    }
+
+    public override void OnJoinedRoom()
+    {
+        Debug.LogError("Photon Multiplayer - Current room name: " + PhotonNetwork.CurrentRoom.Name);
+        //PhotonNetwork.IsMessageQueueRunning = true;
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
@@ -36,9 +42,9 @@ public class StartLobbyController : MonoBehaviourPunCallbacks
     void CreateRoom()
     {
         int randomNumber = Random.Range(0, 10000);
-        RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = 0/*(byte)RoomSize */};
+        RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = 5/*(byte)RoomSize */};
         roomOps.PublishUserId = true;
-        PhotonNetwork.CreateRoom("Room" + 0, roomOps);
+        PhotonNetwork.CreateRoom("Room" + randomNumber, roomOps);
         //Debug.LogError(randomNumber);
     }
 

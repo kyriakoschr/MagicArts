@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviourPun, IPunObservable
+public class AudioManager : MonoBehaviourPun
 {
     int version ; // 1=first 2=second
     public int[] isPlaying = new int[19];
@@ -116,7 +116,7 @@ public class AudioManager : MonoBehaviourPun, IPunObservable
         }
     }
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    /*void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsReading) // rec
         {
@@ -140,7 +140,7 @@ public class AudioManager : MonoBehaviourPun, IPunObservable
             for (int i = 0; i < isPlaying.Length; i++)
                 stream.SendNext(isPlaying[i]);
         }
-    }
+    }*/
 
     // Update is called once per frame
     void Update()

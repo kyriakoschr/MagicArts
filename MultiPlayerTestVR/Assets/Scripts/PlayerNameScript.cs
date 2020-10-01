@@ -14,7 +14,7 @@ public class PlayerNameScript : MonoBehaviourPun, IPunObservable
             playerName= PhotonNetwork.LocalPlayer.NickName;
     }
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {

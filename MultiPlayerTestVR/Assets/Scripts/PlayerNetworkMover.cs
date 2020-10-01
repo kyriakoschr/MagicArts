@@ -41,7 +41,9 @@ public class PlayerNetworkMover : MonoBehaviourPun,IPunObservable
         }
         else
         {
-            _playerTransformName.GetComponent<TextMeshPro>().text = (string)stream.ReceiveNext();
+            //Debug.LogError("My name will be printed on" + _playerTransformName.GetComponent<TextMeshPro>().text);
+            //Debug.LogError("stream contains" + stream.ReceiveNext());
+            transform.Find("Username").GetComponent<TextMeshPro>().SetText((string)stream.ReceiveNext());
         }
     }
 

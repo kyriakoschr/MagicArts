@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OpenPaintings : MonoBehaviourPun,IPunObservable,IPunOwnershipCallbacks
+public class OpenPaintings : MonoBehaviourPun,IPunOwnershipCallbacks
 {
     public bool[] isOpen = new bool[19];
     public int[] isPlaying = new int[19];
@@ -47,9 +47,16 @@ public class OpenPaintings : MonoBehaviourPun,IPunObservable,IPunOwnershipCallba
         base.photonView.RequestOwnership();
         Debug.LogError("req "+photonView.IsMine);
         isOpen[i] = true;
+        this.photonView.RPC("openP", RpcTarget.AllBufferedViaServer,i);
         this.photonView.RPC("soundON", RpcTarget.All);
     }
 
+    [PunRPC]
+    public void openP(int i)
+    {
+        isOpen[i] = true;
+        extras.Find(x => x.name.Equals("extra" + i.ToString())).SetActive(isOpen[i]);
+    }
 
     [PunRPC]
     public void soundON()
@@ -57,7 +64,7 @@ public class OpenPaintings : MonoBehaviourPun,IPunObservable,IPunOwnershipCallba
         sound.GetComponent<AudioSource>().Play();
     }
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    /*public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsReading)//receiver
         {
@@ -77,7 +84,7 @@ public class OpenPaintings : MonoBehaviourPun,IPunObservable,IPunOwnershipCallba
                 stream.SendNext(isOpen[i]);
             //stream.SendNext(isPlaying);
         }
-    }
+    }*/
 
     public void OnOwnershipRequest(PhotonView targetView, Player requestingPlayer)
     {

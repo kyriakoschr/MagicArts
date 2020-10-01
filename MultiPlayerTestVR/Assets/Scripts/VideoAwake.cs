@@ -84,6 +84,17 @@ public class VideoAwake : MonoBehaviour {
 			videoManager.GetComponent<VideoManager>().ReqAndPlay(false, painting);
 			videoManager.GetComponent<VideoManager>().hp--;
 			videoManager.GetComponent<VideoManager>().hmd--;
+			if (mmm.Version.Equals(1))
+			{
+				if (videoManager.GetComponent<VideoManager>().hmd > 0)
+					gc.GetComponent<EmotionManager>().addHMD();
+				else
+					gc.GetComponent<EmotionManager>().removeHMD();
+				if (videoManager.GetComponent<VideoManager>().hp > 0)
+					gc.GetComponent<EmotionManager>().addHP();
+				else
+					gc.GetComponent<EmotionManager>().removeHP();
+			}
 		}
 		else
 		{ 
@@ -95,6 +106,13 @@ public class VideoAwake : MonoBehaviour {
 					rem.getGo().GetComponent<AudioSource>().Pause();
 					GameObject.Find("AudioManager").GetComponent<AudioManager>().ReqAndPlay(false, rem.getNo());
 					videoManager.GetComponent<VideoManager>().hp--;
+					if (mmm.Version.Equals(1))
+					{
+						if (videoManager.GetComponent<VideoManager>().hp > 0)
+							gc.GetComponent<EmotionManager>().addHP();
+						else
+							gc.GetComponent<EmotionManager>().removeHP();
+					}
 				}
 				else
 				{
@@ -102,11 +120,33 @@ public class VideoAwake : MonoBehaviour {
                     videoManager.GetComponent<VideoManager>().ReqAndPlay(false, rem.getNo());
 					videoManager.GetComponent<VideoManager>().hp--;
 					videoManager.GetComponent<VideoManager>().hmd--;
+					if (mmm.Version.Equals(1))
+					{
+						if (videoManager.GetComponent<VideoManager>().hmd > 0)
+							gc.GetComponent<EmotionManager>().addHMD();
+						else
+							gc.GetComponent<EmotionManager>().removeHMD();
+						if (videoManager.GetComponent<VideoManager>().hp > 0)
+							gc.GetComponent<EmotionManager>().addHP();
+						else
+							gc.GetComponent<EmotionManager>().removeHP();
+					}
 				}
 			}
 			vp.Play();
 			videoManager.GetComponent<VideoManager>().hp++;
 			videoManager.GetComponent<VideoManager>().hmd++;
+			if (mmm.Version.Equals(1))
+			{
+				if (videoManager.GetComponent<VideoManager>().hmd > 0)
+					gc.GetComponent<EmotionManager>().addHMD();
+				else
+					gc.GetComponent<EmotionManager>().removeHMD();
+				if (videoManager.GetComponent<VideoManager>().hp > 0)
+					gc.GetComponent<EmotionManager>().addHP();
+				else
+					gc.GetComponent<EmotionManager>().removeHP();
+			}
 			/*GetComponent<MouseOver2>().outlineMaterial.SetColor("_SolidOutline", Color.green);
 			GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 1.0f);
 			videoManager.GetComponent<VideoManager>().isPlaying[painting]++;*/
@@ -124,5 +164,15 @@ public class VideoAwake : MonoBehaviour {
 		videoManager.GetComponent<VideoManager>().ReqAndPlay(false, painting);
 		videoManager.GetComponent<VideoManager>().hp--;
 		videoManager.GetComponent<VideoManager>().hmd--;
+		if (mmm.Version.Equals(2))
+			yield return null;
+		if (videoManager.GetComponent<VideoManager>().hmd > 0)
+			gc.GetComponent<EmotionManager>().addHMD();
+		else
+			gc.GetComponent<EmotionManager>().removeHMD();
+		if (videoManager.GetComponent<VideoManager>().hp > 0)
+			gc.GetComponent<EmotionManager>().addHP();
+		else
+			gc.GetComponent<EmotionManager>().removeHP();
 	}
 }
