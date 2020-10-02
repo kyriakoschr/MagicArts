@@ -16,7 +16,7 @@ public class Teleport : MonoBehaviour {
 	public GameObject sound;
 	public GameObject canvasD;
 	public GameObject canvasN;
-	public GameObject toggleAction;
+	public Zinnia.Action.ToggleAction toggleAction;
 
 	public void teleTo(Transform to)
 	{
@@ -36,9 +36,11 @@ public class Teleport : MonoBehaviour {
 			if (inMuseum.Equals(0))
 			{
 				teleporter.Teleport(roomDay);
-				if (simulator.activeInHierarchy)
+				if (simulator.activeInHierarchy) { 
 					canvasN.SetActive(true);
-					//toggleAction.GetComponent("Toggle)
+					Debug.LogError(this.gameObject.name);
+					toggleAction.Receive(true);
+				}
 			}
 			else {
 				teleporter.Teleport(museum);
@@ -46,7 +48,8 @@ public class Teleport : MonoBehaviour {
                 {
 					canvasD.SetActive(false);
 					canvasN.SetActive(false);
-                }
+					toggleAction.Receive(true);
+				}
 			}
 			sound.GetComponent<AudioSource>().Play();
 		}

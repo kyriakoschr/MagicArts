@@ -23,11 +23,11 @@ MonoBehaviour:
     Port: 0
     Protocol: 0
     AuthMode: 0
-    EnableLobbyStatistics: 0
-    NetworkLogging: 1
-  DevRegion: eu
+    EnableLobbyStatistics: 1
+    NetworkLogging: 5
+  DevRegion: 
   PunLogging: 0
-  EnableSupportLogger: 0
+  EnableSupportLogger: 1
   RunInBackground: 1
   StartInOfflineMode: 0
   RpcList:
@@ -65,6 +65,8 @@ MonoBehaviour:
   - guestFalse
   - Guest
   - tGuest
+  - openPaint
+  - openP
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
