@@ -11833,6 +11833,7 @@ MonoBehaviour:
   frz: {fileID: 0}
   accepted: {fileID: 423775893006775500}
   voted: {fileID: 381337844555727898}
+  table: {fileID: 0}
   guest: {fileID: 6245442247709412388}
   st: {fileID: 6193408376878694801}
   sound: {fileID: 0}
@@ -11845,7 +11846,9 @@ MonoBehaviour:
   cards:
   - {fileID: 0}
   dMaterial: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  gMaterial: {fileID: 2100000, guid: 1ff6d4186b9071540b4ff515b0e583a7, type: 2}
   punvn: {fileID: 0}
+  gm: {fileID: 0}
 --- !u!114 &6186584710567735861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14287,8 +14290,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8309974962133001046}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.49, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -2.2, z: 0}
+  m_LocalScale: {x: 1, y: 1.6958826, z: 1}
   m_Children: []
   m_Father: {fileID: 2402272653165996610}
   m_RootOrder: 12

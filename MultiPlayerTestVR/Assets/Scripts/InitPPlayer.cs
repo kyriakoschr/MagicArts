@@ -25,6 +25,7 @@ public class InitPPlayer : MonoBehaviourPun
     public GameObject frz;
     public GameObject accepted;
     public GameObject voted;
+    public GameObject table;
     public GameObject guest;
     public GameObject st;
     public GameObject sound;
@@ -40,10 +41,11 @@ public class InitPPlayer : MonoBehaviourPun
     public GameObject MyCard;
     public Material[] cards;
     public Material dMaterial;
+    public Material gMaterial;
 
     public PhotonVoiceNetwork punvn;
     Coroutine currentHide=null;
-
+    public GameManager gm;
     Transform scoreboard;
 
     /*    public BooleanAction button1;
@@ -59,7 +61,7 @@ public class InitPPlayer : MonoBehaviourPun
     public void interruptHide()
     {
         if(currentHide!=null)
-            this.photonView.RPC("immediateHide", RpcTarget.All);
+            this.photonView.RPC("immediateHide", RpcTarget.AllBufferedViaServer);
     }
 
     [PunRPC]
@@ -86,7 +88,7 @@ public class InitPPlayer : MonoBehaviourPun
 
     public void teleGuest()
     {
-        this.photonView.RPC("tGuest", RpcTarget.All);
+        this.photonView.RPC("tGuest", RpcTarget.AllBufferedViaServer);
     }
 
     [PunRPC]
@@ -128,7 +130,7 @@ public class InitPPlayer : MonoBehaviourPun
 
     public void revealMyAnswer(string cardname)
     {
-        this.photonView.RPC("revealAnswer", RpcTarget.All,cardname);
+        this.photonView.RPC("revealAnswer", RpcTarget.AllBufferedViaServer,cardname);
     }
 
     public void EnableDisableHMD(bool input)
@@ -143,47 +145,47 @@ public class InitPPlayer : MonoBehaviourPun
 
     public void acceptON()
     {
-        this.photonView.RPC("trueAccept", RpcTarget.All);
+        this.photonView.RPC("trueAccept", RpcTarget.AllBufferedViaServer);
     }
     
     public void guestON()
     {
-        this.photonView.RPC("guestTrue", RpcTarget.All);
+        this.photonView.RPC("guestTrue", RpcTarget.AllBufferedViaServer);
     }
     
     public void guestOff()
     {
-        this.photonView.RPC("guestFalse", RpcTarget.All);
+        this.photonView.RPC("guestFalse", RpcTarget.AllBufferedViaServer);
     }
     
     public void votedON()
     {
-        this.photonView.RPC("trueVoted", RpcTarget.All);
+        this.photonView.RPC("trueVoted", RpcTarget.AllBufferedViaServer);
     }
 
     public void acceptOFF()
     {
-        this.photonView.RPC("falseAccept", RpcTarget.All);
+        this.photonView.RPC("falseAccept", RpcTarget.AllBufferedViaServer);
     }
     
     public void votedOFF()
     {
-        this.photonView.RPC("falseVoted", RpcTarget.All);
+        this.photonView.RPC("falseVoted", RpcTarget.AllBufferedViaServer);
     }
     
     public void hideMyAns()
     {
-        this.photonView.RPC("hideRPC", RpcTarget.All);
+        this.photonView.RPC("hideRPC", RpcTarget.AllBufferedViaServer);
     }
 
     public void sttON()
     {
-        this.photonView.RPC("trueST", RpcTarget.All);
+        this.photonView.RPC("trueST", RpcTarget.AllBufferedViaServer);
     }
 
     public void stOFF()
     {
-        this.photonView.RPC("falseST", RpcTarget.All);
+        this.photonView.RPC("falseST", RpcTarget.AllBufferedViaServer);
     }
 
     public void AcceptInvitation()
@@ -222,12 +224,15 @@ public class InitPPlayer : MonoBehaviourPun
 
         scoreboard = GameObject.Find("MenuBoard_double").transform;
         sound = GameObject.Find("SpawnSound");
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         teleporter = GameObject.Find("CameraRigs.TrackedAlias/Locomotors.Teleporter.Instant").GetComponent<TeleporterFacade>();
 
         ZoomFunctions zm = GameObject.Find("ZoomFunctions").GetComponent<ZoomFunctions>();
         zm.LZoom = lzoom;
         zm.RZoom = rzoom;
 
+        if (PhotonNetwork.CountOfPlayers > 2)
+            gm.openT();
         //this.photonView.RPC("setUname", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName); //set avatar instead of viewid
 
         /*GameObject temp = this.transform.Find("Indicators.ObjectPointers.Curved").gameObject;
@@ -254,20 +259,29 @@ public class InitPPlayer : MonoBehaviourPun
     void trueAccept()
     {
         accepted.SetActive(true);
+        MyCard.GetComponent<MeshRenderer>().material = gMaterial;
+        this.transform.Find("vr_glove_right_model").GetComponent<MeshRenderer>().material = gMaterial;
+        this.transform.Find("vr_glove_left_model").GetComponent<MeshRenderer>().material = gMaterial;
     }
-    
+
     [PunRPC]
     void guestTrue()
     {
         guest.SetActive(true);
+        MyCard.GetComponent<MeshRenderer>().material = gMaterial;
+        this.transform.Find("vr_glove_right_model").GetComponent<MeshRenderer>().material = gMaterial;
+        this.transform.Find("vr_glove_left_model").GetComponent<MeshRenderer>().material = gMaterial;
     }
-    
+
     [PunRPC]
     void guestFalse()
     {
         guest.SetActive(false);
+        MyCard.GetComponent<MeshRenderer>().material = dMaterial;
+        this.transform.Find("vr_glove_right_model").GetComponent<MeshRenderer>().material = gMaterial;
+        this.transform.Find("vr_glove_left_model").GetComponent<MeshRenderer>().material = gMaterial;
     }
-    
+
     [PunRPC]
     void trueVoted()
     {
@@ -278,6 +292,8 @@ public class InitPPlayer : MonoBehaviourPun
     void hideRPC()
     {
         MyCard.GetComponent<MeshRenderer>().material = dMaterial;
+        this.transform.Find("vr_glove_right_model").GetComponent<MeshRenderer>().material = dMaterial;
+        this.transform.Find("vr_glove_left_model").GetComponent<MeshRenderer>().material = dMaterial;
         //MyCard.SetActive(false);
     }
 
@@ -297,6 +313,10 @@ public class InitPPlayer : MonoBehaviourPun
     void trueST()
     {
         st.SetActive(true);
+        MyCard.GetComponent<MeshRenderer>().material = gMaterial;
+        this.transform.Find("vr_glove_right_model").GetComponent<MeshRenderer>().material = gMaterial;
+        this.transform.Find("vr_glove_left_model").GetComponent<MeshRenderer>().material = gMaterial;
+
     }
 
     [PunRPC]

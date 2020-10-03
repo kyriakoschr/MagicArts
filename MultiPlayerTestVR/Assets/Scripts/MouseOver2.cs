@@ -10,6 +10,7 @@ namespace cakeslice
         public GameObject aaudio = null;
         public GameObject Menu = null;
         public GameObject Canvas = null;
+        public GameObject inputCntrls = null;
         private Outline go;
         public Material outlineMaterial;
         private bool over = false;
@@ -108,6 +109,7 @@ namespace cakeslice
                 {
                     togleAction.Receive(true);
                     Canvas.SetActive(true);
+                    inputCntrls.SetActive(false);
                 }
                 else
                     zf.EnableDisable();

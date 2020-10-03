@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviourPun
     public GameObject dText;
     public GameObject aText;
     public GameObject startGame;
+    public GameObject inptCntrl;
+    public GameObject table;
     public Button startRound;
     public GameObject hide;
     public Button choose;
@@ -136,6 +138,7 @@ public class GameManager : MonoBehaviourPun
         }
         scores = scores.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
         int i = 1;
+        int lastS = 1000;
         foreach (string uname in scores.Keys)
         {
             GameObject myrow = Instantiate(prefab, scoreboard1.transform);
@@ -152,7 +155,11 @@ public class GameManager : MonoBehaviourPun
             myrow1.transform.Find("Rounds").GetComponent<Text>().text = rounds[uname].ToString();
             myrow1.transform.parent = scoreboard2.transform;
             myrow1.GetComponent<RectTransform>().localPosition = new Vector3(myrow1.GetComponent<RectTransform>().localPosition.x, myrow1.GetComponent<RectTransform>().localPosition.y, 0);
-            i++;
+            if (scores[uname] < lastS)
+            {
+                lastS = scores[uname];
+                i++;
+            }
         }
         //btn.SetActive(true); //start round btn enabled
         //sGroup.transform.Find("Storyteller").GetComponent<Text>().text = ""; //clear storyteller holder in ui
@@ -191,6 +198,18 @@ public class GameManager : MonoBehaviourPun
             sGroup.SetActive(false);
             choose.gameObject.SetActive(true);
         }*/
+    }
+
+    public void openT()
+    {
+        this.photonView.RPC("openTable", RpcTarget.AllBufferedViaServer);
+    }
+
+
+    [PunRPC]
+    void openTable()
+    {
+        table.SetActive(true);
     }
 
     void Start()
@@ -245,10 +264,10 @@ public class GameManager : MonoBehaviourPun
         {
             interrupt();
             this.photonView.RPC("AcceptDecline", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName); //set avatar instead of viewid
-            gameController.myLocalPlayer.GetComponent<InitPPlayer>().sttON();
             gameController.myLocalPlayer.GetComponent<InitPPlayer>().guestOff();
             gameController.myLocalPlayer.GetComponent<InitPPlayer>().votedOFF();
             gameController.myLocalPlayer.GetComponent<InitPPlayer>().acceptOFF();
+            gameController.myLocalPlayer.GetComponent<InitPPlayer>().sttON();
             punvn.Client.ChangeAudioGroups(new byte[1] { 0 }, new byte[1] { 1 });
         }
     }
@@ -264,6 +283,7 @@ public class GameManager : MonoBehaviourPun
                 GameObject AcceptDecline = gameController.myLocalPlayer.GetComponent<InitPPlayer>().AcceptDecline.gameObject;
                 AcceptDecline.SetActive(true);
                 AcceptDecline.transform.Find("Canvas/Text/Storyteller").GetComponent<Text>().text = initiator;
+                inptCntrl.SetActive(false);
             }
             else
             {
