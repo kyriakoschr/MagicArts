@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviourPun
     public GameObject startGame;
     public GameObject inptCntrl;
     public GameObject table;
+    public Zinnia.Action.ToggleAction togleAction;
     public Button startRound;
     public GameObject hide;
     public Button choose;
@@ -44,7 +45,7 @@ public class GameManager : MonoBehaviourPun
     public PhotonVoiceNetwork punvn;
     public Recorder recorder;
     public List<String> guests;
-
+    public int responded = 0;
     public void calcScore()
     {
         /*scores.Add("kokos", 1);
@@ -137,10 +138,15 @@ public class GameManager : MonoBehaviourPun
             GameObject.Destroy(child.gameObject);
         }
         scores = scores.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
-        int i = 1;
+        int i = 0;
         int lastS = 1000;
         foreach (string uname in scores.Keys)
         {
+            if (scores[uname] < lastS)
+            {
+                lastS = scores[uname];
+                i++;
+            }
             GameObject myrow = Instantiate(prefab, scoreboard1.transform);
             GameObject myrow1 = Instantiate(prefab, scoreboard2.transform);
             myrow.transform.Find("Rank").GetComponent<Text>().text = i.ToString();
@@ -155,11 +161,6 @@ public class GameManager : MonoBehaviourPun
             myrow1.transform.Find("Rounds").GetComponent<Text>().text = rounds[uname].ToString();
             myrow1.transform.parent = scoreboard2.transform;
             myrow1.GetComponent<RectTransform>().localPosition = new Vector3(myrow1.GetComponent<RectTransform>().localPosition.x, myrow1.GetComponent<RectTransform>().localPosition.y, 0);
-            if (scores[uname] < lastS)
-            {
-                lastS = scores[uname];
-                i++;
-            }
         }
         //btn.SetActive(true); //start round btn enabled
         //sGroup.transform.Find("Storyteller").GetComponent<Text>().text = ""; //clear storyteller holder in ui
@@ -288,6 +289,8 @@ public class GameManager : MonoBehaviourPun
             else
             {
                 AccDecSim.SetActive(true);
+                togleAction.Receive(true);
+                inptCntrl.SetActive(false);
                 AccDecSim.transform.Find("AcceptDeclineVR/Canvas/Text/Storyteller").GetComponent<Text>().text = initiator;
             }
         }
@@ -326,6 +329,47 @@ public class GameManager : MonoBehaviourPun
         }
     }
 
+    public void RespondToAll()
+    {
+        this.photonView.RPC("Respond", RpcTarget.AllBufferedViaServer);
+    }
+
+    [PunRPC]
+    public void Respond()
+    {
+        responded++;
+        Debug.LogError(responded + " " + PhotonNetwork.CurrentRoom.PlayerCount);
+        if (responded.Equals(PhotonNetwork.CurrentRoom.PlayerCount - 1))
+        {
+            if (answers.Count >= 2)
+            {
+                if (narrator.Equals(PhotonNetwork.LocalPlayer.NickName))
+                    makeAChoice();
+            }
+            else
+            {
+                answers.Clear();
+                startGame.SetActive(true);
+            }
+            responded = 0;
+        }
+    }
+
+    public void makeAChoice()
+    {
+        if (Simulator.activeInHierarchy)
+        {
+            choosePanel.SetActive(true);
+            togleAction.Receive(true);
+            inptCntrl.SetActive(false);
+        }
+        else
+        {
+            GameObject chooseAnswer = gameController.myLocalPlayer.GetComponent<InitPPlayer>().ChooseAnswer.gameObject;
+            chooseAnswer.SetActive(true);
+        }
+    }
+    
     [PunRPC]
     public void Answered(string user,string answer)
     {
