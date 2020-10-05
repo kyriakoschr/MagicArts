@@ -60,20 +60,22 @@ public class InitPPlayer : MonoBehaviourPun
 
     public void interruptHide()
     {
-        if(currentHide!=null)
-            this.photonView.RPC("immediateHide", RpcTarget.AllBufferedViaServer);
+        this.photonView.RPC("immediateHide", RpcTarget.AllBufferedViaServer);
     }
 
     [PunRPC]
     void immediateHide()
     {
-        StopCoroutine(currentHide);
-        currentHide = null;
+        if(currentHide!=null)
+            StopCoroutine(currentHide);
+        //currentHide = null;
+        Debug.LogError("immediate");
         hideMyAns();
         votedOFF();
         stOFF();
         guestOff();
         punvn.Client.ChangeAudioGroups(new byte[1] { 1 }, new byte[1] { 0 });
+        Debug.LogError("immediate2");
     }
 
     IEnumerator hideAnswer()
@@ -83,6 +85,7 @@ public class InitPPlayer : MonoBehaviourPun
         votedOFF();
         stOFF();
         guestOff();
+        Debug.LogError("SHOULD NOT");
         punvn.Client.ChangeAudioGroups(new byte[1] { 1 }, new byte[1] { 0 });
     }
 
@@ -120,6 +123,7 @@ public class InitPPlayer : MonoBehaviourPun
         }
         GameObject emptyGO = new GameObject();
         Transform newTransform = emptyGO.transform;
+        Debug.LogError(scoreboard.name);
         Vector3 v3 = scoreboard.position + new Vector3(Random.Range(1, 3) == 1 ? Random.Range(10, 30) : Random.Range(-30, -10), 0, Random.Range(1, 3) == 1 ? Random.Range(10, 30) : Random.Range(-30, -10));
         newTransform.position = v3;
         newTransform.LookAt(scoreboard);
@@ -180,8 +184,8 @@ public class InitPPlayer : MonoBehaviourPun
 
     public void sttON()
     {
-        if (currentHide != null)
-            interruptHide();
+        /*if (currentHide != null)
+            interruptHide();*/
         this.photonView.RPC("trueST", RpcTarget.AllBufferedViaServer);
     }
 
@@ -206,10 +210,7 @@ public class InitPPlayer : MonoBehaviourPun
         left = GameObject.Find("LeftControllerAlias");
         right = GameObject.Find("RightControllerAlias");
         head = GameObject.Find("HeadsetAlias");
-        GameObject voice = GameObject.Find("Voice");
-        voice.GetComponent<Recorder>().Init(voice.GetComponent<PhotonVoiceNetwork>().VoiceClient);
-        transform.GetComponent<PhotonVoiceView>().RecorderInUse = voice.GetComponent<Recorder>();
-        punvn = GameObject.Find("Voice").GetComponent<PhotonVoiceNetwork>();
+        
         /*button1 = GameObject.Find("ButtonOne").GetComponent<BooleanAction>();
         button2 = GameObject.Find("ButtonTwo").GetComponent<BooleanAction>();
         
@@ -224,11 +225,7 @@ public class InitPPlayer : MonoBehaviourPun
         this.transform.Find("FollowRightHand").GetComponent<ObjectFollower>().Sources.InsertAt(right,0);
         this.transform.Find("FollowHMD").GetComponent<ObjectFollower>().Sources.InsertAt(head, 0);
 
-        scoreboard = GameObject.Find("MenuBoard_double").transform;
-        sound = GameObject.Find("SpawnSound");
-        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-        teleporter = GameObject.Find("CameraRigs.TrackedAlias/Locomotors.Teleporter.Instant").GetComponent<TeleporterFacade>();
-
+        
         ZoomFunctions zm = GameObject.Find("ZoomFunctions").GetComponent<ZoomFunctions>();
         zm.LZoom = lzoom;
         zm.RZoom = rzoom;
@@ -257,6 +254,18 @@ public class InitPPlayer : MonoBehaviourPun
         temp.GetComponent<PointerFacade>().Selected.AddListener(spatialDispatcher.GetComponent<SpatialTargetDispatcher>().DoDispatchSelect);*/
     }
 
+    private void Awake()
+    {
+        GameObject voice = GameObject.Find("Voice");
+        voice.GetComponent<Recorder>().Init(voice.GetComponent<PhotonVoiceNetwork>().VoiceClient);
+        transform.GetComponent<PhotonVoiceView>().RecorderInUse = voice.GetComponent<Recorder>();
+        punvn = GameObject.Find("Voice").GetComponent<PhotonVoiceNetwork>(); 
+        scoreboard = GameObject.Find("MenuBoard_double/back").transform;
+        sound = GameObject.Find("SpawnSound");
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        teleporter = GameObject.Find("CameraRigs.TrackedAlias/Locomotors.Teleporter.Instant").GetComponent<TeleporterFacade>();
+    }
+
     [PunRPC]
     void trueAccept()
     {
@@ -280,8 +289,8 @@ public class InitPPlayer : MonoBehaviourPun
     {
         guest.SetActive(false);
         MyCard.GetComponent<MeshRenderer>().material = dMaterial;
-        this.transform.Find("vr_glove_right_model/renderMesh0").GetComponent<SkinnedMeshRenderer>().material = gMaterial;
-        this.transform.Find("vr_glove_left_model/renderMesh0").GetComponent<SkinnedMeshRenderer>().material = gMaterial;
+        this.transform.Find("vr_glove_right_model/renderMesh0").GetComponent<SkinnedMeshRenderer>().material = dMaterial;
+        this.transform.Find("vr_glove_left_model/renderMesh0").GetComponent<SkinnedMeshRenderer>().material = dMaterial;
     }
 
     [PunRPC]
@@ -314,10 +323,12 @@ public class InitPPlayer : MonoBehaviourPun
     [PunRPC]
     void trueST()
     {
+        Debug.LogError("Storyteller dressed"); 
         st.SetActive(true);
         MyCard.GetComponent<MeshRenderer>().material = gMaterial;
         this.transform.Find("vr_glove_right_model/renderMesh0").GetComponent<SkinnedMeshRenderer>().material = gMaterial;
         this.transform.Find("vr_glove_left_model/renderMesh0").GetComponent<SkinnedMeshRenderer>().material = gMaterial;
+        Debug.LogError("Storyteller dressed 2");
 
     }
 

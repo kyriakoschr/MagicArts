@@ -11,6 +11,9 @@ public class StartLobbyController : MonoBehaviourPunCallbacks
     [SerializeField]
     private int RoomSize;
     public TextMeshProUGUI username;
+    public InputField uname;
+    public TMP_InputField InputField;
+    public Button join;
 
     public override void OnConnectedToMaster()
     {
@@ -57,12 +60,13 @@ public class StartLobbyController : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        
+        InputField.Select();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Return))
+            join.onClick.Invoke();
     }
 }

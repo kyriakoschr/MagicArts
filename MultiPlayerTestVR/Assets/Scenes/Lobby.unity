@@ -525,6 +525,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RoomSize: 4
   username: {fileID: 957081988}
+  uname: {fileID: 0}
+  InputField: {fileID: 1860752421}
+  join: {fileID: 1138939247}
 --- !u!4 &837998908
 Transform:
   m_ObjectHideFlags: 0

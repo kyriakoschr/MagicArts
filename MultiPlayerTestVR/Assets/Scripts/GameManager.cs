@@ -190,9 +190,9 @@ public class GameManager : MonoBehaviourPun
     public void onHide()
     {
         Debug.LogError("narrator is " + narrator);
-        if (correctAnswer.Equals(""))
+        /*if (correctAnswer.Equals(""))
             startGame.SetActive(true);
-        else
+        else*/
             hide.SetActive(true);
         /*else
         {
@@ -251,24 +251,23 @@ public class GameManager : MonoBehaviourPun
     [PunRPC]
     public void interruptH()
     {
+        Debug.LogError("Interrupt");    
         gameController.myLocalPlayer.GetComponent<InitPPlayer>().interruptHide();
     }
 
     public void interrupt()
     {
-        this.photonView.RPC("interruptH", RpcTarget.All); 
+        this.photonView.RPC("interruptH", RpcTarget.Others); 
     }
 
     public void InviteUsers()
     {
         if (narrator.Equals(""))
         {
-            interrupt();
-            this.photonView.RPC("AcceptDecline", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName); //set avatar instead of viewid
-            gameController.myLocalPlayer.GetComponent<InitPPlayer>().guestOff();
+            /*gameController.myLocalPlayer.GetComponent<InitPPlayer>().guestOff();
             gameController.myLocalPlayer.GetComponent<InitPPlayer>().votedOFF();
-            gameController.myLocalPlayer.GetComponent<InitPPlayer>().acceptOFF();
-            gameController.myLocalPlayer.GetComponent<InitPPlayer>().sttON();
+            gameController.myLocalPlayer.GetComponent<InitPPlayer>().acceptOFF();*/
+            this.photonView.RPC("AcceptDecline", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName); //set avatar instead of viewid
             punvn.Client.ChangeAudioGroups(new byte[1] { 0 }, new byte[1] { 1 });
         }
     }
@@ -277,6 +276,7 @@ public class GameManager : MonoBehaviourPun
     public void AcceptDecline(string initiator)
     {
         narrator = initiator;
+        //gameController.myLocalPlayer.GetComponent<InitPPlayer>().interruptHide();
         if (!PhotonNetwork.LocalPlayer.NickName.Equals(initiator))
         {
             if (!Simulator.activeSelf)
@@ -293,6 +293,13 @@ public class GameManager : MonoBehaviourPun
                 inptCntrl.SetActive(false);
                 AccDecSim.transform.Find("AcceptDeclineVR/Canvas/Text/Storyteller").GetComponent<Text>().text = initiator;
             }
+        }
+        else
+        {
+            interrupt();
+            gameController.myLocalPlayer.GetComponent<InitPPlayer>().guestOff();
+            gameController.myLocalPlayer.GetComponent<InitPPlayer>().votedOFF();
+            gameController.myLocalPlayer.GetComponent<InitPPlayer>().sttON();
         }
     }
 
@@ -349,7 +356,10 @@ public class GameManager : MonoBehaviourPun
             else
             {
                 answers.Clear();
+                guests.Clear();
                 startGame.SetActive(true);
+                narrator = "";
+                gameController.myLocalPlayer.GetComponent<InitPPlayer>().interruptHide();
             }
             responded = 0;
         }
@@ -397,6 +407,8 @@ public class GameManager : MonoBehaviourPun
                 return;
             if (Simulator.activeInHierarchy) {
                 choosePanel.SetActive(true);
+                togleAction.Receive(true);
+                inptCntrl.SetActive(false);
             }
             else
             {
