@@ -36,7 +36,8 @@ public class Teleport : MonoBehaviour {
 			if (inMuseum.Equals(0))
 			{
 				teleporter.Teleport(roomDay);
-				if (simulator.activeInHierarchy) { 
+				if (simulator.activeInHierarchy) {
+					Cursor.visible = true;
 					canvasN.SetActive(true);
 					Debug.LogError(this.gameObject.name);
 					toggleAction.Receive(true);
@@ -46,6 +47,7 @@ public class Teleport : MonoBehaviour {
 				teleporter.Teleport(museum);
 				if (simulator.activeInHierarchy)
                 {
+					Cursor.visible = false;
 					canvasD.SetActive(false);
 					canvasN.SetActive(false);
 					toggleAction.Receive(true);

@@ -60,18 +60,18 @@ public class GameManager : MonoBehaviourPun
             foreach (string s in answers.Keys)
                 if (answers[s].Equals(correctAnswer))
                     if (scores.ContainsKey(s))
-                            scores[s] += 3;
+                        scores[s] += 3;
                     else
                         scores.Add(s, 3);
-                
+
                 else
                     if (!scores.ContainsKey(s))
-                        if (!scores.ContainsKey(s))
-                            scores.Add(s, 0);
+                    if (!scores.ContainsKey(s))
+                        scores.Add(s, 0);
             if (scores.ContainsKey(narrator))
-                    scores[narrator] += 3;
-                else
-                    scores.Add(narrator, 3);
+                scores[narrator] += 3;
+            else
+                scores.Add(narrator, 3);
         }
         else
         {
@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviourPun
             gameController.myLocalPlayer.GetComponent<InitPPlayer>().teleGuest();
             return;
         }
-        Debug.LogError("narr is " + narrator+" myname is "+myname);
+        Debug.LogError("narr is " + narrator + " myname is " + myname);
         if (narrator.Equals(myname))
         {
             cardname = correctAnswer;
@@ -124,7 +124,7 @@ public class GameManager : MonoBehaviourPun
 
     public void generateRows()
     {
-        Debug.LogError("Generate rows "+scores.Count+" "+answers.Count);
+        Debug.LogError("Generate rows " + scores.Count + " " + answers.Count);
         foreach (Transform child in scoreboard1.transform)
         {
             if (child.name.Equals("Head"))
@@ -154,7 +154,7 @@ public class GameManager : MonoBehaviourPun
             myrow.transform.Find("Score").GetComponent<Text>().text = scores[uname].ToString();
             myrow.transform.Find("Rounds").GetComponent<Text>().text = rounds[uname].ToString();
             myrow.transform.parent = scoreboard1.transform;
-            myrow.GetComponent<RectTransform>().localPosition = new Vector3(myrow.GetComponent<RectTransform>().localPosition.x, myrow.GetComponent<RectTransform>().localPosition.y,0);
+            myrow.GetComponent<RectTransform>().localPosition = new Vector3(myrow.GetComponent<RectTransform>().localPosition.x, myrow.GetComponent<RectTransform>().localPosition.y, 0);
             myrow1.transform.Find("Rank").GetComponent<Text>().text = i.ToString();
             myrow1.transform.Find("Name").GetComponent<Text>().text = uname;
             myrow1.transform.Find("Score").GetComponent<Text>().text = scores[uname].ToString();
@@ -166,7 +166,7 @@ public class GameManager : MonoBehaviourPun
         //sGroup.transform.Find("Storyteller").GetComponent<Text>().text = ""; //clear storyteller holder in ui
         Debug.LogError("scores written");
         Sound.Play();
-        Debug.LogError("sound played"); 
+        Debug.LogError("sound played");
         startGame.SetActive(true);
         Debug.LogError("button active");
         //revealAnswer();
@@ -193,7 +193,7 @@ public class GameManager : MonoBehaviourPun
         /*if (correctAnswer.Equals(""))
             startGame.SetActive(true);
         else*/
-            hide.SetActive(true);
+        hide.SetActive(true);
         /*else
         {
             sGroup.SetActive(false);
@@ -215,7 +215,7 @@ public class GameManager : MonoBehaviourPun
 
     void Start()
     {
-        //hide.onClick.AddListener(onHide);
+        Cursor.visible = false;
     }
 
     public void addPlayer()
@@ -226,7 +226,7 @@ public class GameManager : MonoBehaviourPun
         punvn.Client.ChangeAudioGroups(new byte[1] { 0 }, new byte[1] { 1 });
         //recorder.AudioGroup = 1;
     }
-    
+
     public void addGuest()
     {
         this.photonView.RPC("Guest", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName); //set avatar instead of viewid
@@ -241,23 +241,23 @@ public class GameManager : MonoBehaviourPun
     {
         answers.Add(username, "accepted");
     }
-    
+
     [PunRPC]
     public void Guest(string username)
     {
         guests.Add(username);
     }
-    
+
     [PunRPC]
     public void interruptH()
     {
-        Debug.LogError("Interrupt");    
+        Debug.LogError("Interrupt");
         gameController.myLocalPlayer.GetComponent<InitPPlayer>().interruptHide();
     }
 
     public void interrupt()
     {
-        this.photonView.RPC("interruptH", RpcTarget.Others); 
+        this.photonView.RPC("interruptH", RpcTarget.Others);
     }
 
     public void InviteUsers()
@@ -288,6 +288,7 @@ public class GameManager : MonoBehaviourPun
             }
             else
             {
+                Cursor.visible = true;
                 AccDecSim.SetActive(true);
                 togleAction.Receive(true);
                 inptCntrl.SetActive(false);
@@ -318,7 +319,7 @@ public class GameManager : MonoBehaviourPun
     public void CardPlaced(GameObject obj)
     {
         if (narrator.Equals(PhotonNetwork.LocalPlayer.NickName))
-            this.photonView.RPC("CardPlacedRPC", RpcTarget.All,obj.name); //set avatar instead of viewid
+            this.photonView.RPC("CardPlacedRPC", RpcTarget.All, obj.name); //set avatar instead of viewid
         else
         {
             /*answers[PhotonNetwork.LocalPlayer.NickName] = obj.name;
@@ -330,7 +331,7 @@ public class GameManager : MonoBehaviourPun
                 //show scoreboard
                 answered = 0;
             }*/
-            this.photonView.RPC("Answered", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName,obj.name); //set avatar instead of viewid
+            this.photonView.RPC("Answered", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName, obj.name); //set avatar instead of viewid
             gameController.myLocalPlayer.GetComponent<InitPPlayer>().acceptOFF();
             gameController.myLocalPlayer.GetComponent<InitPPlayer>().votedON();
         }
@@ -365,10 +366,21 @@ public class GameManager : MonoBehaviourPun
         }
     }
 
+    public void disCursor()
+    {
+        Cursor.visible = false;
+    }
+    
+    public void enCursor()
+    {
+        Cursor.visible = true;
+    }
+
     public void makeAChoice()
     {
         if (Simulator.activeInHierarchy)
         {
+            Cursor.visible = true;
             choosePanel.SetActive(true);
             togleAction.Receive(true);
             inptCntrl.SetActive(false);
@@ -406,6 +418,7 @@ public class GameManager : MonoBehaviourPun
             if (!answers.ContainsKey(PhotonNetwork.LocalPlayer.NickName))
                 return;
             if (Simulator.activeInHierarchy) {
+                Cursor.visible = true;
                 choosePanel.SetActive(true);
                 togleAction.Receive(true);
                 inptCntrl.SetActive(false);

@@ -107,6 +107,7 @@ namespace cakeslice
             if (Menu.activeInHierarchy) {
                 if (!sim.activeInHierarchy)
                 {
+                    Cursor.visible = true;
                     togleAction.Receive(true);
                     Canvas.SetActive(true);
                     inputCntrls.SetActive(false);

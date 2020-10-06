@@ -11847,6 +11847,8 @@ MonoBehaviour:
   - {fileID: 0}
   dMaterial: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   gMaterial: {fileID: 2100000, guid: 1ff6d4186b9071540b4ff515b0e583a7, type: 2}
+  gfMaterial: {fileID: 2100000, guid: d3733a24b15d7e74bbd1d7de3266d437, type: 2}
+  fMaterial: {fileID: 2100000, guid: b1b5c67f07c907e4c994aacdaba788be, type: 2}
   punvn: {fileID: 0}
   gm: {fileID: 0}
 --- !u!114 &6186584710567735861

@@ -42,6 +42,8 @@ public class InitPPlayer : MonoBehaviourPun
     public Material[] cards;
     public Material dMaterial;
     public Material gMaterial;
+    public Material gfMaterial;
+    public Material fMaterial;
 
     public PhotonVoiceNetwork punvn;
     Coroutine currentHide=null;
@@ -230,7 +232,7 @@ public class InitPPlayer : MonoBehaviourPun
         zm.LZoom = lzoom;
         zm.RZoom = rzoom;
 
-        if (PhotonNetwork.CurrentRoom.PlayerCount> 2)
+        if (PhotonNetwork.CurrentRoom.PlayerCount>3)
             gm.openT();
         //this.photonView.RPC("setUname", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName); //set avatar instead of viewid
 
@@ -273,6 +275,7 @@ public class InitPPlayer : MonoBehaviourPun
         MyCard.GetComponent<MeshRenderer>().material = gMaterial;
         this.transform.Find("vr_glove_right_model/renderMesh0").GetComponent<SkinnedMeshRenderer>().material = gMaterial;
         this.transform.Find("vr_glove_left_model/renderMesh0").GetComponent<SkinnedMeshRenderer>().material = gMaterial;
+        this.transform.Find("Head").GetComponent<MeshRenderer>().material = gfMaterial;
     }
 
     [PunRPC]
@@ -282,6 +285,7 @@ public class InitPPlayer : MonoBehaviourPun
         MyCard.GetComponent<MeshRenderer>().material = gMaterial;
         this.transform.Find("vr_glove_right_model/renderMesh0").GetComponent<SkinnedMeshRenderer>().material = gMaterial;
         this.transform.Find("vr_glove_left_model/renderMesh0").GetComponent<SkinnedMeshRenderer>().material = gMaterial;
+        this.transform.Find("Head").GetComponent<MeshRenderer>().material = gfMaterial;
     }
 
     [PunRPC]
@@ -291,6 +295,7 @@ public class InitPPlayer : MonoBehaviourPun
         MyCard.GetComponent<MeshRenderer>().material = dMaterial;
         this.transform.Find("vr_glove_right_model/renderMesh0").GetComponent<SkinnedMeshRenderer>().material = dMaterial;
         this.transform.Find("vr_glove_left_model/renderMesh0").GetComponent<SkinnedMeshRenderer>().material = dMaterial;
+        this.transform.Find("Head").GetComponent<MeshRenderer>().material = fMaterial;
     }
 
     [PunRPC]
@@ -305,6 +310,7 @@ public class InitPPlayer : MonoBehaviourPun
         MyCard.GetComponent<MeshRenderer>().material = dMaterial;
         this.transform.Find("vr_glove_right_model/renderMesh0").GetComponent<SkinnedMeshRenderer>().material = dMaterial;
         this.transform.Find("vr_glove_left_model/renderMesh0").GetComponent<SkinnedMeshRenderer>().material = dMaterial;
+        this.transform.Find("Head").GetComponent<MeshRenderer>().material = fMaterial;
         //MyCard.SetActive(false);
     }
 
@@ -328,6 +334,7 @@ public class InitPPlayer : MonoBehaviourPun
         MyCard.GetComponent<MeshRenderer>().material = gMaterial;
         this.transform.Find("vr_glove_right_model/renderMesh0").GetComponent<SkinnedMeshRenderer>().material = gMaterial;
         this.transform.Find("vr_glove_left_model/renderMesh0").GetComponent<SkinnedMeshRenderer>().material = gMaterial;
+        this.transform.Find("Head").GetComponent<MeshRenderer>().material = gfMaterial;
         Debug.LogError("Storyteller dressed 2");
 
     }
