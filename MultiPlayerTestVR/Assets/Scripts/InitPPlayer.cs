@@ -71,13 +71,11 @@ public class InitPPlayer : MonoBehaviourPun
         if(currentHide!=null)
             StopCoroutine(currentHide);
         //currentHide = null;
-        Debug.LogError("immediate");
         hideMyAns();
         votedOFF();
         stOFF();
         guestOff();
         punvn.Client.ChangeAudioGroups(new byte[1] { 1 }, new byte[1] { 0 });
-        Debug.LogError("immediate2");
     }
 
     IEnumerator hideAnswer()
@@ -87,12 +85,13 @@ public class InitPPlayer : MonoBehaviourPun
         votedOFF();
         stOFF();
         guestOff();
-        Debug.LogError("SHOULD NOT");
+        //Debug.LogError("SHOULD NOT");
         punvn.Client.ChangeAudioGroups(new byte[1] { 1 }, new byte[1] { 0 });
     }
 
     public void teleGuest()
     {
+        Debug.LogError("teeleguest called for"+PhotonNetwork.LocalPlayer.NickName);
         this.photonView.RPC("tGuest", RpcTarget.AllBufferedViaServer);
     }
 
@@ -104,18 +103,19 @@ public class InitPPlayer : MonoBehaviourPun
         Vector3 v3 = scoreboard.position + new Vector3(Random.Range(1,3)==1? Random.Range(10, 30): Random.Range(-30, -10), 0, Random.Range(1, 3) == 1 ? Random.Range(10, 30) : Random.Range(-30, -10));
         newTransform.position = v3;
         newTransform.LookAt(scoreboard);
-        teleporter.Teleport(newTransform);
+        if (photonView.IsMine)
+            teleporter.Teleport(newTransform);
         sound.GetComponent<AudioSource>().Play();
     }
 
     [PunRPC]
-    public void revealAnswer(string cardname)
+    public void revealAnswerR(string cardname)
     {
+        //Debug.LogError(this.transform.Find("Head/Username").GetComponent<TextMeshPro>().text);
         cards = Resources.LoadAll<Material>("TexturesM/");
-        Debug.LogError(cardname + " is cardname and total cards "+cards.Length+" cardname "+cardname);
+        //Debug.LogError(cardname + " is cardname and total cards "+cards.Length+" cardname "+cardname);
         foreach (Material m in cards)
         {
-            Debug.LogError(m.name);
             if (m.name.Equals(cardname))
             {
                 MyCard.GetComponent<MeshRenderer>().material = m;
@@ -125,18 +125,20 @@ public class InitPPlayer : MonoBehaviourPun
         }
         GameObject emptyGO = new GameObject();
         Transform newTransform = emptyGO.transform;
-        Debug.LogError(scoreboard.name);
+        //Debug.LogError(scoreboard.name);
         Vector3 v3 = scoreboard.position + new Vector3(Random.Range(1, 3) == 1 ? Random.Range(10, 30) : Random.Range(-30, -10), 0, Random.Range(1, 3) == 1 ? Random.Range(10, 30) : Random.Range(-30, -10));
         newTransform.position = v3;
         newTransform.LookAt(scoreboard);
-        teleporter.Teleport(newTransform);
         sound.GetComponent<AudioSource>().Play();
-        currentHide =StartCoroutine(hideAnswer());
+        if(photonView.IsMine)
+            teleporter.Teleport(newTransform);
+        currentHide = StartCoroutine(hideAnswer());
     }
 
     public void revealMyAnswer(string cardname)
     {
-        this.photonView.RPC("revealAnswer", RpcTarget.AllBufferedViaServer,cardname);
+        Debug.LogError("reveal my answer called for"+PhotonNetwork.LocalPlayer.NickName);
+        this.photonView.RPC("revealAnswerR", RpcTarget.AllBufferedViaServer,cardname);
     }
 
     public void EnableDisableHMD(bool input)
@@ -208,7 +210,7 @@ public class InitPPlayer : MonoBehaviourPun
         if (!photonView.IsMine)
             return;
         cards= Resources.LoadAll<Material>("BackColor_Blue/");
-        Debug.LogError("photon view is mine");
+        //Debug.LogError("photon view is mine");
         left = GameObject.Find("LeftControllerAlias");
         right = GameObject.Find("RightControllerAlias");
         head = GameObject.Find("HeadsetAlias");
@@ -262,7 +264,7 @@ public class InitPPlayer : MonoBehaviourPun
         voice.GetComponent<Recorder>().Init(voice.GetComponent<PhotonVoiceNetwork>().VoiceClient);
         transform.GetComponent<PhotonVoiceView>().RecorderInUse = voice.GetComponent<Recorder>();
         punvn = GameObject.Find("Voice").GetComponent<PhotonVoiceNetwork>(); 
-        scoreboard = GameObject.Find("MenuBoard_double/back").transform;
+        scoreboard = GameObject.Find("gatherP").transform;
         sound = GameObject.Find("SpawnSound");
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         teleporter = GameObject.Find("CameraRigs.TrackedAlias/Locomotors.Teleporter.Instant").GetComponent<TeleporterFacade>();
@@ -329,13 +331,13 @@ public class InitPPlayer : MonoBehaviourPun
     [PunRPC]
     void trueST()
     {
-        Debug.LogError("Storyteller dressed"); 
+        //Debug.LogError("Storyteller dressed"); 
         st.SetActive(true);
         MyCard.GetComponent<MeshRenderer>().material = gMaterial;
         this.transform.Find("vr_glove_right_model/renderMesh0").GetComponent<SkinnedMeshRenderer>().material = gMaterial;
         this.transform.Find("vr_glove_left_model/renderMesh0").GetComponent<SkinnedMeshRenderer>().material = gMaterial;
         this.transform.Find("Head").GetComponent<MeshRenderer>().material = gfMaterial;
-        Debug.LogError("Storyteller dressed 2");
+        //Debug.LogError("Storyteller dressed 2");
 
     }
 

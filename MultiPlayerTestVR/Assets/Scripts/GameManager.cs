@@ -63,9 +63,7 @@ public class GameManager : MonoBehaviourPun
                         scores[s] += 3;
                     else
                         scores.Add(s, 3);
-
                 else
-                    if (!scores.ContainsKey(s))
                     if (!scores.ContainsKey(s))
                         scores.Add(s, 0);
             if (scores.ContainsKey(narrator))
@@ -105,26 +103,32 @@ public class GameManager : MonoBehaviourPun
     {
         string myname = PhotonNetwork.LocalPlayer.NickName;
         string cardname;
-        if (guests.Contains(myname)) {
+        Debug.LogError(myname + " ismyname " + narrator + " isnarr");
+        if (guests.Contains(myname))
+        {
+            Debug.LogError("should not");
             gameController.myLocalPlayer.GetComponent<InitPPlayer>().teleGuest();
             return;
         }
-        Debug.LogError("narr is " + narrator + " myname is " + myname);
-        if (narrator.Equals(myname))
+        else if (answers.ContainsKey(myname)||narrator.Equals(myname))
         {
-            cardname = correctAnswer;
+            Debug.LogError("should not2");
+            if (narrator.Equals(myname))
+            {
+                cardname = correctAnswer;
+            }
+            else
+            {
+                cardname = answers[myname];
+            }
+            //Debug.LogError("ti skata is " + cardname);
+            gameController.myLocalPlayer.GetComponent<InitPPlayer>().revealMyAnswer(cardname);
         }
-        else
-        {
-            cardname = answers[myname];
-        }
-        Debug.LogError("cardname is " + cardname);
-        gameController.myLocalPlayer.GetComponent<InitPPlayer>().revealMyAnswer(cardname);
     }
 
     public void generateRows()
     {
-        Debug.LogError("Generate rows " + scores.Count + " " + answers.Count);
+        //Debug.LogError("Generate rows " + scores.Count + " " + answers.Count);
         foreach (Transform child in scoreboard1.transform)
         {
             if (child.name.Equals("Head"))
@@ -164,13 +168,13 @@ public class GameManager : MonoBehaviourPun
         }
         //btn.SetActive(true); //start round btn enabled
         //sGroup.transform.Find("Storyteller").GetComponent<Text>().text = ""; //clear storyteller holder in ui
-        Debug.LogError("scores written");
+        //Debug.LogError("scores written");
         Sound.Play();
-        Debug.LogError("sound played");
+        //Debug.LogError("sound played");
         startGame.SetActive(true);
-        Debug.LogError("button active");
+        //Debug.LogError("button active");
         //revealAnswer();
-        Debug.LogError("answers revealed");
+        //Debug.LogError("answers revealed");
         answers.Clear();
         guests.Clear();
         narrator = "";
@@ -183,13 +187,13 @@ public class GameManager : MonoBehaviourPun
     {
         gameController.myLocalPlayer.GetComponent<InitPPlayer>().acceptOFF();
         gameController.myLocalPlayer.GetComponent<InitPPlayer>().stOFF();
-        punvn.Client.ChangeAudioGroups(new byte[1] { 1 }, new byte[1] { 0 });
+        //punvn.Client.ChangeAudioGroups(new byte[1] { 1 }, new byte[1] { 0 });
         //recorder.AudioGroup = 0;
     }
 
     public void onHide()
     {
-        Debug.LogError("narrator is " + narrator);
+        //Debug.LogError("narrator is " + narrator);
         /*if (correctAnswer.Equals(""))
             startGame.SetActive(true);
         else*/
@@ -223,7 +227,7 @@ public class GameManager : MonoBehaviourPun
         this.photonView.RPC("Accept", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName); //set avatar instead of viewid
         startGame.SetActive(false);
         gameController.myLocalPlayer.GetComponent<InitPPlayer>().acceptON();
-        punvn.Client.ChangeAudioGroups(new byte[1] { 0 }, new byte[1] { 1 });
+        //punvn.Client.ChangeAudioGroups(new byte[1] { 0 }, new byte[1] { 1 });
         //recorder.AudioGroup = 1;
     }
 
@@ -232,7 +236,7 @@ public class GameManager : MonoBehaviourPun
         this.photonView.RPC("Guest", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName); //set avatar instead of viewid
         startGame.SetActive(false);
         gameController.myLocalPlayer.GetComponent<InitPPlayer>().guestON();
-        punvn.Client.ChangeAudioGroups(new byte[1] { 0 }, new byte[1] { 1 });
+        //punvn.Client.ChangeAudioGroups(new byte[1] { 0 }, new byte[1] { 1 });
         //recorder.AudioGroup = 1;
     }
 
@@ -251,7 +255,7 @@ public class GameManager : MonoBehaviourPun
     [PunRPC]
     public void interruptH()
     {
-        Debug.LogError("Interrupt");
+        //Debug.LogError("Interrupt");
         gameController.myLocalPlayer.GetComponent<InitPPlayer>().interruptHide();
     }
 
@@ -268,7 +272,7 @@ public class GameManager : MonoBehaviourPun
             gameController.myLocalPlayer.GetComponent<InitPPlayer>().votedOFF();
             gameController.myLocalPlayer.GetComponent<InitPPlayer>().acceptOFF();*/
             this.photonView.RPC("AcceptDecline", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName); //set avatar instead of viewid
-            punvn.Client.ChangeAudioGroups(new byte[1] { 0 }, new byte[1] { 1 });
+            //punvn.Client.ChangeAudioGroups(new byte[1] { 0 }, new byte[1] { 1 });
         }
     }
 
@@ -276,6 +280,7 @@ public class GameManager : MonoBehaviourPun
     public void AcceptDecline(string initiator)
     {
         narrator = initiator;
+        Debug.LogError("First one " + narrator + " " + PhotonNetwork.LocalPlayer.NickName);
         //gameController.myLocalPlayer.GetComponent<InitPPlayer>().interruptHide();
         if (!PhotonNetwork.LocalPlayer.NickName.Equals(initiator))
         {
@@ -346,11 +351,14 @@ public class GameManager : MonoBehaviourPun
     public void Respond()
     {
         responded++;
-        Debug.LogError(responded + " " + PhotonNetwork.CurrentRoom.PlayerCount);
         if (responded.Equals(PhotonNetwork.CurrentRoom.PlayerCount - 1))
         {
             if (answers.Count >= 2)
             {
+                if (narrator.Equals(PhotonNetwork.LocalPlayer.NickName)||answers.ContainsKey(PhotonNetwork.LocalPlayer.NickName)||guests.Contains(PhotonNetwork.LocalPlayer.NickName))
+                {
+                    punvn.Client.ChangeAudioGroups(new byte[1] { 0 }, new byte[1] { 1 });
+                }
                 if (narrator.Equals(PhotonNetwork.LocalPlayer.NickName))
                     makeAChoice();
             }
@@ -395,11 +403,14 @@ public class GameManager : MonoBehaviourPun
     [PunRPC]
     public void Answered(string user,string answer)
     {
-        Debug.LogError(user + " answered " + answer);
+        Debug.LogError("i am "+PhotonNetwork.LocalPlayer.NickName+" narris: "+narrator);
+        Debug.LogError("responded:" + responded + " playing:" + answers.Count + " guests:" + guests.Count+" answered:"+answered);
         answers[user] = answer;
         answered++;
         if (answers.Count.Equals(answered))
         {
+            foreach (string key in answers.Keys)
+                Debug.LogError(key + ":" + answers[key]);
             revealAnswer();
             calcScore();
             //show scoreboard
