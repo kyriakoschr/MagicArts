@@ -27,6 +27,12 @@ public class EmotionManager : MonoBehaviourPun
     public float secsForFeeling = 30;
     public GameObject sound;
 
+    public Material m1;
+    public Material m2;
+    public Material m3;
+    public Material m4;
+    public Material m5;
+
     public void addFeel(int feeling)
     {
         this.photonView.RPC("addFeeling", RpcTarget.All, gc.myLocalPlayer.GetComponent<PhotonView>().ViewID, feeling);
@@ -80,22 +86,52 @@ public class EmotionManager : MonoBehaviourPun
             case 0:
                 bubbles.Find(x => x.name.Equals("smilecloud")).gameObject.SetActive(true);
                 StartCoroutine(timer(bubbles.Find(x => x.name.Equals("smilecloud")).gameObject));
+                if (play.GetPhotonView().IsMine)
+                {
+                    ParticleSystem p = play.transform.Find("Head").GetComponent<ParticleSystem>();
+                    p.GetComponent<ParticleSystemRenderer>().material = m1;
+                    p.Play();
+                }
                 break;
             case 1:
                 bubbles.Find(x => x.name.Equals("wowcloud")).gameObject.SetActive(true);
                 StartCoroutine(timer(bubbles.Find(x => x.name.Equals("wowcloud")).gameObject));
+                if (play.GetPhotonView().IsMine)
+                {
+                    ParticleSystem p = play.transform.Find("Head").GetComponent<ParticleSystem>();
+                    p.GetComponent<ParticleSystemRenderer>().material = m2;
+                    p.Play();
+                }
                 break;
             case 2:
                 bubbles.Find(x => x.name.Equals("neutralcloud")).gameObject.SetActive(true);
                 StartCoroutine(timer(bubbles.Find(x => x.name.Equals("neutralcloud")).gameObject));
+                if (play.GetPhotonView().IsMine)
+                {
+                    ParticleSystem p = play.transform.Find("Head").GetComponent<ParticleSystem>();
+                    p.GetComponent<ParticleSystemRenderer>().material = m3;
+                    p.Play();
+                }
                 break;
             case 3:
                 bubbles.Find(x => x.name.Equals("sadcloud")).gameObject.SetActive(true);
                 StartCoroutine(timer(bubbles.Find(x => x.name.Equals("sadcloud")).gameObject));
+                if (play.GetPhotonView().IsMine)
+                {
+                    ParticleSystem p = play.transform.Find("Head").GetComponent<ParticleSystem>();
+                    p.GetComponent<ParticleSystemRenderer>().material = m4;
+                    p.Play();
+                }
                 break;
             case 4:
                 bubbles.Find(x => x.name.Equals("angrycloud")).gameObject.SetActive(true);
                 StartCoroutine(timer(bubbles.Find(x => x.name.Equals("angrycloud")).gameObject));
+                if (play.GetPhotonView().IsMine)
+                {
+                    ParticleSystem p = play.transform.Find("Head").GetComponent<ParticleSystem>();
+                    p.GetComponent<ParticleSystemRenderer>().material = m5;
+                    p.Play();
+                }
                 break;
         }
         sound.GetComponent<AudioSource>().Play();

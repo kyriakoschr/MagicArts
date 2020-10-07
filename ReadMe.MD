@@ -109,7 +109,7 @@ for the game:
 - [X] depending on version, enable disable hmd and headset
 - [X] depending on version, change icon of sound and determine the volume
 - [X] enable sound effects
-- [ ] on simulator change zoom function
+- [Χ] on simulator change zoom function
 - [X] integrate game functionality
 	- [X] become storyteller
 	- [X] accept/decline invitation
@@ -148,6 +148,9 @@ for the game:
 - [X] double click (HIGH PR)
 - [X] connection issues (HIGH PR)
 - [ ] outline the feelings emoji instead of the painting (LOW PR)
+- [ ] να με βλέπω από έξω (LOW PR)
+- [X] αφαιρεση κερσορα στη θέση που δείχνει (colliders τοιχων)
+- [X] κάποιο feedback/effect στον εαυτό όταν επιλεγεις εμοτικον
 - [Χ] adjust voice and audio to give priotiy to chat
 - [X] on version 1 adjsut volume too
 - [X] bound camera on y-axis for the sim (HIGH PR)
@@ -155,6 +158,19 @@ for the game:
 - [X] check the wrong teleport from the room
 - [x] move videos a little bit above
 - [X] dual collider on paint 9?
+- [X] τη ροδελα για την επιλογή εκθέματος από τον παίχτη
+- [X] κάπως να σηματοδοτείται το πότε μπορεί να ξεκινήσει ένα παιχνίδι
+- [X] σχετικά με το πρόβλημα με το focus και το κλείσιμο - όταν έχεις μια εικόνα zoom-in, θα μπορούσες να κλειδώνεις την κίνηση στο πίσω χώρο;
+- [X] γίνεται να κοντύνω μέσα στο υπνοδωμάτιο
+- [X] rank 1 1 1 4
+- [X] green color to the participants of game
+- [X] a bug with the storyteller
+- [X] bug with the hand ?
+- [X] έχω και κάποιες χωροταξικές παρατηρήσεις - π.χ τα βιντεο πρέπει να προβάλλονται στο ύψος των ματιών σου
+- [ ] συνέπεια στα φοντς (labels κάτω από τους πίνακες, ίδιο μέγεθος και γραμματοσειρά σε όλα)
+- [ ] όταν είμαι κοντά στο τραπέζι, το teleport δεν πηγαίνει εκεί που θέλω αν υπάρχει τέτοιο πρόβλημα, τότε να αλλάξουμε τη χωρική διάταξη. δλδ, έτσι όπως είναι,
+που για να γίνει αφηγητής πας στη μία πλευρά, και το ταμπλώ είναι στην άλλη, το staging το αναδικνύει.
+ίσως η επιγραφή να ήταν στην πλευρά στο κέντρο του τραπεζιού και λίγο πιο πίσω το scoring table
 
 ## TRANSFORM TO HTC VIVE
 - First 2 versions
