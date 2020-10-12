@@ -41,14 +41,13 @@ public class VideoAwake : MonoBehaviour {
 			float dist = Vector3.Distance(gameObject.transform.position, mplayer.transform.Find("Head").transform.position);
 			float vlm;
 			if (dist < 25)
-				vlm = 1f;
-			else if (dist < 50)
-				vlm = 0.7f;
-			else if (dist < 100)
-				vlm = 0.3f;
-			else if (dist < 150)
-				vlm = 0.05f;
-			else vlm = 0.0f;
+                vlm = 1f;
+            else if (dist < 50)
+                vlm = 0.7f;
+            else if (dist < 100)
+                vlm = 0.4f;
+            else
+                vlm = 0.1f;
 			if (voiceSpeaker.isPlaying)
 				vlm *= 0.5f;
 			vp.SetDirectAudioVolume(0, vlm);

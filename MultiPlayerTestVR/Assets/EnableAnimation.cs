@@ -36,12 +36,14 @@ public class EnableAnimation : MonoBehaviour
             else if (dist < 50)
                 vlm = 0.7f;
             else if (dist < 100)
-                vlm = 0.3f;
-            else if (dist < 150)
-                vlm = 0.05f;
-            else vlm = 0.0f;
+                vlm = 0.4f;
+            else
+                vlm = 0.1f;
             vp = VideoToAnimate.GetComponent<VideoPlayer>();
-            vp.GetTargetAudioSource(0).volume = vlm;
+            if(VideoToAnimate.name.Equals("VideoFirstSteps"))
+                vp.GetTargetAudioSource(0).volume = vlm/3;
+            else    
+                vp.GetTargetAudioSource(0).volume = vlm;
         }
     }
 
@@ -67,7 +69,7 @@ public class EnableAnimation : MonoBehaviour
                     VideoToAnimate.GetComponent<VideoPlayer>().Play();
                     VideoToAnimate.GetComponent<MouseOver2>().outlineMaterial.SetColor("_SolidOutline", Color.green);
                     VideoToAnimate.GetComponent<MouseOver2>().outlineMaterial.SetFloat("_OutlineEnabled", 1.0f);
-                    StartCoroutine(videowait(VideoToAnimate));
+                    //StartCoroutine(videowait(VideoToAnimate));
                 }
             }
         }

@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 8921664697871494079}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: NonTeleportable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5214,7 +5214,7 @@ GameObject:
   - component: {fileID: 4500456452363297974}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: NonTeleportable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5264,7 +5264,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1ff6d4186b9071540b4ff515b0e583a7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5350,7 +5350,7 @@ GameObject:
   - component: {fileID: 8361258006138903659}
   m_Layer: 0
   m_Name: Voted
-  m_TagString: Untagged
+  m_TagString: NonTeleportable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5557,7 +5557,7 @@ GameObject:
   - component: {fileID: 2966146689130449432}
   m_Layer: 0
   m_Name: Accepted
-  m_TagString: Untagged
+  m_TagString: NonTeleportable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6272,7 +6272,7 @@ GameObject:
   - component: {fileID: 6429836392651312673}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: NonTeleportable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7750,7 +7750,7 @@ GameObject:
   - component: {fileID: 2045199496513155831}
   m_Layer: 0
   m_Name: Accepted (1)
-  m_TagString: Untagged
+  m_TagString: NonTeleportable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8029,7 +8029,7 @@ GameObject:
   - component: {fileID: 3539366037705916678}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: NonTeleportable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9394,7 +9394,7 @@ GameObject:
   - component: {fileID: 1266398930452834545}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: NonTeleportable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12298,7 +12298,7 @@ GameObject:
   - component: {fileID: 7297103684579683892}
   m_Layer: 0
   m_Name: Accepted (1)
-  m_TagString: Untagged
+  m_TagString: NonTeleportable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13043,7 +13043,7 @@ GameObject:
   - component: {fileID: 2219039933110440929}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: NonTeleportable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14114,7 +14114,7 @@ GameObject:
   - component: {fileID: 5323869256215342423}
   m_Layer: 0
   m_Name: Storyteller (1)
-  m_TagString: Untagged
+  m_TagString: NonTeleportable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14664,7 +14664,7 @@ GameObject:
   - component: {fileID: 3219680581897953534}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: NonTeleportable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14714,7 +14714,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1ff6d4186b9071540b4ff515b0e583a7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15496,7 +15496,7 @@ GameObject:
   - component: {fileID: 4808381304673863993}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: NonTeleportable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15626,7 +15626,7 @@ GameObject:
   - component: {fileID: 2117862682293099610}
   m_Layer: 0
   m_Name: Storyteller
-  m_TagString: Untagged
+  m_TagString: NonTeleportable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15833,7 +15833,7 @@ GameObject:
   - component: {fileID: 8972121950971159330}
   m_Layer: 0
   m_Name: Guest
-  m_TagString: Untagged
+  m_TagString: NonTeleportable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15933,7 +15933,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Guest
+  m_text: GUEST
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -16383,7 +16383,7 @@ GameObject:
   - component: {fileID: 3948377678142392122}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: NonTeleportable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17898,7 +17898,7 @@ GameObject:
   - component: {fileID: 4957334226733233065}
   m_Layer: 0
   m_Name: Username
-  m_TagString: Untagged
+  m_TagString: NonTeleportable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19003,7 +19003,7 @@ GameObject:
   - component: {fileID: 2551803586106392532}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: NonTeleportable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19016,8 +19016,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8309974962133001046}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.2, z: 0}
-  m_LocalScale: {x: 1, y: 1.6958826, z: 1}
+  m_LocalPosition: {x: 0, y: -3.65, z: 0}
+  m_LocalScale: {x: 1, y: 3.15, z: 1}
   m_Children: []
   m_Father: {fileID: 2402272653165996610}
   m_RootOrder: 12
@@ -19402,7 +19402,7 @@ GameObject:
   - component: {fileID: 8652609333192857332}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: NonTeleportable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19959,7 +19959,7 @@ GameObject:
   - component: {fileID: 4668151045599730575}
   m_Layer: 0
   m_Name: Guest
-  m_TagString: Untagged
+  m_TagString: NonTeleportable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20058,7 +20058,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Guest
+  m_text: GUEST
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -20321,7 +20321,7 @@ GameObject:
   - component: {fileID: 2423653748486092337}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: NonTeleportable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20577,7 +20577,7 @@ GameObject:
   - component: {fileID: 2296679354591280590}
   m_Layer: 0
   m_Name: Username (1)
-  m_TagString: Untagged
+  m_TagString: NonTeleportable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
