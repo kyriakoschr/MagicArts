@@ -29,7 +29,7 @@ public class InitPPlayer : MonoBehaviourPun
     public GameObject guest;
     public GameObject st;
     public GameObject sound;
-
+    public VoiceConnection vc;
     public TeleporterFacade teleporter;
 
     public GameObject headphones;
@@ -49,6 +49,7 @@ public class InitPPlayer : MonoBehaviourPun
     Coroutine currentHide=null;
     public GameManager gm;
     Transform scoreboard;
+    private Recorder recorder;
 
     /*    public BooleanAction button1;
         public BooleanAction button2;
@@ -75,7 +76,9 @@ public class InitPPlayer : MonoBehaviourPun
         votedOFF();
         stOFF();
         guestOff();
-        punvn.Client.ChangeAudioGroups(new byte[1] { 1 }, new byte[1] { 0 });
+        if (photonView.IsMine)
+            recorder.InterestGroup = (byte)0;
+            //Debug.LogError(punvn.GetComponent<VoiceConnection>().Client.OpChangeGroups(new byte[] { 1 } , new byte[1] { 0 }));
     }
 
     IEnumerator hideAnswer()
@@ -86,7 +89,9 @@ public class InitPPlayer : MonoBehaviourPun
         stOFF();
         guestOff();
         //Debug.LogError("SHOULD NOT");
-        punvn.Client.ChangeAudioGroups(new byte[1] { 1 }, new byte[1] { 0 });
+        if (photonView.IsMine)
+            recorder.InterestGroup = (byte)0;
+            //Debug.LogError(punvn.GetComponent<VoiceConnection>().Client.OpChangeGroups(new byte[] { 1 } , new byte[1] { 0 }));
     }
 
     public void teleGuest()
@@ -264,6 +269,7 @@ public class InitPPlayer : MonoBehaviourPun
         voice.GetComponent<Recorder>().Init(voice.GetComponent<PhotonVoiceNetwork>().VoiceClient);
         transform.GetComponent<PhotonVoiceView>().RecorderInUse = voice.GetComponent<Recorder>();
         punvn = GameObject.Find("Voice").GetComponent<PhotonVoiceNetwork>(); 
+        recorder = GameObject.Find("Voice").GetComponent<Recorder>();
         scoreboard = GameObject.Find("gatherP").transform;
         sound = GameObject.Find("SpawnSound");
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();

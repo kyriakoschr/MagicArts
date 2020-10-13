@@ -123,6 +123,7 @@ public class GameManager : MonoBehaviourPun
             }
             //Debug.LogError("ti skata is " + cardname);
             gameController.myLocalPlayer.GetComponent<InitPPlayer>().revealMyAnswer(cardname);
+            Sound.Play();
         }
     }
 
@@ -169,7 +170,6 @@ public class GameManager : MonoBehaviourPun
         //btn.SetActive(true); //start round btn enabled
         //sGroup.transform.Find("Storyteller").GetComponent<Text>().text = ""; //clear storyteller holder in ui
         //Debug.LogError("scores written");
-        Sound.Play();
         //Debug.LogError("sound played");
         startGame.SetActive(true);
         //Debug.LogError("button active");
@@ -357,7 +357,10 @@ public class GameManager : MonoBehaviourPun
             {
                 if (narrator.Equals(PhotonNetwork.LocalPlayer.NickName)||answers.ContainsKey(PhotonNetwork.LocalPlayer.NickName)||guests.Contains(PhotonNetwork.LocalPlayer.NickName))
                 {
-                    punvn.Client.ChangeAudioGroups(new byte[1] { 0 }, new byte[1] { 1 });
+                    Debug.LogError("tryynig to change group");
+                    recorder.InterestGroup = (byte)1;
+                    //Debug.LogError(punvn.GetComponent<VoiceConnection>().Client.OpChangeGroups(new byte[] { 0 },new byte[] { 1 }));
+                    Debug.LogError("Changed");
                 }
                 if (narrator.Equals(PhotonNetwork.LocalPlayer.NickName))
                     makeAChoice();
