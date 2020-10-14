@@ -46,6 +46,9 @@ public class GameManager : MonoBehaviourPun
     public Recorder recorder;
     public List<String> guests;
     public int responded = 0;
+    public GameObject pickVR;
+
+
     public void calcScore()
     {
         /*scores.Add("kokos", 1);
@@ -398,8 +401,9 @@ public class GameManager : MonoBehaviourPun
         }
         else
         {
-            GameObject chooseAnswer = gameController.myLocalPlayer.GetComponent<InitPPlayer>().ChooseAnswer.gameObject;
-            chooseAnswer.SetActive(true);
+            pickVR.SetActive(true);
+            /*GameObject chooseAnswer = gameController.myLocalPlayer.GetComponent<InitPPlayer>().ChooseAnswer.gameObject;
+            chooseAnswer.SetActive(true);*/
         }
     }
     

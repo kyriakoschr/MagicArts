@@ -38,7 +38,7 @@ public class VideoAwake : MonoBehaviour {
 		}
 		if (vp.isPlaying)
 		{
-			float dist = Vector3.Distance(gameObject.transform.position, mplayer.transform.Find("Head").transform.position);
+			float dist = Vector3.Distance(gameObject.transform.Find("VideoIcon").position, mplayer.transform.Find("Head").transform.position);
 			float vlm;
 			if (dist < 25)
                 vlm = 1f;
@@ -50,7 +50,7 @@ public class VideoAwake : MonoBehaviour {
                 vlm = 0.1f;
 			if (voiceSpeaker.isPlaying)
 				vlm *= 0.5f;
-			vp.SetDirectAudioVolume(0, vlm);
+			vp.GetTargetAudioSource(0).volume= vlm;
 		}
 	}
 
