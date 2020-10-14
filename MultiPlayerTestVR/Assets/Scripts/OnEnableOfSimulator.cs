@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Tilia.Locomotors.Teleporter;
 using UnityEngine;
 
 public class OnEnableOfSimulator : MonoBehaviour
@@ -12,6 +13,7 @@ public class OnEnableOfSimulator : MonoBehaviour
     public GameObject btnN;
     public GameObject VRBtn;
     public GameObject SimBtn;
+    public TeleporterFacade teleporter;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +41,7 @@ public class OnEnableOfSimulator : MonoBehaviour
         btnN.SetActive(true);
         SimBtn.SetActive(false);
         VRBtn.SetActive(true);
+        teleporter.Teleport(this.transform);
     }
 
     // Update is called once per frame

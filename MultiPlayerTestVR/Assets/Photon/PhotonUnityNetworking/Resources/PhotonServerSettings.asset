@@ -67,6 +67,10 @@ MonoBehaviour:
   - tGuest
   - openPaint
   - openP
+  - openTable
+  - Respond
+  - revealAnswerR
+  - immediateHideS
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
