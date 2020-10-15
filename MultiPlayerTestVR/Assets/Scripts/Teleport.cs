@@ -17,6 +17,7 @@ public class Teleport : MonoBehaviour {
 	public GameObject canvasD;
 	public GameObject canvasN;
 	public Zinnia.Action.ToggleAction toggleAction;
+	public static bool entered = false;
 
 	public void teleTo(Transform to)
 	{
@@ -28,10 +29,10 @@ public class Teleport : MonoBehaviour {
 		sound.GetComponent<AudioSource>().Play();
 	}
 
-	void OnTriggerEnter(Collider other) 
+	void OnTriggerEnter(Collider other)
 	{
-		Debug.Log(other.tag+" is tag");
-		if (other.name.Equals("ExampleAvatar") && other.CompareTag ("NonTeleportable")) {
+		if (other.name.Equals("ExampleAvatar")&& other.CompareTag ("NonTeleportable")) {
+			Debug.Log(other.name+" is tag");
 			Debug.Log(inMuseum + " in museuem");
 			if (inMuseum.Equals(0))
 			{
@@ -53,7 +54,7 @@ public class Teleport : MonoBehaviour {
 					toggleAction.Receive(true);
 				}*/
 			}
-			sound.GetComponent<AudioSource>().Play();
+            sound.GetComponent<AudioSource>().Play();
 		}
 	}
 		

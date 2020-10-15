@@ -46,6 +46,8 @@ namespace cakeslice
                 }
                 else
                     outlineMaterial.SetColor("_SolidOutline", Color.green);
+                if (this.gameObject.name.Equals("paint8(1)"))
+                    outlineMaterial.SetFloat("_Thickness", 10f);
             }
 //            outlineShader = outlineMaterial.shader;
         }
@@ -72,6 +74,9 @@ namespace cakeslice
                 }
                 else
                     outlineMaterial.SetColor("_SolidOutline", Color.green);
+                if (this.gameObject.name.Equals("paint8(1)"))
+                    outlineMaterial.SetFloat("_Thickness", 10f);
+
             }
             //            outlineShader = outlineMaterial.shader;
         }
@@ -96,7 +101,7 @@ namespace cakeslice
             }*/
             if (outlineMaterial.GetFloat("_OutlineEnabled").Equals(0.0f))
             {
-                outlineMaterial.SetColor("_SolidOutline",Color.red);
+                outlineMaterial.SetColor("_SolidOutline",new Color(117f/255f, 255f / 255f, 117f / 255f));
                 outlineMaterial.SetFloat("_OutlineEnabled", 1.0f);
             }
         }

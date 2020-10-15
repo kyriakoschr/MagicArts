@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviourPun
     public List<String> guests;
     public int responded = 0;
     public GameObject pickVR;
+    public GameObject pickVR2;
 
 
     public void calcScore()
@@ -291,8 +292,8 @@ public class GameManager : MonoBehaviourPun
             {
                 GameObject AcceptDecline = gameController.myLocalPlayer.GetComponent<InitPPlayer>().AcceptDecline.gameObject;
                 AcceptDecline.SetActive(true);
-                AcceptDecline.transform.Find("Canvas/Text/Storyteller").GetComponent<Text>().text = initiator;
-                inptCntrl.SetActive(false);
+                AcceptDecline.transform.Find("Canvas/GameObject/Text/Storyteller").GetComponent<Text>().text = initiator;
+                //inptCntrl.SetActive(false);
             }
             else
             {
@@ -445,6 +446,7 @@ public class GameManager : MonoBehaviourPun
             {
                 GameObject chooseAnswer = gameController.myLocalPlayer.GetComponent<InitPPlayer>().ChooseAnswer.gameObject;
                 chooseAnswer.SetActive(true);
+                pickVR2.SetActive(true);
             }
         }
     }

@@ -276,6 +276,27 @@ public class InitPPlayer : MonoBehaviourPun
         teleporter = GameObject.Find("CameraRigs.TrackedAlias/Locomotors.Teleporter.Instant").GetComponent<TeleporterFacade>();
     }
 
+    public void yesHandler()
+    {
+        gm.addPlayer();
+        gm.startGame.SetActive(false);
+        gm.Respond();
+    }
+
+    public void guestHandler()
+    {
+        gm.addGuest();
+        gm.startGame.SetActive(false);
+        gm.Respond();
+    }
+
+    public void noHandler()
+    {
+        gm.startGame.SetActive(false);
+        gm.Respond();
+    }
+
+
     [PunRPC]
     void trueAccept()
     {

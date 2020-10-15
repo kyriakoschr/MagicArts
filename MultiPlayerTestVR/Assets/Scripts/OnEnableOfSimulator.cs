@@ -30,8 +30,8 @@ public class OnEnableOfSimulator : MonoBehaviour
     {
         lInteractor.SimON();
         rInteractor.SimON();
-        btnD.SetActive(false);
-        btnN.SetActive(false);
+        //btnD.SetActive(false);
+        //btnN.SetActive(false);
         SimBtn.SetActive(true);
         VRBtn.SetActive(false);
         trackedAllias.position = new Vector3(0, 0, 0);
@@ -46,8 +46,8 @@ public class OnEnableOfSimulator : MonoBehaviour
         rInteractor.VRON();
         canvasD.SetActive(false);
         canvasN.SetActive(false);
-        btnD.SetActive(true);
-        btnN.SetActive(true);
+        //btnD.SetActive(true);
+        //btnN.SetActive(true);
         SimBtn.SetActive(false);
         VRBtn.SetActive(true);
         teleporter.Teleport(this.transform);
