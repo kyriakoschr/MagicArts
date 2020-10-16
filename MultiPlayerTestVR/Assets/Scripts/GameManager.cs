@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviourPun
     public GameObject aText;
     public GameObject startGame;
     public GameObject inptCntrl;
+    public GameObject choicesPrefab;
     public GameObject table;
     public Zinnia.Action.ToggleAction togleAction;
     public Button startRound;
@@ -47,7 +48,7 @@ public class GameManager : MonoBehaviourPun
     public List<String> guests;
     public int responded = 0;
     public GameObject pickVR;
-    public GameObject pickVR2;
+    //public GameObject pickVR2;
 
 
     public void calcScore()
@@ -328,7 +329,10 @@ public class GameManager : MonoBehaviourPun
     public void CardPlaced(GameObject obj)
     {
         if (narrator.Equals(PhotonNetwork.LocalPlayer.NickName))
+        {
             this.photonView.RPC("CardPlacedRPC", RpcTarget.All, obj.name); //set avatar instead of viewid
+            pickVR.SetActive(false);
+        }
         else
         {
             /*answers[PhotonNetwork.LocalPlayer.NickName] = obj.name;
@@ -402,6 +406,9 @@ public class GameManager : MonoBehaviourPun
         }
         else
         {
+            Transform temp = pickVR.transform;
+            Destroy(pickVR);
+            pickVR = Instantiate(choicesPrefab, temp.position, temp.rotation);
             pickVR.SetActive(true);
             /*GameObject chooseAnswer = gameController.myLocalPlayer.GetComponent<InitPPlayer>().ChooseAnswer.gameObject;
             chooseAnswer.SetActive(true);*/
@@ -446,7 +453,10 @@ public class GameManager : MonoBehaviourPun
             {
                 /*GameObject chooseAnswer = gameController.myLocalPlayer.GetComponent<InitPPlayer>().ChooseAnswer.gameObject;
                 chooseAnswer.SetActive(true);*/
-                pickVR2.SetActive(true);
+                Transform temp = pickVR.transform;
+                Destroy(pickVR);
+                pickVR = Instantiate(choicesPrefab,temp.position,temp.rotation);
+                pickVR.SetActive(true);
             }
         }
     }
