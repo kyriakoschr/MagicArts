@@ -34,11 +34,22 @@ public class exit : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            simChoice.SetActive(true);
-            Cursor.visible = true;
-            togleAction.Receive(true);
-            inputCntrls.SetActive(false);
-            exitMenu.SetActive(true);
+            //simChoice.SetActive(true);
+            if (!exitMenu.activeSelf)
+            {
+                Cursor.visible = true;
+                togleAction.Receive(true);
+                inputCntrls.SetActive(false);
+                exitMenu.SetActive(true);
+            }
+            else
+            {
+                hideMenu();
+                /*inputCntrls.SetActive(true);
+                togleAction.Receive(true);
+                Cursor.visible = false;
+                exitMenu.SetActive(false);*/
+            }
         }
     }
 }

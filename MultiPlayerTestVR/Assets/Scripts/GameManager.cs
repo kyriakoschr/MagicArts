@@ -444,8 +444,8 @@ public class GameManager : MonoBehaviourPun
             }
             else
             {
-                GameObject chooseAnswer = gameController.myLocalPlayer.GetComponent<InitPPlayer>().ChooseAnswer.gameObject;
-                chooseAnswer.SetActive(true);
+                /*GameObject chooseAnswer = gameController.myLocalPlayer.GetComponent<InitPPlayer>().ChooseAnswer.gameObject;
+                chooseAnswer.SetActive(true);*/
                 pickVR2.SetActive(true);
             }
         }

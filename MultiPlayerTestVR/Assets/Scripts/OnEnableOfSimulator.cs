@@ -34,10 +34,10 @@ public class OnEnableOfSimulator : MonoBehaviour
         //btnN.SetActive(false);
         SimBtn.SetActive(true);
         VRBtn.SetActive(false);
-        trackedAllias.position = new Vector3(0, 0, 0);
-        toggleRay.SetActive(true);
+        trackedAllias.position = new Vector3(0,16, 0);
+        /*toggleRay.SetActive(true);
         menuPC.SetActive(true);
-        menuVIVE.SetActive(false);
+        menuVIVE.SetActive(false);*/
     }
 
     private void OnDisable()
@@ -52,9 +52,9 @@ public class OnEnableOfSimulator : MonoBehaviour
         VRBtn.SetActive(true);
         teleporter.Teleport(this.transform);
         trackedAllias.position = new Vector3(0, 16, 0);
-        toggleRay.SetActive(false);
+        /*toggleRay.SetActive(false);
         menuPC.SetActive(false);
-        menuVIVE.SetActive(true);
+        menuVIVE.SetActive(true);*/
     }
 
     // Update is called once per frame
