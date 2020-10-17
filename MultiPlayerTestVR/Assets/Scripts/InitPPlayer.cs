@@ -111,6 +111,7 @@ public class InitPPlayer : MonoBehaviourPun
         if (photonView.IsMine)
             teleporter.Teleport(newTransform);
         sound.GetComponent<AudioSource>().Play();
+        currentHide = StartCoroutine(hideAnswer());
     }
 
     [PunRPC]
