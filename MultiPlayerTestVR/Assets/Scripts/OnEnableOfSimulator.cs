@@ -19,6 +19,7 @@ public class OnEnableOfSimulator : MonoBehaviour
     public GameObject toggleRay;
     public GameObject menuVIVE;
     public GameObject menuPC;
+    public switchModes switcher;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,7 @@ public class OnEnableOfSimulator : MonoBehaviour
         SimBtn.SetActive(true);
         VRBtn.SetActive(false);
         trackedAllias.position = new Vector3(0,16, 0);
+        switcher.onEnable();
         /*toggleRay.SetActive(true);
         menuPC.SetActive(true);
         menuVIVE.SetActive(false);*/
