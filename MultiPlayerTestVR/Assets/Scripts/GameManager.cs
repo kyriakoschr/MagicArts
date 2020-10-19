@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviourPun
     public List<String> guests;
     public int responded = 0;
     public GameObject pickVR;
+    public GameObject tempChoices;
     //public GameObject pickVR2;
 
 
@@ -126,7 +127,7 @@ public class GameManager : MonoBehaviourPun
             {
                 cardname = answers[myname];
             }
-            //Debug.LogError("ti skata is " + cardname);
+            Debug.LogError(myname+ " : " + cardname);
             gameController.myLocalPlayer.GetComponent<InitPPlayer>().revealMyAnswer(cardname);
             Sound.Play();
         }
@@ -225,6 +226,7 @@ public class GameManager : MonoBehaviourPun
     void Start()
     {
         Cursor.visible = false;
+        tempChoices = pickVR.transform.GetChild(4).gameObject;
     }
 
     public void addPlayer()
@@ -271,6 +273,7 @@ public class GameManager : MonoBehaviourPun
 
     public void InviteUsers()
     {
+        Debug.LogError("Inviting");
         if (narrator.Equals(""))
         {
             /*gameController.myLocalPlayer.GetComponent<InitPPlayer>().guestOff();
@@ -289,7 +292,7 @@ public class GameManager : MonoBehaviourPun
         //gameController.myLocalPlayer.GetComponent<InitPPlayer>().interruptHide();
         if (!PhotonNetwork.LocalPlayer.NickName.Equals(initiator))
         {
-            if (!Simulator.activeSelf)
+            if (Simulator.activeSelf)
             {
                 GameObject AcceptDecline = gameController.myLocalPlayer.GetComponent<InitPPlayer>().AcceptDecline.gameObject;
                 AcceptDecline.SetActive(true);
@@ -316,6 +319,7 @@ public class GameManager : MonoBehaviourPun
 
     public void CardPlacedSim(Text input)
     {
+        Debug.LogError("CardPlaced sim " + input);
         if (narrator.Equals(PhotonNetwork.LocalPlayer.NickName))
             this.photonView.RPC("CardPlacedRPC", RpcTarget.All, input.text); //set avatar instead of viewid
         else
@@ -328,9 +332,14 @@ public class GameManager : MonoBehaviourPun
 
     public void CardPlaced(GameObject obj)
     {
+        String objName = obj.name;
+        Debug.LogError("CardPlaced " + objName);
         if (narrator.Equals(PhotonNetwork.LocalPlayer.NickName))
         {
-            this.photonView.RPC("CardPlacedRPC", RpcTarget.All, obj.name); //set avatar instead of viewid
+            this.photonView.RPC("CardPlacedRPC", RpcTarget.All, objName); //set avatar instead of viewid
+            GameObject oldC = tempChoices;
+            tempChoices = Instantiate(choicesPrefab, oldC.transform.position, oldC.transform.rotation, pickVR.transform);
+            oldC.gameObject.SetActive(false);
             pickVR.SetActive(false);
         }
         else
@@ -344,20 +353,27 @@ public class GameManager : MonoBehaviourPun
                 //show scoreboard
                 answered = 0;
             }*/
-            this.photonView.RPC("Answered", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName, obj.name); //set avatar instead of viewid
+            this.photonView.RPC("Answered", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName, objName); //set avatar instead of viewid
             gameController.myLocalPlayer.GetComponent<InitPPlayer>().acceptOFF();
             gameController.myLocalPlayer.GetComponent<InitPPlayer>().votedON();
+            GameObject oldC = tempChoices;
+            tempChoices = Instantiate(choicesPrefab, oldC.transform.position, oldC.transform.rotation, pickVR.transform);
+            oldC.gameObject.SetActive(false);
+            pickVR.SetActive(false);
         }
     }
 
     public void RespondToAll()
     {
+        Debug.LogError("responded to all ");
         this.photonView.RPC("Respond", RpcTarget.AllBufferedViaServer);
     }
 
     [PunRPC]
     public void Respond()
     {
+        Debug.LogError("respondrpc " );
+
         responded++;
         if (responded.Equals(PhotonNetwork.CurrentRoom.PlayerCount - 1))
         {
@@ -397,18 +413,23 @@ public class GameManager : MonoBehaviourPun
 
     public void makeAChoice()
     {
-        if (Simulator.activeInHierarchy)
+        Debug.LogError("WTF1");
+        if (!Simulator.activeInHierarchy)
         {
+            Debug.LogError("WTF2"); 
             Cursor.visible = true;
             choosePanel.SetActive(true);
             togleAction.Receive(true);
             inptCntrl.SetActive(false);
+            Debug.LogError("WTF3");
         }
         else
         {
-            Transform temp = pickVR.transform;
-            Destroy(pickVR);
-            pickVR = Instantiate(choicesPrefab, temp.position, temp.rotation);
+            /*Transform temp = pickVR.transform.GetChild(4);
+            Debug.LogError(temp.name + " to be destroyed");*/
+            GameObject oldC = tempChoices;
+            tempChoices=Instantiate(choicesPrefab, oldC.transform.position, oldC.transform.rotation,pickVR.transform);
+            oldC.gameObject.SetActive(false);
             pickVR.SetActive(true);
             /*GameObject chooseAnswer = gameController.myLocalPlayer.GetComponent<InitPPlayer>().ChooseAnswer.gameObject;
             chooseAnswer.SetActive(true);*/
@@ -419,7 +440,7 @@ public class GameManager : MonoBehaviourPun
     public void Answered(string user,string answer)
     {
         Debug.LogError("i am "+PhotonNetwork.LocalPlayer.NickName+" narris: "+narrator);
-        Debug.LogError("responded:" + responded + " playing:" + answers.Count + " guests:" + guests.Count+" answered:"+answered);
+        //Debug.LogError("responded:" + responded + " playing:" + answers.Count + " guests:" + guests.Count+" answered:"+answered);
         answers[user] = answer;
         answered++;
         if (answers.Count.Equals(answered))
@@ -439,11 +460,12 @@ public class GameManager : MonoBehaviourPun
     {
         correctAnswer = answer;
         //calcScore();
+        Debug.LogError("CardPlacedRPC " + answer);
         if (!PhotonNetwork.LocalPlayer.NickName.Equals(narrator))
         {
             if (!answers.ContainsKey(PhotonNetwork.LocalPlayer.NickName))
                 return;
-            if (Simulator.activeInHierarchy) {
+            if (!Simulator.activeInHierarchy) {
                 Cursor.visible = true;
                 choosePanel.SetActive(true);
                 togleAction.Receive(true);
@@ -453,9 +475,9 @@ public class GameManager : MonoBehaviourPun
             {
                 /*GameObject chooseAnswer = gameController.myLocalPlayer.GetComponent<InitPPlayer>().ChooseAnswer.gameObject;
                 chooseAnswer.SetActive(true);*/
-                Transform temp = pickVR.transform;
-                Destroy(pickVR);
-                pickVR = Instantiate(choicesPrefab,temp.position,temp.rotation);
+                GameObject oldC = tempChoices;
+                tempChoices = Instantiate(choicesPrefab, oldC.transform.position, oldC.transform.rotation, pickVR.transform);
+                oldC.gameObject.SetActive(false);
                 pickVR.SetActive(true);
             }
         }

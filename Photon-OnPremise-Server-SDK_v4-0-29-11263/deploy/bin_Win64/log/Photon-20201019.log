@@ -1,0 +1,18 @@
+28504: 09:22:27.095 - ---
+28504: 09:22:27.095 - Service: "Photon Socket Server" starting
+28504: 09:22:27.095 - Config File: C:\Users\chris\Documents\GitHub\MagicArts\Photon-OnPremise-Server-SDK_v4-0-29-11263\deploy\bin_Win64\PhotonServer.config
+28504: 09:22:27.097 - Will produce at most: 10 crash dumps
+28504: 09:22:27.097 - Service shutting down
+28504: 09:22:27.098 - Service shut down complete
+9544: 09:22:56.967 - ---
+9544: 09:22:56.967 - Service: "Photon Socket Server" starting
+9544: 09:22:56.967 - Config File: C:\Users\chris\Documents\GitHub\MagicArts\Photon-OnPremise-Server-SDK_v4-0-29-11263\deploy\bin_Win64\PhotonServer.config
+9544: 09:22:56.969 - Will produce at most: 10 crash dumps
+9544: 09:22:56.969 - Service shutting down
+9544: 09:22:56.971 - Service shut down complete
+4336: 09:25:39.609 - ---
+4336: 09:25:39.609 - Service: "Photon Socket Server" starting
+4336: 09:25:39.609 - Config File: C:\Users\chris\Documents\GitHub\MagicArts\Photon-OnPremise-Server-SDK_v4-0-29-11263\deploy\bin_Win64\PhotonServer.config
+4336: 09:25:39.611 - Will produce at most: 10 crash dumps
+4336: 09:25:39.611 - Service shutting down
+4336: 09:25:39.612 - Service shut down complete

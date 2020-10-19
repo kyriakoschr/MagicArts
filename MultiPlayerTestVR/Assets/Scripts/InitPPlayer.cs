@@ -279,22 +279,23 @@ public class InitPPlayer : MonoBehaviourPun
 
     public void yesHandler()
     {
+        Debug.LogError("yessss");
         gm.addPlayer();
         gm.startGame.SetActive(false);
-        gm.Respond();
+        gm.RespondToAll();
     }
 
     public void guestHandler()
     {
         gm.addGuest();
         gm.startGame.SetActive(false);
-        gm.Respond();
+        gm.RespondToAll();
     }
 
     public void noHandler()
     {
         gm.startGame.SetActive(false);
-        gm.Respond();
+        gm.RespondToAll();
     }
 
 
