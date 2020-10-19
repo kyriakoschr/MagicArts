@@ -145,6 +145,9 @@ for the game:
 - [ ] fix physical movement of button in both rooms and table
 
 ## bugs to fix
+- [ ] colliders of hands and body should not collide
+- [ ] double click become storyteller and acceptdeclineVR
+
 - [X] double click (HIGH PR)
 - [X] connection issues (HIGH PR)
 - [X] check video volume in respect with distance
