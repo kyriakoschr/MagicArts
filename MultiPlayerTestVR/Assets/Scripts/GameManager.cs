@@ -292,7 +292,7 @@ public class GameManager : MonoBehaviourPun
         //gameController.myLocalPlayer.GetComponent<InitPPlayer>().interruptHide();
         if (!PhotonNetwork.LocalPlayer.NickName.Equals(initiator))
         {
-            if (Simulator.activeSelf)
+            if (!Simulator.activeSelf)
             {
                 GameObject AcceptDecline = gameController.myLocalPlayer.GetComponent<InitPPlayer>().AcceptDecline.gameObject;
                 AcceptDecline.SetActive(true);
@@ -414,7 +414,7 @@ public class GameManager : MonoBehaviourPun
     public void makeAChoice()
     {
         Debug.LogError("WTF1");
-        if (!Simulator.activeInHierarchy)
+        if (Simulator.activeInHierarchy)
         {
             Debug.LogError("WTF2"); 
             Cursor.visible = true;
@@ -465,7 +465,7 @@ public class GameManager : MonoBehaviourPun
         {
             if (!answers.ContainsKey(PhotonNetwork.LocalPlayer.NickName))
                 return;
-            if (!Simulator.activeInHierarchy) {
+            if (Simulator.activeInHierarchy) {
                 Cursor.visible = true;
                 choosePanel.SetActive(true);
                 togleAction.Receive(true);
