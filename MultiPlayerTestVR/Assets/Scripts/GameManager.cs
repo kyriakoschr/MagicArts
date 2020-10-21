@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviourPun
     public GameObject extraArea;
     public Zinnia.Action.ToggleAction togleAction;
     public Button startRound;
+    public AudioSource failRound;
     public GameObject hide;
     public Button choose;
     public GameObject choosePanel;
@@ -313,9 +314,10 @@ public class GameManager : MonoBehaviourPun
         else
         {
             interrupt();
-            gameController.myLocalPlayer.GetComponent<InitPPlayer>().guestOff();
+            gameController.myLocalPlayer.GetComponent<InitPPlayer>().interruptMyHide();
+            /*gameController.myLocalPlayer.GetComponent<InitPPlayer>().guestOff();
             gameController.myLocalPlayer.GetComponent<InitPPlayer>().votedOFF();
-            gameController.myLocalPlayer.GetComponent<InitPPlayer>().sttON();
+            gameController.myLocalPlayer.GetComponent<InitPPlayer>().sttON();*/
         }
     }
 
@@ -397,6 +399,7 @@ public class GameManager : MonoBehaviourPun
                 guests.Clear();
                 startGame.SetActive(true);
                 narrator = "";
+                failRound.Play();
                 gameController.myLocalPlayer.GetComponent<InitPPlayer>().interruptHide();
             }
             responded = 0;

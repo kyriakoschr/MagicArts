@@ -66,6 +66,12 @@ public class InitPPlayer : MonoBehaviourPun
         this.photonView.RPC("immediateHide", RpcTarget.AllBufferedViaServer);
     }
 
+    public void interruptMyHide()
+    {
+        this.photonView.RPC("immediateMyHide", RpcTarget.AllBufferedViaServer);
+
+    }
+
     [PunRPC]
     void immediateHide()
     {
@@ -76,6 +82,27 @@ public class InitPPlayer : MonoBehaviourPun
         votedOFF();
         stOFF();
         guestOff();
+        if (photonView.IsMine)
+            recorder.InterestGroup = (byte)0;
+            //Debug.LogError(punvn.GetComponent<VoiceConnection>().Client.OpChangeGroups(new byte[] { 1 } , new byte[1] { 0 }));
+    }
+    
+    [PunRPC]
+    void immediateMyHide()
+    {
+        if(currentHide!=null)
+            StopCoroutine(currentHide);
+        //currentHide = null;
+        voted.SetActive(false);
+        guest.SetActive(false);
+        accepted.SetActive(false);
+        st.SetActive(true);
+        MyCard.GetComponent<MeshRenderer>().material = gMaterial;
+        this.transform.Find("vr_glove_right_model/renderMesh0").GetComponent<SkinnedMeshRenderer>().material = gMaterial;
+        this.transform.Find("vr_glove_left_model/renderMesh0").GetComponent<SkinnedMeshRenderer>().material = gMaterial;
+        this.transform.Find("Head").GetComponent<MeshRenderer>().material = gfMaterial;
+        if (currentHide != null)
+            StopCoroutine(currentHide);
         if (photonView.IsMine)
             recorder.InterestGroup = (byte)0;
             //Debug.LogError(punvn.GetComponent<VoiceConnection>().Client.OpChangeGroups(new byte[] { 1 } , new byte[1] { 0 }));
