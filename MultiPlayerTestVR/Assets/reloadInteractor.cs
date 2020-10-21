@@ -15,7 +15,20 @@ public class reloadInteractor : MonoBehaviour
 
     public void reload()
     {
+        /*GameObject old = interactor;*/
         interactor = Instantiate(interactor, this.transform);
+/*        Destroy(old);
+*/    }
+
+    private void OnEnable()
+    {
+        if (interactor.name.Contains("SimBtn")|| interactor.name.Contains("Buttons"))
+        {
+            GameObject old = interactor;
+            reload();
+            interactor.SetActive(true);
+            old.SetActive(false);
+        }
     }
 
     // Update is called once per frame

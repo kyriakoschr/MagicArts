@@ -146,7 +146,6 @@ for the game:
 
 ## bugs to fix
 - [ ] colliders of hands and body should not collide
-- [ ] double click become storyteller and acceptdeclineVR
 
 - [X] double click (HIGH PR)
 - [X] connection issues (HIGH PR)

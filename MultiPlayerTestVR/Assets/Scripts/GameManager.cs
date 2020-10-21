@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviourPun
     public GameObject inptCntrl;
     public GameObject choicesPrefab;
     public GameObject table;
+    public GameObject extraArea;
     public Zinnia.Action.ToggleAction togleAction;
     public Button startRound;
     public GameObject hide;
@@ -95,7 +96,7 @@ public class GameManager : MonoBehaviourPun
                 rounds.Add(uname, 1);
         else
         {
-            foreach (string uname in scores.Keys)
+            foreach (string uname in answers.Keys)
                 if (rounds.ContainsKey(uname))
                     rounds[uname] += 1;
                 else
@@ -221,6 +222,7 @@ public class GameManager : MonoBehaviourPun
     void openTable()
     {
         table.SetActive(true);
+        extraArea.SetActive(false);
     }
 
     void Start()

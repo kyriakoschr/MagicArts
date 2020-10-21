@@ -31,30 +31,65 @@ public class Teleport : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.name.Equals("ExampleAvatar")&& other.CompareTag ("NonTeleportable")) {
-			Debug.Log(other.name+" is tag");
-			Debug.Log(inMuseum + " in museuem");
-			if (inMuseum.Equals(0))
+		if (simulator.activeSelf)
+		{
+			if (other.name.Equals("ExampleAvatar") && other.CompareTag("NonTeleportable"))
 			{
-				teleporter.Teleport(roomDay);
-				/*if (simulator.activeInHierarchy) {
-					Cursor.visible = true;
-					canvasN.SetActive(true);
-					Debug.LogError(this.gameObject.name);
-					toggleAction.Receive(true);
-				}*/
+				Debug.Log(other.name + " is tag");
+				Debug.Log(inMuseum + " in museuem");
+				if (inMuseum.Equals(0))
+				{
+					teleporter.Teleport(roomDay);
+					/*if (simulator.activeInHierarchy) {
+						Cursor.visible = true;
+						canvasN.SetActive(true);
+						Debug.LogError(this.gameObject.name);
+						toggleAction.Receive(true);
+					}*/
+				}
+				else
+				{
+					teleporter.Teleport(museum);
+					/*if (simulator.activeInHierarchy)
+					{
+						Cursor.visible = false;
+						canvasD.SetActive(false);
+						canvasN.SetActive(false);
+						toggleAction.Receive(true);
+					}*/
+				}
+				sound.GetComponent<AudioSource>().Play();
 			}
-			else {
-				teleporter.Teleport(museum);
-				/*if (simulator.activeInHierarchy)
-                {
-					Cursor.visible = false;
-					canvasD.SetActive(false);
-					canvasN.SetActive(false);
-					toggleAction.Receive(true);
-				}*/
+		}
+        else
+        {
+			if ((other.name.Contains("ExampleAvatar")||(other.name.Equals("Capsule"))) && other.CompareTag("NonTeleportable"))
+			{
+				Debug.Log(other.name + " is tag");
+				Debug.Log(inMuseum + " in museuem");
+				if (inMuseum.Equals(0))
+				{
+					teleporter.Teleport(roomDay);
+					/*if (simulator.activeInHierarchy) {
+						Cursor.visible = true;
+						canvasN.SetActive(true);
+						Debug.LogError(this.gameObject.name);
+						toggleAction.Receive(true);
+					}*/
+				}
+				else
+				{
+					teleporter.Teleport(museum);
+					/*if (simulator.activeInHierarchy)
+					{
+						Cursor.visible = false;
+						canvasD.SetActive(false);
+						canvasN.SetActive(false);
+						toggleAction.Receive(true);
+					}*/
+				}
+				sound.GetComponent<AudioSource>().Play();
 			}
-            sound.GetComponent<AudioSource>().Play();
 		}
 	}
 		

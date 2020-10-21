@@ -111,6 +111,8 @@ public class InitPPlayer : MonoBehaviourPun
         if (photonView.IsMine)
             teleporter.Teleport(newTransform);
         sound.GetComponent<AudioSource>().Play();
+        if (currentHide != null)
+            StopCoroutine(currentHide);
         currentHide = StartCoroutine(hideAnswer());
     }
 
@@ -138,6 +140,8 @@ public class InitPPlayer : MonoBehaviourPun
         sound.GetComponent<AudioSource>().Play();
         if(photonView.IsMine)
             teleporter.Teleport(newTransform);
+        if (currentHide != null)
+            StopCoroutine(currentHide);
         currentHide = StartCoroutine(hideAnswer());
     }
 
