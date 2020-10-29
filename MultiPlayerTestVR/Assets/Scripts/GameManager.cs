@@ -10,10 +10,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.WSA;
 using Zinnia.Data.Collection.List;
+using Zinnia.Haptics;
 
 public class GameManager : MonoBehaviourPun
 {
     // Start is called before the first frame update
+    public XRNodeHapticPulser leftHaptic;
     public GameObject Simulator;
     public GameObject AccDecSim;
     public GameObject dText;
@@ -321,6 +323,7 @@ public class GameManager : MonoBehaviourPun
                 GameObject AcceptDecline = gameController.myLocalPlayer.GetComponent<InitPPlayer>().AcceptDecline.gameObject;
                 AcceptDecline.SetActive(true);
                 AcceptDecline.transform.Find("Canvas/GameObject/Text/Storyteller").GetComponent<Text>().text = initiator;
+                leftHaptic.Begin();
                 //inptCntrl.SetActive(false);
             }
             else
