@@ -63,12 +63,12 @@ public class InitPPlayer : MonoBehaviourPun
 
     public void interruptHide()
     {
-        this.photonView.RPC("immediateHide", RpcTarget.AllBufferedViaServer);
+        this.photonView.RPC("immediateHide", RpcTarget.All);
     }
 
     public void interruptMyHide()
     {
-        this.photonView.RPC("immediateMyHide", RpcTarget.AllBufferedViaServer);
+        this.photonView.RPC("immediateMyHide", RpcTarget.All);
 
     }
 
@@ -79,12 +79,16 @@ public class InitPPlayer : MonoBehaviourPun
             StopCoroutine(currentHide);
         //currentHide = null;
         hideMyAns();
+        acceptOFF();
         votedOFF();
         stOFF();
         guestOff();
         if (photonView.IsMine)
-            recorder.InterestGroup = (byte)0;
-            //Debug.LogError(punvn.GetComponent<VoiceConnection>().Client.OpChangeGroups(new byte[] { 1 } , new byte[1] { 0 }));
+        {
+            punvn.Client.GlobalInterestGroup = (byte)1;
+            recorder.InterestGroup = (byte)1;
+        }
+        //Debug.LogError(punvn.GetComponent<VoiceConnection>().Client.OpChangeGroups(new byte[] { 1 } , new byte[1] { 0 }));
     }
     
     [PunRPC]
@@ -104,8 +108,11 @@ public class InitPPlayer : MonoBehaviourPun
         if (currentHide != null)
             StopCoroutine(currentHide);
         if (photonView.IsMine)
-            recorder.InterestGroup = (byte)0;
-            //Debug.LogError(punvn.GetComponent<VoiceConnection>().Client.OpChangeGroups(new byte[] { 1 } , new byte[1] { 0 }));
+        {
+            punvn.Client.GlobalInterestGroup = (byte)1;
+            recorder.InterestGroup = (byte)1;
+        }
+        //Debug.LogError(punvn.GetComponent<VoiceConnection>().Client.OpChangeGroups(new byte[] { 1 } , new byte[1] { 0 }));
     }
 
     IEnumerator hideAnswer()
@@ -116,15 +123,23 @@ public class InitPPlayer : MonoBehaviourPun
         stOFF();
         guestOff();
         //Debug.LogError("SHOULD NOT");
-        if (photonView.IsMine)
-            recorder.InterestGroup = (byte)0;
-            //Debug.LogError(punvn.GetComponent<VoiceConnection>().Client.OpChangeGroups(new byte[] { 1 } , new byte[1] { 0 }));
+        if (photonView.IsMine) { 
+            punvn.Client.GlobalInterestGroup = (byte)1;
+            recorder.InterestGroup = (byte)1;
+        }
+        //Debug.LogError(punvn.GetComponent<VoiceConnection>().Client.OpChangeGroups(new byte[] { 1 } , new byte[1] { 0 }));
+    }
+
+    private void OnDestroy()
+    {
+        if (PhotonNetwork.CurrentRoom.PlayerCount <4)
+            gm.closeT();
     }
 
     public void teleGuest()
     {
         Debug.LogError("teeleguest called for"+PhotonNetwork.LocalPlayer.NickName);
-        this.photonView.RPC("tGuest", RpcTarget.AllBufferedViaServer);
+        this.photonView.RPC("tGuest", RpcTarget.All);
     }
 
     [PunRPC]
@@ -175,7 +190,7 @@ public class InitPPlayer : MonoBehaviourPun
     public void revealMyAnswer(string cardname)
     {
         Debug.LogError("reveal my answer called for"+PhotonNetwork.LocalPlayer.NickName);
-        this.photonView.RPC("revealAnswerR", RpcTarget.AllBufferedViaServer,cardname);
+        this.photonView.RPC("revealAnswerR", RpcTarget.All,cardname);
     }
 
     public void EnableDisableHMD(bool input)
@@ -190,49 +205,49 @@ public class InitPPlayer : MonoBehaviourPun
 
     public void acceptON()
     {
-        this.photonView.RPC("trueAccept", RpcTarget.AllBufferedViaServer);
+        this.photonView.RPC("trueAccept", RpcTarget.All);
     }
     
     public void guestON()
     {
-        this.photonView.RPC("guestTrue", RpcTarget.AllBufferedViaServer);
+        this.photonView.RPC("guestTrue", RpcTarget.All);
     }
     
     public void guestOff()
     {
-        this.photonView.RPC("guestFalse", RpcTarget.AllBufferedViaServer);
+        this.photonView.RPC("guestFalse", RpcTarget.All);
     }
     
     public void votedON()
     {
-        this.photonView.RPC("trueVoted", RpcTarget.AllBufferedViaServer);
+        this.photonView.RPC("trueVoted", RpcTarget.All);
     }
 
     public void acceptOFF()
     {
-        this.photonView.RPC("falseAccept", RpcTarget.AllBufferedViaServer);
+        this.photonView.RPC("falseAccept", RpcTarget.All);
     }
     
     public void votedOFF()
     {
-        this.photonView.RPC("falseVoted", RpcTarget.AllBufferedViaServer);
+        this.photonView.RPC("falseVoted", RpcTarget.All);
     }
     
     public void hideMyAns()
     {
-        this.photonView.RPC("hideRPC", RpcTarget.AllBufferedViaServer);
+        this.photonView.RPC("hideRPC", RpcTarget.All);
     }
 
     public void sttON()
     {
         /*if (currentHide != null)
             interruptHide();*/
-        this.photonView.RPC("trueST", RpcTarget.AllBufferedViaServer);
+        this.photonView.RPC("trueST", RpcTarget.All);
     }
 
     public void stOFF()
     {
-        this.photonView.RPC("falseST", RpcTarget.AllBufferedViaServer);
+        this.photonView.RPC("falseST", RpcTarget.All);
     }
 
     public void AcceptInvitation()
@@ -271,7 +286,7 @@ public class InitPPlayer : MonoBehaviourPun
         zm.LZoom = lzoom;
         zm.RZoom = rzoom;
 
-        if (PhotonNetwork.CurrentRoom.PlayerCount>3)
+        if (PhotonNetwork.CurrentRoom.PlayerCount>2)
             gm.openT();
         //this.photonView.RPC("setUname", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName); //set avatar instead of viewid
 
@@ -306,6 +321,8 @@ public class InitPPlayer : MonoBehaviourPun
         sound = GameObject.Find("SpawnSound");
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         teleporter = GameObject.Find("CameraRigs.TrackedAlias/Locomotors.Teleporter.Instant").GetComponent<TeleporterFacade>();
+        punvn.Client.GlobalInterestGroup = (byte)1;
+        recorder.InterestGroup = (byte)1;
     }
 
     public void yesHandler()

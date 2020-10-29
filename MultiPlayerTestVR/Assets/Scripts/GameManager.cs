@@ -102,6 +102,10 @@ public class GameManager : MonoBehaviourPun
                     rounds[uname] += 1;
                 else
                     rounds[uname] = 1;
+            if(rounds.ContainsKey(narrator))
+                rounds[narrator] += 1;
+            else
+                rounds[narrator] = 1;
         }
         //revealAnswer();
         generateRows();
@@ -225,6 +229,19 @@ public class GameManager : MonoBehaviourPun
         table.SetActive(true);
         extraArea.SetActive(false);
     }
+    
+    public void closeT()
+    {
+        this.photonView.RPC("closeTable", RpcTarget.AllBufferedViaServer);
+    }
+
+
+    [PunRPC]
+    void closeTable()
+    {
+        table.SetActive(false);
+        extraArea.SetActive(true);
+    }
 
     void Start()
     {
@@ -272,6 +289,10 @@ public class GameManager : MonoBehaviourPun
     public void interrupt()
     {
         this.photonView.RPC("interruptH", RpcTarget.Others);
+    }
+    public void interruptAll()
+    {
+        this.photonView.RPC("interruptH", RpcTarget.All);
     }
 
     public void InviteUsers()
@@ -328,7 +349,7 @@ public class GameManager : MonoBehaviourPun
             this.photonView.RPC("CardPlacedRPC", RpcTarget.All, input.text); //set avatar instead of viewid
         else
         {
-            this.photonView.RPC("Answered", RpcTarget.All, PhotonNetwork.LocalPlayer.NickName, input.text); //set avatar instead of viewid
+            this.photonView.RPC("Answered", RpcTarget.AllBufferedViaServer, PhotonNetwork.LocalPlayer.NickName, input.text); //set avatar instead of viewid
             gameController.myLocalPlayer.GetComponent<InitPPlayer>().acceptOFF();
             gameController.myLocalPlayer.GetComponent<InitPPlayer>().votedON();
         }
@@ -370,7 +391,7 @@ public class GameManager : MonoBehaviourPun
     public void RespondToAll()
     {
         Debug.LogError("responded to all ");
-        this.photonView.RPC("Respond", RpcTarget.AllBufferedViaServer);
+        this.photonView.RPC("Respond", RpcTarget.All);
     }
 
     [PunRPC]
@@ -386,7 +407,8 @@ public class GameManager : MonoBehaviourPun
                 if (narrator.Equals(PhotonNetwork.LocalPlayer.NickName)||answers.ContainsKey(PhotonNetwork.LocalPlayer.NickName)||guests.Contains(PhotonNetwork.LocalPlayer.NickName))
                 {
                     Debug.LogError("tryynig to change group");
-                    recorder.InterestGroup = (byte)1;
+                    punvn.Client.GlobalInterestGroup = (byte)2;
+                    recorder.InterestGroup = (byte)2;
                     //Debug.LogError(punvn.GetComponent<VoiceConnection>().Client.OpChangeGroups(new byte[] { 0 },new byte[] { 1 }));
                     Debug.LogError("Changed");
                 }
@@ -400,7 +422,7 @@ public class GameManager : MonoBehaviourPun
                 startGame.SetActive(true);
                 narrator = "";
                 failRound.Play();
-                gameController.myLocalPlayer.GetComponent<InitPPlayer>().interruptHide();
+                interruptAll();
             }
             responded = 0;
         }
