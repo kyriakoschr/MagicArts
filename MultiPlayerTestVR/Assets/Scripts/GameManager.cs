@@ -15,6 +15,7 @@ using Zinnia.Haptics;
 public class GameManager : MonoBehaviourPun
 {
     // Start is called before the first frame update
+    bool firstTimeGenerated = true;
     public XRNodeHapticPulser leftHaptic;
     public GameObject Simulator;
     public GameObject AccDecSim;
@@ -144,6 +145,14 @@ public class GameManager : MonoBehaviourPun
     public void generateRows()
     {
         //Debug.LogError("Generate rows " + scores.Count + " " + answers.Count);
+        if (firstTimeGenerated)
+        {
+            scoreboard1.SetActive(true);
+            scoreboard2.SetActive(true);
+            scoreboard1.transform.parent.Find("Warning").gameObject.SetActive(false);
+            scoreboard2.transform.parent.Find("Warning").gameObject.SetActive(false);
+            firstTimeGenerated = false;
+        }
         foreach (Transform child in scoreboard1.transform)
         {
             if (child.name.Equals("Head"))

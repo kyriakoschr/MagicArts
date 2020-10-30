@@ -350,7 +350,7 @@ PrefabInstance:
     - target: {fileID: 6693041384023231204, guid: 3164b38464b3a9547beb4522f03f3031,
         type: 3}
       propertyPath: m_Name
-      value: Vincent's Chair with his pipe 1888
+      value: Van Gogh's Chair 1888
       objectReference: {fileID: 0}
     - target: {fileID: 6693041384023231204, guid: 3164b38464b3a9547beb4522f03f3031,
         type: 3}
@@ -2149,7 +2149,7 @@ PrefabInstance:
     - target: {fileID: 6693041384023231204, guid: 3164b38464b3a9547beb4522f03f3031,
         type: 3}
       propertyPath: m_Name
-      value: Portrait of doctor Gachet  1890
+      value: Portrait of Dr Gachet 2nd 1890
       objectReference: {fileID: 0}
     - target: {fileID: 6693041384023231204, guid: 3164b38464b3a9547beb4522f03f3031,
         type: 3}
@@ -10673,7 +10673,7 @@ PrefabInstance:
     - target: {fileID: 7774344186399642229, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a,
         type: 3}
       propertyPath: m_Name
-      value: Vincent's Chair with his pipe 1888
+      value: Van Gogh's Chair 1888
       objectReference: {fileID: 0}
     - target: {fileID: 7774344186399642229, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a,
         type: 3}
@@ -11207,7 +11207,7 @@ PrefabInstance:
     - target: {fileID: 7774344186399642229, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a,
         type: 3}
       propertyPath: m_Name
-      value: Portrait Of doctor Gachet  1890
+      value: Portrait Of Dr Gachet 2nd 1890
       objectReference: {fileID: 0}
     - target: {fileID: 7774344186399642229, guid: 1bb7642ebf8d0a34aa23fc586ea87e6a,
         type: 3}
