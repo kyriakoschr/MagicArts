@@ -2678,7 +2678,7 @@ PrefabInstance:
     - target: {fileID: 2054661506976876215, guid: 0460673c1c49cce4ea029c947988a138,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2054661506976876215, guid: 0460673c1c49cce4ea029c947988a138,
         type: 3}
@@ -2703,7 +2703,7 @@ PrefabInstance:
     - target: {fileID: 2054661506976876215, guid: 0460673c1c49cce4ea029c947988a138,
         type: 3}
       propertyPath: m_text
-      value: Legend
+      value: Controls
       objectReference: {fileID: 0}
     - target: {fileID: 2054661506976876215, guid: 0460673c1c49cce4ea029c947988a138,
         type: 3}
