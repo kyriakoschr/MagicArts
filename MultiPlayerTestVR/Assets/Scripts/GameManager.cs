@@ -16,7 +16,10 @@ public class GameManager : MonoBehaviourPun
 {
     // Start is called before the first frame update
     bool firstTimeGenerated = true;
+    public XRNodeHapticPulser rightHaptic;
     public XRNodeHapticPulser leftHaptic;
+    public TimedHapticProcess leftHaptic2;
+    public TimedHapticProcess rightHaptic2;
     public GameObject Simulator;
     public GameObject AccDecSim;
     public GameObject dText;
@@ -333,6 +336,7 @@ public class GameManager : MonoBehaviourPun
                 AcceptDecline.SetActive(true);
                 AcceptDecline.transform.Find("Canvas/GameObject/Text/Storyteller").GetComponent<Text>().text = initiator;
                 leftHaptic.Begin();
+                leftHaptic2.Begin();
                 //inptCntrl.SetActive(false);
             }
             else
@@ -371,6 +375,10 @@ public class GameManager : MonoBehaviourPun
     {
         String objName = obj.name;
         Debug.LogError("CardPlaced " + objName);
+        leftHaptic.Begin();
+        rightHaptic.Begin();
+        leftHaptic2.Begin();
+        rightHaptic2.Begin();
         if (narrator.Equals(PhotonNetwork.LocalPlayer.NickName))
         {
             this.photonView.RPC("CardPlacedRPC", RpcTarget.All, objName); //set avatar instead of viewid

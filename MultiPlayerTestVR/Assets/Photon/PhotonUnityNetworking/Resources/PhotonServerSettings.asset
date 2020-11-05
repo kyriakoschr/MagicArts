@@ -27,7 +27,7 @@ MonoBehaviour:
     NetworkLogging: 5
   DevRegion: 
   PunLogging: 0
-  EnableSupportLogger: 1
+  EnableSupportLogger: 0
   RunInBackground: 1
   StartInOfflineMode: 0
   RpcList:
@@ -71,6 +71,8 @@ MonoBehaviour:
   - Respond
   - revealAnswerR
   - immediateHideS
+  - immediateMyHide
+  - closeTable
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
